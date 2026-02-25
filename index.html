@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giran Insider Trading — L2 Reborn Franz</title>
+  <meta name="description" content="Lineage 2 Classic C5 Reborn market price tracker, shot calculator, crafting profitability engine, and bargain calculator. Made by Vaxil with Claude Opus 4.6." />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #12100c; overflow-y: scroll; }
+    #root { min-height: 100vh; }
+    /* Scrollbar styling */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #12100c; }
+    ::-webkit-scrollbar-thumb { background: #3a3020; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #d4a843; }
+    /* Remove number input spinners */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    input[type=number] { -moz-appearance: textfield; }
+  </style>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+const { useState, useEffect, useCallback, useMemo } = React;
+
+// ─── VERIFIED GAME DATA ──────────────────────────────────────────────────────
+const NPC_PRICES = {
+  soulOre: 307,
+  spiritOre: 492,
+  gemD: 1230,
+  gemC: 3690,
+  gemB: 12300,
+};
+
+const CRYSTAL_PATHS_D = [
+  { name: "Winged Spear", cost: 1722000, yield: 2545, perCrystal: 676.62 },
+  { name: "Goat Head Staff", cost: 1722000, yield: 2545, perCrystal: 676.62 },
+  { name: "Saber", cost: 503070, yield: 743, perCrystal: 677.08 },
+  { name: "Elven Ring", cost: 76629, yield: 113, perCrystal: 678.13 },
+  { name: "Iron Boots", cost: 62484, yield: 92, perCrystal: 679.17 },
+];
+
+const CRYSTAL_PATHS_C = [
+  { name: "SoR × SoR", weapons: "2× Sword of Revolution", weaponCost: 3444000, dCrystals: 178, bsFee: 15041, yield: 1148 },
+  { name: "Bastard × SoR", weapons: "Bastard Sword + SoR", weaponCost: 2514120, dCrystals: 185, bsFee: 15632, yield: 848 },
+  { name: "Saber × SoR", weapons: "Saber + SoR", weaponCost: 2225070, dCrystals: 362, bsFee: 30589, yield: 784 },
+];
+
+const SHOT_RECIPES = {
+  D: {
+    SS:   { ore: "soul", oreQty: 3,   crystals: 1, yield: 156, label: "Soulshot D" },
+    SPS:  { ore: "spirit", oreQty: 3, crystals: 1, yield: 100, label: "Spiritshot D" },
+    BSPS: { ore: "spirit", oreQty: 8, crystals: 2, yield: 100, label: "Blessed SPS D" },
+  },
+  C: {
+    SS:   { ore: "soul", oreQty: 15,  crystals: 1, yield: 476, label: "Soulshot C" },
+    SPS:  { ore: "spirit", oreQty: 10, crystals: 1, yield: 200, label: "Spiritshot C" },
+    BSPS: { ore: "spirit", oreQty: 30, crystals: 2, yield: 200, label: "Blessed SPS C" },
+  },
+};
+
+// ─── CRAFTING RECIPES (33 verified C5 recipes) ──────────────────────────────
+const CRAFT_RECIPES = [
+  { name: "Braided Hemp", ingredients: [{ name: "Stem", qty: 5 }], yield: 1 },
+  { name: "Coarse Bone Powder", ingredients: [{ name: "Animal Bone", qty: 10 }], yield: 1 },
+  { name: "Cokes", ingredients: [{ name: "Coal", qty: 3 }, { name: "Charcoal", qty: 3 }], yield: 1 },
+  { name: "Leather", ingredients: [{ name: "Animal Skin", qty: 6 }], yield: 1 },
+  { name: "Steel", ingredients: [{ name: "Iron Ore", qty: 5 }, { name: "Varnish", qty: 5 }], yield: 1 },
+  { name: "Compound Braid", ingredients: [{ name: "Thread", qty: 5 }, { name: "Braided Hemp", qty: 5 }], yield: 1 },
+  { name: "Cord", ingredients: [{ name: "Thread", qty: 25 }, { name: "Steel", qty: 2 }], yield: 20 },
+  { name: "High Grade Suede", ingredients: [{ name: "Suede", qty: 3 }, { name: "Coarse Bone Powder", qty: 1 }], yield: 1 },
+  { name: "Silver Mold", ingredients: [{ name: "Silver Nugget", qty: 10 }, { name: "Cokes", qty: 5 }, { name: "Braided Hemp", qty: 5 }], yield: 1 },
+  { name: "Steel Mold", ingredients: [{ name: "Iron Ore", qty: 5 }, { name: "Coal", qty: 5 }, { name: "Braided Hemp", qty: 5 }], yield: 1 },
+  { name: "Synthetic Cokes", ingredients: [{ name: "Cokes", qty: 3 }, { name: "Oriharukon Ore", qty: 1 }], yield: 1 },
+  { name: "Varnish of Purity", ingredients: [{ name: "Coarse Bone Powder", qty: 3 }, { name: "Varnish", qty: 3 }, { name: "Stone of Purity", qty: 1 }], yield: 1 },
+  { name: "Mithril Alloy", ingredients: [{ name: "Steel", qty: 2 }, { name: "Varnish of Purity", qty: 1 }, { name: "Mithril Ore", qty: 1 }], yield: 1 },
+  { name: "Crafted Leather", ingredients: [{ name: "Leather", qty: 4 }, { name: "Coal", qty: 4 }, { name: "Cord", qty: 4 }], yield: 1 },
+  { name: "Metallic Fiber", ingredients: [{ name: "Cord", qty: 20 }, { name: "Silver Nugget", qty: 15 }], yield: 20 },
+  { name: "Metal Hardener", ingredients: [{ name: "Varnish", qty: 10 }, { name: "Iron Ore", qty: 10 }, { name: "Stem", qty: 10 }], yield: 1 },
+  { name: "Metallic Thread", ingredients: [{ name: "Thread", qty: 10 }, { name: "Iron Ore", qty: 5 }], yield: 1 },
+  { name: "Durable Metal Plate", ingredients: [{ name: "Metallic Thread", qty: 5 }, { name: "Mithril Ore", qty: 5 }], yield: 1 },
+  { name: "Oriharukon", ingredients: [{ name: "Synthetic Cokes", qty: 1 }, { name: "Oriharukon Ore", qty: 4 }, { name: "Silver Nugget", qty: 12 }], yield: 1 },
+  { name: "Artisan's Frame", ingredients: [{ name: "Varnish of Purity", qty: 5 }, { name: "Adamantite Nugget", qty: 10 }, { name: "Steel Mold", qty: 1 }], yield: 1 },
+  { name: "Blacksmith's Frame", ingredients: [{ name: "Silver Mold", qty: 1 }, { name: "Mithril Ore", qty: 10 }, { name: "Varnish of Purity", qty: 5 }], yield: 1 },
+  { name: "Maestro Anvil Lock", ingredients: [{ name: "Synthetic Cokes", qty: 4 }, { name: "Mold Lubricant", qty: 4 }, { name: "Mold Glue", qty: 4 }], yield: 1 },
+  { name: "Maestro Holder", ingredients: [{ name: "Varnish of Purity", qty: 10 }, { name: "Mold Lubricant", qty: 10 }, { name: "Mold Hardener", qty: 10 }], yield: 1 },
+  { name: "Maestro Mold", ingredients: [{ name: "Blacksmith's Frame", qty: 1 }, { name: "Mold Glue", qty: 10 }, { name: "Asofe", qty: 5 }], yield: 1 },
+  { name: "Craftsman Mold", ingredients: [{ name: "Artisan's Frame", qty: 2 }, { name: "Mold Hardener", qty: 20 }, { name: "Enria", qty: 5 }], yield: 1 },
+  { name: "Mithril Arrow", ingredients: [{ name: "Mithril Ore", qty: 1 }, { name: "Braided Hemp", qty: 4 }], yield: 500 },
+  { name: "Silver Arrow", ingredients: [{ name: "Braided Hemp", qty: 1 }, { name: "Silver Nugget", qty: 5 }], yield: 550 },
+  { name: "Shining Arrow", ingredients: [{ name: "Mithril Ore", qty: 2 }, { name: "Braided Hemp", qty: 4 }], yield: 500 },
+  { name: "Reorin's Mold", ingredients: [{ name: "Durable Metal Plate", qty: 10 }, { name: "Adamantite Nugget", qty: 15 }, { name: "Cord", qty: 40 }], yield: 1 },
+  { name: "Warsmith's Holder", ingredients: [{ name: "Maestro Holder", qty: 2 }, { name: "Mold Glue", qty: 10 }, { name: "Thread", qty: 20 }], yield: 1, adenaCost: 901680 },
+  { name: "Warsmith's Mold", ingredients: [{ name: "Artisan's Frame", qty: 1 }, { name: "Mold Hardener", qty: 10 }, { name: "Enria", qty: 5 }], yield: 1, adenaCost: 392700 },
+  { name: "Arcsmith's Anvil", ingredients: [{ name: "Maestro Anvil Lock", qty: 3 }, { name: "Mold Lubricant", qty: 20 }, { name: "Thons", qty: 10 }], yield: 1, adenaCost: 541820 },
+];
+
+const BASE_MATERIALS = [
+  "Stem", "Thread", "Animal Skin", "Animal Bone", "Iron Ore", "Coal", "Charcoal",
+  "Suede", "Varnish", "Silver Nugget", "Adamantite Nugget", "Mithril Ore",
+  "Oriharukon Ore", "Stone of Purity", "Asofe", "Enria", "Thons",
+  "Mold Glue", "Mold Lubricant", "Mold Hardener",
+];
+
+const norm = (s) => (s || "").trim().toLowerCase();
+// Item DB: 440 unique D/C grade tradeable items from lineage2wiki.org C5
+const ITEM_DB = [{"n":"Adamantite Boots","g":"c","c":143,"t":"armor"},{"n":"Akat Long Bow","g":"c","c":1720,"t":"weapon"},{"n":"Ancient Cloak","g":"c","c":98,"t":"armor"},{"n":"Ancient Reagent","g":"d","c":3272,"t":"weapon"},{"n":"Aquastone Necklace","g":"c","c":82,"t":"jewelry"},{"n":"Aquastone Ring","g":"c","c":41,"t":"jewelry"},{"n":"Artisan's Sword","g":"d","c":1170,"t":"weapon"},{"n":"Artisan's Sword*Artisan's Sword","g":"d","c":2545,"t":"weapon"},{"n":"Artisan's Sword*Crimson Sword","g":"d","c":3018,"t":"weapon"},{"n":"Artisan's Sword*Elven Long Sword","g":"c","c":988,"t":"weapon"},{"n":"Artisan's Sword*Elven Sword","g":"d","c":3018,"t":"weapon"},{"n":"Artisan's Sword*Knight's Sword","g":"d","c":2545,"t":"weapon"},{"n":"Artisan's Sword*Sword of Revolution","g":"c","c":848,"t":"weapon"},{"n":"Aspis","g":"d","c":63,"t":"armor"},{"n":"Assassin Knife","g":"d","c":743,"t":"weapon"},{"n":"Assault Boots","g":"d","c":177,"t":"armor"},{"n":"Atuba Hammer","g":"d","c":3272,"t":"weapon"},{"n":"Atuba Mace","g":"d","c":3272,"t":"weapon"},{"n":"Bagh-Nakh","g":"d","c":743,"t":"weapon"},{"n":"Bastard Sword","g":"d","c":1170,"t":"weapon"},{"n":"Bastard Sword*Artisan's Sword","g":"d","c":2545,"t":"weapon"},{"n":"Bastard Sword*Bastard Sword","g":"d","c":2545,"t":"weapon"},{"n":"Bastard Sword*Crimson Sword","g":"d","c":3018,"t":"weapon"},{"n":"Bastard Sword*Elven Long Sword","g":"c","c":988,"t":"weapon"},{"n":"Bastard Sword*Elven Sword","g":"d","c":3018,"t":"weapon"},{"n":"Bastard Sword*Knight's Sword","g":"d","c":2545,"t":"weapon"},{"n":"Bastard Sword*Spinebone Sword","g":"d","c":2545,"t":"weapon"},{"n":"Bastard Sword*Sword of Revolution","g":"c","c":848,"t":"weapon"},{"n":"Battle Axe","g":"c","c":916,"t":"weapon"},{"n":"Bec de Corbin","g":"c","c":1148,"t":"weapon"},{"n":"Berserker Blade","g":"c","c":2452,"t":"weapon"},{"n":"Bich'Hwa","g":"d","c":2545,"t":"weapon"},{"n":"Big Hammer","g":"c","c":916,"t":"weapon"},{"n":"Bikini Set","g":"d","c":30,"t":"armor"},{"n":"Black Pearl Ring","g":"d","c":77,"t":"jewelry"},{"n":"Blast Plate","g":"d","c":369,"t":"armor"},{"n":"Blessed Branch","g":"c","c":2452,"t":"weapon"},{"n":"Blessed Earring","g":"c","c":169,"t":"jewelry"},{"n":"Blessed Gloves","g":"c","c":143,"t":"armor"},{"n":"Blessed Necklace","g":"c","c":226,"t":"jewelry"},{"n":"Blessed Ring","g":"c","c":112,"t":"jewelry"},{"n":"Blood of Saints","g":"d","c":1758,"t":"weapon"},{"n":"Blue Buckskin Boots","g":"d","c":60,"t":"armor"},{"n":"Blue Crystal Skull","g":"d","c":2763,"t":"weapon"},{"n":"Body Slasher","g":"c","c":916,"t":"weapon"},{"n":"Bone Helmet","g":"d","c":56,"t":"armor"},{"n":"Bone Staff","g":"d","c":743,"t":"weapon"},{"n":"Bonebreaker","g":"d","c":3272,"t":"weapon"},{"n":"Boots of Knowledge","g":"d","c":92,"t":"armor"},{"n":"Boots of Power","g":"d","c":135,"t":"armor"},{"n":"Boots of Seal","g":"c","c":50,"t":"armor"},{"n":"Branch of Life","g":"d","c":743,"t":"weapon"},{"n":"Brigandine Boots","g":"d","c":135,"t":"armor"},{"n":"Brigandine Gaiters","g":"d","c":340,"t":"armor"},{"n":"Brigandine Gauntlets","g":"d","c":135,"t":"armor"},{"n":"Brigandine Helmet","g":"d","c":203,"t":"armor"},{"n":"Brigandine Shield","g":"d","c":142,"t":"armor"},{"n":"Brigandine Tunic","g":"d","c":543,"t":"armor"},{"n":"Bronze Helmet","g":"d","c":90,"t":"armor"},{"n":"Bronze Shield","g":"d","c":39,"t":"armor"},{"n":"Caliburs","g":"c","c":1720,"t":"weapon"},{"n":"Candle of Wisdom","g":"c","c":2452,"t":"weapon"},{"n":"Cap of Mana","g":"c","c":214,"t":"armor"},{"n":"Cerberus Eye","g":"c","c":2452,"t":"weapon"},{"n":"Chain Boots","g":"c","c":50,"t":"armor"},{"n":"Chain Gaiters","g":"c","c":126,"t":"armor"},{"n":"Chain Gloves","g":"c","c":50,"t":"armor"},{"n":"Chain Helmet","g":"c","c":59,"t":"armor"},{"n":"Chain Hood","g":"c","c":75,"t":"armor"},{"n":"Chain Mail Shirt","g":"c","c":202,"t":"armor"},{"n":"Chain Shield","g":"c","c":53,"t":"armor"},{"n":"Chakram","g":"c","c":916,"t":"weapon"},{"n":"Claws of Black Dragon","g":"c","c":2452,"t":"weapon"},{"n":"Claymore","g":"d","c":3272,"t":"weapon"},{"n":"Cloak of Magic","g":"d","c":135,"t":"armor"},{"n":"Cloak of Protection","g":"c","c":143,"t":"armor"},{"n":"Cloak of Self Protection","g":"c","c":64,"t":"armor"},{"n":"Club of Nature","g":"c","c":1720,"t":"weapon"},{"n":"Cobweb Cloak","g":"d","c":60,"t":"armor"},{"n":"Composite Armor","g":"c","c":576,"t":"armor"},{"n":"Composite Boots","g":"c","c":98,"t":"armor"},{"n":"Composite Helmet","g":"c","c":147,"t":"armor"},{"n":"Composite Shield","g":"c","c":103,"t":"armor"},{"n":"Compound Scale Gaiters","g":"d","c":230,"t":"armor"},{"n":"Compound Scale Mail","g":"d","c":332,"t":"armor"},{"n":"Conjurer's Knife","g":"d","c":1758,"t":"weapon"},{"n":"Conjuror's Staff","g":"d","c":1170,"t":"weapon"},{"n":"Crafted Dagger","g":"d","c":743,"t":"weapon"},{"n":"Crafted Leather Gloves","g":"d","c":38,"t":"armor"},{"n":"Crimson Boots","g":"c","c":64,"t":"armor"},{"n":"Crimson Sword","g":"d","c":1758,"t":"weapon"},{"n":"Crimson Sword*Crimson Sword","g":"c","c":784,"t":"weapon"},{"n":"Crimson Sword*Elven Long Sword","g":"c","c":1148,"t":"weapon"},{"n":"Crimson Sword*Elven Sword","g":"c","c":784,"t":"weapon"},{"n":"Crimson Sword*Sword of Revolution","g":"c","c":988,"t":"weapon"},{"n":"Crucifix of Blood","g":"d","c":2545,"t":"weapon"},{"n":"Crystal Dagger","g":"c","c":2452,"t":"weapon"},{"n":"Crystal Staff","g":"c","c":916,"t":"weapon"},{"n":"Crystallized Ice Bow","g":"c","c":916,"t":"weapon"},{"n":"Cursed Dagger","g":"c","c":916,"t":"weapon"},{"n":"Cursed Maingauche","g":"d","c":2545,"t":"weapon"},{"n":"Cursed Staff","g":"c","c":1148,"t":"weapon"},{"n":"Cursed Stockings","g":"d","c":71,"t":"armor"},{"n":"Cursed Tunic","g":"d","c":113,"t":"armor"},{"n":"Cursed Undergarment Set","g":"d","c":46,"t":"armor"},{"n":"Dagger of Mana","g":"d","c":1758,"t":"weapon"},{"n":"Dark Elven Bow","g":"d","c":1170,"t":"weapon"},{"n":"Dark Elven Dagger","g":"c","c":916,"t":"weapon"},{"n":"Dark Screamer","g":"c","c":1720,"t":"weapon"},{"n":"Dark Stockings","g":"d","c":113,"t":"armor"},{"n":"Deadman's Staff","g":"c","c":2452,"t":"weapon"},{"n":"Demon Fangs","g":"d","c":2763,"t":"weapon"},{"n":"Demon's Boots","g":"c","c":98,"t":"armor"},{"n":"Demon's Gloves","g":"c","c":98,"t":"armor"},{"n":"Demon's Staff","g":"c","c":2452,"t":"weapon"},{"n":"Demon's Stockings","g":"c","c":184,"t":"armor"},{"n":"Demon's Tunic","g":"c","c":294,"t":"armor"},{"n":"Demon's Undergarment Set","g":"c","c":71,"t":"armor"},{"n":"Divine Boots","g":"c","c":143,"t":"armor"},{"n":"Divine Gloves","g":"c","c":143,"t":"armor"},{"n":"Divine Stockings","g":"c","c":268,"t":"armor"},{"n":"Divine Tome","g":"d","c":1170,"t":"weapon"},{"n":"Divine Tunic","g":"c","c":428,"t":"armor"},{"n":"Doom Hammer","g":"d","c":1170,"t":"weapon"},{"n":"Drake Leather Armor","g":"c","c":628,"t":"armor"},{"n":"Drake Leather Boots","g":"c","c":143,"t":"armor"},{"n":"Drake Leather Gloves","g":"c","c":143,"t":"armor"},{"n":"Dwarven Chain Boots","g":"c","c":50,"t":"armor"},{"n":"Dwarven Chain Gaiters","g":"c","c":161,"t":"armor"},{"n":"Dwarven Chain Gloves","g":"c","c":64,"t":"armor"},{"n":"Dwarven Chain Mail Shirt","g":"c","c":257,"t":"armor"},{"n":"Dwarven Chain Shield","g":"c","c":62,"t":"armor"},{"n":"Dwarven Hammer","g":"c","c":2449,"t":"weapon"},{"n":"Dwarven Pike","g":"d","c":1758,"t":"weapon"},{"n":"Dwarven Scale Gaiters","g":"d","c":230,"t":"armor"},{"n":"Dwarven Scale Mail","g":"d","c":332,"t":"armor"},{"n":"Dwarven Trident","g":"d","c":1170,"t":"weapon"},{"n":"Dwarven War Hammer","g":"c","c":1148,"t":"weapon"},{"n":"Earring of Binding","g":"c","c":118,"t":"jewelry"},{"n":"Earring of Protection","g":"c","c":78,"t":"jewelry"},{"n":"Ecliptic Axe","g":"c","c":2449,"t":"weapon"},{"n":"Ecliptic Sword","g":"c","c":2449,"t":"weapon"},{"n":"Eldarake","g":"c","c":53,"t":"armor"},{"n":"Elemental Bow","g":"c","c":1148,"t":"weapon"},{"n":"Elemental Hood","g":"c","c":214,"t":"armor"},{"n":"Elven Bow","g":"d","c":1170,"t":"weapon"},{"n":"Elven Bow of Nobility","g":"c","c":1148,"t":"weapon"},{"n":"Elven Earring","g":"d","c":169,"t":"jewelry"},{"n":"Elven Long Sword","g":"d","c":3272,"t":"weapon"},{"n":"Elven Long Sword*Elven Long Sword","g":"c","c":1528,"t":"weapon"},{"n":"Elven Mithril Boots","g":"d","c":135,"t":"armor"},{"n":"Elven Mithril Gloves","g":"d","c":135,"t":"armor"},{"n":"Elven Mithril Stockings","g":"d","c":254,"t":"armor"},{"n":"Elven Mithril Tunic","g":"d","c":407,"t":"armor"},{"n":"Elven Necklace","g":"d","c":227,"t":"jewelry"},{"n":"Elven Ring","g":"d","c":113,"t":"jewelry"},{"n":"Elven Stockings","g":"d","c":113,"t":"armor"},{"n":"Elven Sword","g":"d","c":1758,"t":"weapon"},{"n":"Elven Sword*Elven Long Sword","g":"c","c":1148,"t":"weapon"},{"n":"Elven Sword*Elven Sword","g":"c","c":784,"t":"weapon"},{"n":"Elven Sword*Sword of Revolution","g":"c","c":988,"t":"weapon"},{"n":"Elven Tunic","g":"d","c":181,"t":"armor"},{"n":"Eminence Bow","g":"c","c":2452,"t":"weapon"},{"n":"Enchanted Earring","g":"d","c":77,"t":"jewelry"},{"n":"Enchanted Necklace","g":"d","c":103,"t":"jewelry"},{"n":"Enchanted Ring","g":"d","c":51,"t":"jewelry"},{"n":"Eye of Infinity","g":"d","c":2545,"t":"weapon"},{"n":"Fascination Undergarment Set","g":"c","c":32,"t":"armor"},{"n":"Fist Blade","g":"c","c":1720,"t":"weapon"},{"n":"Flamberge","g":"c","c":916,"t":"weapon"},{"n":"Flame Helm","g":"c","c":214,"t":"armor"},{"n":"Forgotten Boots","g":"c","c":98,"t":"armor"},{"n":"Full Plate Armor","g":"c","c":836,"t":"armor"},{"n":"Full Plate Boots","g":"c","c":143,"t":"armor"},{"n":"Full Plate Gauntlets","g":"c","c":143,"t":"armor"},{"n":"Full Plate Helmet","g":"c","c":214,"t":"armor"},{"n":"Full Plate Shield","g":"c","c":150,"t":"armor"},{"n":"Gastraphetes","g":"d","c":1758,"t":"weapon"},{"n":"Gauntlets","g":"d","c":92,"t":"armor"},{"n":"Gauntlets of Ghost","g":"c","c":143,"t":"armor"},{"n":"Ghost Staff","g":"d","c":3272,"t":"weapon"},{"n":"Ghoul's Staff","g":"c","c":2452,"t":"weapon"},{"n":"Glaive","g":"d","c":3272,"t":"weapon"},{"n":"Gloves of Knowledge","g":"d","c":92,"t":"armor"},{"n":"Gloves of Seal","g":"c","c":64,"t":"armor"},{"n":"Goat Head Staff","g":"d","c":2545,"t":"weapon"},{"n":"Grace Dagger","g":"c","c":1720,"t":"weapon"},{"n":"Great Helmet","g":"c","c":96,"t":"armor"},{"n":"Great Pata","g":"c","c":2452,"t":"weapon"},{"n":"Guard Spear","g":"d","c":743,"t":"weapon"},{"n":"Half Plate Armor","g":"d","c":710,"t":"armor"},{"n":"Hand Axe","g":"d","c":743,"t":"weapon"},{"n":"Heathen's Book","g":"c","c":1720,"t":"weapon"},{"n":"Heavy Bone Club","g":"d","c":2545,"t":"weapon"},{"n":"Heavy Doom Axe","g":"c","c":916,"t":"weapon"},{"n":"Heavy Doom Hammer","g":"c","c":916,"t":"weapon"},{"n":"Heavy Mace","g":"d","c":743,"t":"weapon"},{"n":"Heavy Sword","g":"d","c":743,"t":"weapon"},{"n":"Helm of Avadon","g":"c","c":214,"t":"armor"},{"n":"Helmet","g":"d","c":138,"t":"armor"},{"n":"Helmet of Pledge","g":"c","c":214,"t":"armor"},{"n":"Hex Doll","g":"c","c":1720,"t":"weapon"},{"n":"Homunkulus's Sword","g":"c","c":1720,"t":"weapon"},{"n":"Hood of Aid","g":"c","c":214,"t":"armor"},{"n":"Hood of Grace","g":"c","c":214,"t":"armor"},{"n":"Hood of Solar Eclipse","g":"c","c":214,"t":"armor"},{"n":"Hood of Summoning","g":"c","c":214,"t":"armor"},{"n":"Hoplon","g":"d","c":96,"t":"armor"},{"n":"Horn of Glory","g":"c","c":1148,"t":"weapon"},{"n":"Inferno Staff","g":"c","c":1720,"t":"weapon"},{"n":"Iron Boots","g":"d","c":92,"t":"armor"},{"n":"Iron Plate Gaiters","g":"d","c":94,"t":"armor"},{"n":"Karik Horn","g":"c","c":1718,"t":"weapon"},{"n":"Karmian Boots","g":"c","c":50,"t":"armor"},{"n":"Karmian Gloves","g":"c","c":50,"t":"armor"},{"n":"Karmian Stockings","g":"c","c":94,"t":"armor"},{"n":"Karmian Tunic","g":"c","c":151,"t":"armor"},{"n":"Katana","g":"c","c":1148,"t":"weapon"},{"n":"Katana*Katana","g":"c","c":2452,"t":"weapon"},{"n":"Katana*Raid Sword","g":"c","c":2452,"t":"weapon"},{"n":"Katana*Spirit Sword","g":"c","c":2452,"t":"weapon"},{"n":"Kite Shield","g":"d","c":142,"t":"armor"},{"n":"Knight's Cloak","g":"d","c":38,"t":"armor"},{"n":"Knight's Shield","g":"c","c":67,"t":"armor"},{"n":"Knight's Sword","g":"d","c":1170,"t":"weapon"},{"n":"Knight's Sword*Crimson Sword","g":"d","c":3018,"t":"weapon"},{"n":"Knight's Sword*Elven Long Sword","g":"c","c":988,"t":"weapon"},{"n":"Knight's Sword*Elven Sword","g":"d","c":3018,"t":"weapon"},{"n":"Knight's Sword*Knight's Sword","g":"d","c":2545,"t":"weapon"},{"n":"Knight's Sword*Sword of Revolution","g":"c","c":848,"t":"weapon"},{"n":"Knuckle Duster","g":"c","c":1148,"t":"weapon"},{"n":"Kukuri","g":"d","c":1758,"t":"weapon"},{"n":"Leather Boots","g":"d","c":38,"t":"armor"},{"n":"Leather Gauntlets","g":"d","c":60,"t":"armor"},{"n":"Light Crossbow","g":"d","c":3272,"t":"weapon"},{"n":"Lion Skin Gaiters","g":"d","c":113,"t":"armor"},{"n":"Lion Skin Shirt","g":"d","c":181,"t":"armor"},{"n":"Lizardspear","g":"d","c":743,"t":"weapon"},{"n":"Long Bow","g":"d","c":1170,"t":"weapon"},{"n":"Mace of Judgment","g":"d","c":1170,"t":"weapon"},{"n":"Mace of Miracle","g":"d","c":1170,"t":"weapon"},{"n":"Mace of Prayer","g":"d","c":1170,"t":"weapon"},{"n":"Mace of The Underworld","g":"c","c":1720,"t":"weapon"},{"n":"Maingauche","g":"d","c":2545,"t":"weapon"},{"n":"Manticore Skin Boots","g":"d","c":135,"t":"armor"},{"n":"Manticore Skin Gaiters","g":"d","c":254,"t":"armor"},{"n":"Manticore Skin Gloves","g":"d","c":135,"t":"armor"},{"n":"Manticore Skin Shirt","g":"d","c":407,"t":"armor"},{"n":"Mithril Banded Gaiters","g":"d","c":173,"t":"armor"},{"n":"Mithril Banded Mail","g":"d","c":276,"t":"armor"},{"n":"Mithril Boots","g":"c","c":50,"t":"armor"},{"n":"Mithril Breastplate","g":"d","c":332,"t":"armor"},{"n":"Mithril Cloak","g":"d","c":177,"t":"armor"},{"n":"Mithril Dagger","g":"d","c":3272,"t":"weapon"},{"n":"Mithril Gaiters","g":"d","c":230,"t":"armor"},{"n":"Mithril Gauntlets","g":"c","c":98,"t":"armor"},{"n":"Mithril Gloves","g":"d","c":177,"t":"armor"},{"n":"Mithril Helmet","g":"c","c":214,"t":"armor"},{"n":"Mithril Ring","g":"d","c":146,"t":"jewelry"},{"n":"Mithril Scale Gaiters","g":"d","c":340,"t":"armor"},{"n":"Mithril Shirt","g":"c","c":151,"t":"armor"},{"n":"Mithril Stockings","g":"d","c":254,"t":"armor"},{"n":"Mithril Tunic","g":"d","c":407,"t":"armor"},{"n":"Mithril Undergarment Set","g":"c","c":25,"t":"armor"},{"n":"Moonstone Earring","g":"c","c":62,"t":"jewelry"},{"n":"Morning Star","g":"d","c":2545,"t":"weapon"},{"n":"Mysterious Sword","g":"c","c":915,"t":"weapon"},{"n":"Mystic Knife","g":"d","c":1758,"t":"weapon"},{"n":"Mystic Staff","g":"d","c":1170,"t":"weapon"},{"n":"Mystic's Stockings","g":"d","c":113,"t":"armor"},{"n":"Mystic's Tunic","g":"d","c":181,"t":"armor"},{"n":"Nassen's Earring","g":"c","c":169,"t":"jewelry"},{"n":"Near Forest Necklace","g":"d","c":155,"t":"jewelry"},{"n":"Necklace of Binding","g":"c","c":226,"t":"jewelry"},{"n":"Necklace of Darkness","g":"d","c":294,"t":"jewelry"},{"n":"Necklace of Devotion","g":"d","c":65,"t":"jewelry"},{"n":"Necklace of Mermaid","g":"c","c":157,"t":"jewelry"},{"n":"Necklace of Protection","g":"c","c":104,"t":"jewelry"},{"n":"Nirvana Axe","g":"c","c":1720,"t":"weapon"},{"n":"Noble Elven Bow","g":"c","c":1148,"t":"weapon"},{"n":"Ogre Power Gauntlets","g":"d","c":177,"t":"armor"},{"n":"Omen Beast's Eye Earring","g":"d","c":220,"t":"jewelry"},{"n":"One-Piece Swimsuit","g":"d","c":18,"t":"armor"},{"n":"Orcish Glaive","g":"c","c":916,"t":"weapon"},{"n":"Orcish Poleaxe","g":"c","c":2452,"t":"weapon"},{"n":"Pa'agrian Axe","g":"c","c":1912,"t":"weapon"},{"n":"Pa'agrian Hammer","g":"c","c":1720,"t":"weapon"},{"n":"Pa'agrian Hand","g":"c","c":64,"t":"armor"},{"n":"Pa'agrian Sword","g":"c","c":1718,"t":"weapon"},{"n":"Paradia Hood","g":"c","c":214,"t":"armor"},{"n":"Paradia Staff","g":"c","c":1720,"t":"weapon"},{"n":"Phoenix Feather","g":"c","c":2452,"t":"weapon"},{"n":"Phoenix Hood","g":"c","c":214,"t":"armor"},{"n":"Pike","g":"d","c":1170,"t":"weapon"},{"n":"Plate Boots","g":"d","c":177,"t":"armor"},{"n":"Plate Gaiters","g":"d","c":443,"t":"armor"},{"n":"Plate Helmet","g":"d","c":267,"t":"armor"},{"n":"Plate Shield","g":"d","c":187,"t":"armor"},{"n":"Plated Leather","g":"c","c":178,"t":"armor"},{"n":"Plated Leather Boots","g":"c","c":50,"t":"armor"},{"n":"Plated Leather Gaiters","g":"c","c":111,"t":"armor"},{"n":"Plated Leather Gloves","g":"c","c":59,"t":"armor"},{"n":"Poleaxe","g":"c","c":1720,"t":"weapon"},{"n":"Poniard Dagger","g":"d","c":1170,"t":"weapon"},{"n":"Priest Mace","g":"d","c":2577,"t":"weapon"},{"n":"Priest Sword","g":"d","c":756,"t":"weapon"},{"n":"Proof of Revenge","g":"d","c":743,"t":"weapon"},{"n":"Puma Skin Gaiters","g":"d","c":71,"t":"armor"},{"n":"Puma Skin Shirt","g":"d","c":113,"t":"armor"},{"n":"Raid Sword","g":"c","c":1148,"t":"weapon"},{"n":"Raid Sword*Raid Sword","g":"c","c":2452,"t":"weapon"},{"n":"Red Crescent Earring","g":"d","c":48,"t":"jewelry"},{"n":"Reinforced Leather Boots","g":"d","c":92,"t":"armor"},{"n":"Reinforced Leather Gaiters","g":"d","c":173,"t":"armor"},{"n":"Reinforced Leather Gloves","g":"d","c":92,"t":"armor"},{"n":"Reinforced Leather Shirt","g":"d","c":276,"t":"armor"},{"n":"Reinforced Mithril Gloves","g":"c","c":50,"t":"armor"},{"n":"Rind Leather Armor","g":"c","c":193,"t":"armor"},{"n":"Rind Leather Boots","g":"c","c":64,"t":"armor"},{"n":"Rind Leather Gaiters","g":"c","c":120,"t":"armor"},{"n":"Rind Leather Gloves","g":"c","c":64,"t":"armor"},{"n":"Ring Mail Breastplate","g":"d","c":151,"t":"armor"},{"n":"Ring of Ages","g":"c","c":78,"t":"jewelry"},{"n":"Ring of Binding","g":"c","c":112,"t":"jewelry"},{"n":"Ring of Devotion","g":"d","c":32,"t":"jewelry"},{"n":"Ring of Protection","g":"c","c":52,"t":"jewelry"},{"n":"Rip Gauntlets","g":"d","c":135,"t":"armor"},{"n":"Robe of Seal","g":"c","c":282,"t":"armor"},{"n":"Saber","g":"d","c":743,"t":"weapon"},{"n":"Saber*Artisan's Sword","g":"d","c":1927,"t":"weapon"},{"n":"Saber*Bastard Sword","g":"d","c":1927,"t":"weapon"},{"n":"Saber*Crimson Sword","g":"d","c":2545,"t":"weapon"},{"n":"Saber*Elven Long Sword","g":"c","c":916,"t":"weapon"},{"n":"Saber*Elven Sword","g":"d","c":2545,"t":"weapon"},{"n":"Saber*Knight's Sword","g":"d","c":1927,"t":"weapon"},{"n":"Saber*Saber","g":"d","c":1594,"t":"weapon"},{"n":"Saber*Spinebone Sword","g":"d","c":1927,"t":"weapon"},{"n":"Saber*Sword of Revolution","g":"c","c":784,"t":"weapon"},{"n":"Sage's Rag","g":"d","c":780,"t":"armor"},{"n":"Sage's Staff","g":"c","c":1720,"t":"weapon"},{"n":"Sage's Worn Gloves","g":"d","c":177,"t":"armor"},{"n":"Salamander Skin Boots","g":"d","c":177,"t":"armor"},{"n":"Salamander Skin Mail","g":"d","c":780,"t":"armor"},{"n":"Samurai Longsword","g":"c","c":2452,"t":"weapon"},{"n":"Scale Gaiters","g":"d","c":151,"t":"armor"},{"n":"Scale Mail","g":"d","c":241,"t":"armor"},{"n":"Scallop Jamadhr","g":"d","c":3272,"t":"weapon"},{"n":"Scalpel","g":"d","c":743,"t":"weapon"},{"n":"Scorpion","g":"c","c":1912,"t":"weapon"},{"n":"Scroll of Destruction","g":"c","c":2452,"t":"weapon"},{"n":"Scroll of Wisdom","g":"d","c":743,"t":"weapon"},{"n":"Scythe","g":"c","c":916,"t":"weapon"},{"n":"Shadow Cloak","g":"c","c":50,"t":"armor"},{"n":"Shamshir","g":"c","c":1148,"t":"weapon"},{"n":"Shamshir*Katana","g":"c","c":2452,"t":"weapon"},{"n":"Shamshir*Raid Sword","g":"c","c":2452,"t":"weapon"},{"n":"Shamshir*Shamshir","g":"c","c":2452,"t":"weapon"},{"n":"Shamshir*Spirit Sword","g":"c","c":2452,"t":"weapon"},{"n":"Shilen Knife","g":"d","c":1758,"t":"weapon"},{"n":"Shining Circlet","g":"c","c":147,"t":"armor"},{"n":"Silver Axe","g":"c","c":916,"t":"weapon"},{"n":"Single-Edged Jamadhr","g":"d","c":1170,"t":"weapon"},{"n":"Skull Breaker","g":"d","c":2545,"t":"weapon"},{"n":"Skull Graver","g":"c","c":916,"t":"weapon"},{"n":"Soulfire Dirk","g":"c","c":1148,"t":"weapon"},{"n":"Spiked Club","g":"d","c":1758,"t":"weapon"},{"n":"Spinebone Sword","g":"d","c":1170,"t":"weapon"},{"n":"Spinebone Sword*Artisan's Sword","g":"d","c":2545,"t":"weapon"},{"n":"Spinebone Sword*Crimson Sword","g":"d","c":3018,"t":"weapon"},{"n":"Spinebone Sword*Elven Long Sword","g":"c","c":988,"t":"weapon"},{"n":"Spinebone Sword*Elven Sword","g":"d","c":3018,"t":"weapon"},{"n":"Spinebone Sword*Knight's Sword","g":"d","c":2545,"t":"weapon"},{"n":"Spinebone Sword*Spinebone Sword","g":"d","c":2545,"t":"weapon"},{"n":"Spinebone Sword*Sword of Revolution","g":"c","c":848,"t":"weapon"},{"n":"Spirit Sword","g":"c","c":1148,"t":"weapon"},{"n":"Spirit Sword*Raid Sword","g":"c","c":2452,"t":"weapon"},{"n":"Spirit Sword*Spirit Sword","g":"c","c":2452,"t":"weapon"},{"n":"Square Shield","g":"d","c":187,"t":"armor"},{"n":"Staff of Life","g":"d","c":3272,"t":"weapon"},{"n":"Staff of Magic","g":"d","c":1758,"t":"weapon"},{"n":"Staff of Mana","g":"d","c":1170,"t":"weapon"},{"n":"Steel Plate Helmet","g":"c","c":82,"t":"armor"},{"n":"Steel Sword","g":"d","c":756,"t":"weapon"},{"n":"Stick of Eternity","g":"c","c":1720,"t":"weapon"},{"n":"Stick of Faith","g":"c","c":916,"t":"weapon"},{"n":"Stiletto","g":"c","c":1148,"t":"weapon"},{"n":"Stockings of Knowledge","g":"d","c":173,"t":"armor"},{"n":"Stormbringer","g":"c","c":916,"t":"weapon"},{"n":"Stormbringer*Katana","g":"c","c":2112,"t":"weapon"},{"n":"Stormbringer*Raid Sword","g":"c","c":2112,"t":"weapon"},{"n":"Stormbringer*Shamshir","g":"c","c":2112,"t":"weapon"},{"n":"Stormbringer*Spirit Sword","g":"c","c":2112,"t":"weapon"},{"n":"Stormbringer*Stormbringer","g":"c","c":1912,"t":"weapon"},{"n":"Strengthened Bow","g":"d","c":743,"t":"weapon"},{"n":"Strengthened Long Bow","g":"d","c":2545,"t":"weapon"},{"n":"Sword of Delusion","g":"c","c":1720,"t":"weapon"},{"n":"Sword of Limit","g":"c","c":1720,"t":"weapon"},{"n":"Sword of Magic","g":"d","c":1301,"t":"weapon"},{"n":"Sword of Magic Fog","g":"d","c":2577,"t":"weapon"},{"n":"Sword of Mystic","g":"d","c":1301,"t":"weapon"},{"n":"Sword of Nightmare","g":"c","c":1720,"t":"weapon"},{"n":"Sword of Occult","g":"d","c":1301,"t":"weapon"},{"n":"Sword of Revolution","g":"d","c":2545,"t":"weapon"},{"n":"Sword of Revolution*Elven Long Sword","g":"c","c":1336,"t":"weapon"},{"n":"Sword of Revolution*Sword of Revolution","g":"c","c":1148,"t":"weapon"},{"n":"Sword of Whispering Death","g":"c","c":1720,"t":"weapon"},{"n":"Tarbar","g":"d","c":2545,"t":"weapon"},{"n":"Tattoo of Bravery","g":"c","c":428,"t":"armor"},{"n":"Tattoo of Fire","g":"d","c":276,"t":"armor"},{"n":"Tattoo of Resolve","g":"d","c":276,"t":"armor"},{"n":"Tattoo of Soul","g":"d","c":181,"t":"armor"},{"n":"Tears of Fairy","g":"c","c":1148,"t":"weapon"},{"n":"Tempered Mithril Gaiters","g":"c","c":94,"t":"armor"},{"n":"Temptation of Abyss","g":"d","c":743,"t":"weapon"},{"n":"Theca Leather Armor","g":"c","c":330,"t":"armor"},{"n":"Theca Leather Boots","g":"c","c":110,"t":"armor"},{"n":"Theca Leather Gaiters","g":"c","c":206,"t":"armor"},{"n":"Theca Leather Gloves","g":"c","c":110,"t":"armor"},{"n":"Three Eyed Crow's Feather","g":"c","c":2452,"t":"weapon"},{"n":"Tiger's Eye Earring","g":"d","c":116,"t":"jewelry"},{"n":"Titan Hammer","g":"d","c":2577,"t":"weapon"},{"n":"Titan Sword","g":"d","c":2577,"t":"weapon"},{"n":"Tomahawk","g":"d","c":1170,"t":"weapon"},{"n":"Tome of Blood","g":"d","c":1758,"t":"weapon"},{"n":"Tower Shield","g":"c","c":103,"t":"armor"},{"n":"Trident","g":"d","c":743,"t":"weapon"},{"n":"Triple-Edged Jamadhr","g":"d","c":1758,"t":"weapon"},{"n":"Tsurugi","g":"c","c":1720,"t":"weapon"},{"n":"Tunic of Knowledge","g":"d","c":276,"t":"armor"},{"n":"Two-Handed Sword","g":"d","c":1758,"t":"weapon"},{"n":"Vajra Wands","g":"d","c":3272,"t":"weapon"},{"n":"War Axe","g":"c","c":1720,"t":"weapon"},{"n":"War Hammer","g":"d","c":1758,"t":"weapon"},{"n":"War Pick","g":"d","c":2545,"t":"weapon"},{"n":"White Tunic","g":"d","c":181,"t":"armor"},{"n":"Widow Maker","g":"c","c":1912,"t":"weapon"},{"n":"Winged Spear","g":"d","c":2545,"t":"weapon"},{"n":"Wolverine Needle","g":"c","c":916,"t":"weapon"},{"n":"Work Hammer","g":"d","c":743,"t":"weapon"},{"n":"Yaksa Mace","g":"c","c":2452,"t":"weapon"}];
+const ITEMS = [
+  "Iron Ore", "Coal", "Charcoal", "Varnish", "Animal Skin", "Animal Bone",
+  "Stem", "Suede", "Thread", "Silver Nugget", "Adamantite Nugget",
+  "Oriharukon Ore", "Mithril Ore", "Stone of Purity",
+  "Asofe", "Enria", "Thons", "Mold Glue", "Mold Lubricant", "Mold Hardener",
+  "Braided Hemp", "Coarse Bone Powder", "Cokes", "Leather", "Steel",
+  "Compound Braid", "Cord", "High Grade Suede", "Silver Mold", "Steel Mold",
+  "Synthetic Cokes", "Varnish of Purity", "Mithril Alloy", "Crafted Leather",
+  "Metallic Fiber", "Metal Hardener", "Metallic Thread", "Durable Metal Plate",
+  "Oriharukon", "Artisan's Frame", "Blacksmith's Frame",
+  "Maestro Anvil Lock", "Maestro Holder", "Maestro Mold", "Craftsman Mold",
+  "Mithril Arrow", "Silver Arrow", "Shining Arrow", "Reorin's Mold",
+  "Warsmith's Holder", "Warsmith's Mold", "Arcsmith's Anvil",
+  "Crystal D", "Crystal C", "Crystal B", "Crystal A",
+  "Gemstone D", "Gemstone C",
+  "Soulshot D", "Soulshot C", "Spiritshot D", "Spiritshot C", "BSPS D", "BSPS C",
+  "Scroll: Enchant Weapon D", "Scroll: Enchant Armor D", "Custom..."
+];
+const LOCATIONS = ["Giran", "Gludin", "Gludio", "Dion", "Aden", "Oren", "Hunters Village", "Goddard"];
+const STORAGE_KEY = "l2-market-v3";
+const SHOTS_STORAGE_KEY = "l2-shots-prices-v1";
+const ANALYTICS_WATCH_KEY = "l2-analytics-watch-v1";
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+const NUMFMT_KEY = "l2-numfmt-v1";
+const _fmt = (n, mode) => {
+  if (n == null) return "—";
+  const num = Math.round(n);
+  if (mode === "k") {
+    const abs = Math.abs(num);
+    const sign = num < 0 ? "-" : "";
+    if (abs >= 1000000) { const v = abs / 1000000; return sign + (abs % 1000000 === 0 ? v.toFixed(0) : v.toFixed(1)) + "kk"; }
+    if (abs >= 1000) { const v = abs / 1000; return sign + (abs % 1000 === 0 ? v.toFixed(0) : v.toFixed(1)) + "k"; }
+    return num.toLocaleString();
+  }
+  return num.toLocaleString();
+};
+const _fmtDec = (n, d = 2, mode) => {
+  if (n == null) return "—";
+  if (mode === "k") {
+    const abs = Math.abs(n);
+    const sign = n < 0 ? "-" : "";
+    if (abs >= 1000000) return sign + (abs / 1000000).toFixed(1) + "kk";
+    if (abs >= 1000) return sign + (abs / 1000).toFixed(1) + "k";
+  }
+  const fixed = n.toFixed(d);
+  const [intPart, dec] = fixed.split(".");
+  return Number(intPart).toLocaleString() + (dec ? "." + dec : "");
+};
+const fmtDate = (iso) => new Date(iso).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+const fmtTime = (iso) => new Date(iso).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+
+const movingAvg = (arr, w) => arr.map((_, i) => {
+  const s = arr.slice(Math.max(0, i - w + 1), i + 1);
+  return s.reduce((a, b) => a + b, 0) / s.length;
+});
+const stdDev = (arr) => {
+  if (arr.length < 2) return 0;
+  const m = arr.reduce((a, b) => a + b, 0) / arr.length;
+  return Math.sqrt(arr.reduce((s, v) => s + (v - m) ** 2, 0) / (arr.length - 1));
+};
+const getSignal = (price, ma, sd) => {
+  if (!ma || !sd || sd === 0) return { label: "HOLD", color: "#7a7464", detail: "Not enough data" };
+  const z = (price - ma) / sd;
+  if (z < -1.2) return { label: "STRONG BUY", color: "#4ade80", detail: `${Math.abs(z).toFixed(1)}σ below avg — stockpile` };
+  if (z < -0.5) return { label: "BUY", color: "#86efac", detail: `${Math.abs(z).toFixed(1)}σ below avg` };
+  if (z > 1.2) return { label: "STRONG SELL", color: "#f59e0b", detail: `${z.toFixed(1)}σ above avg — offload` };
+  if (z > 0.5) return { label: "SELL", color: "#fbbf24", detail: `${z.toFixed(1)}σ above avg` };
+  return { label: "HOLD", color: "#fbbf24", detail: `Near average (${z > 0 ? "+" : ""}${z.toFixed(1)}σ)` };
+};
+
+// ─── Smart adena input (commas display, k/kk interpretation) ────────────────
+const parseAdena = (raw) => {
+  if (raw == null || raw === "") return NaN;
+  let s = String(raw).trim().replace(/,/g, "");
+  if (/kk$/i.test(s)) return parseFloat(s.replace(/kk$/i, "")) * 1000000;
+  if (/k$/i.test(s)) return parseFloat(s.replace(/k$/i, "")) * 1000;
+  return parseFloat(s);
+};
+const fmtInputVal = (v) => {
+  if (v == null || v === "" || isNaN(Number(v))) return "";
+  return Number(v).toLocaleString();
+};
+function AdenaInput({ value, onChange, style, placeholder, onKeyDown }) {
+  const [raw, setRaw] = useState(value ? fmtInputVal(value) : "");
+  const [focused, setFocused] = useState(false);
+  useEffect(() => { if (!focused) setRaw(value ? fmtInputVal(value) : ""); }, [value, focused]);
+  return (
+    <input
+      style={style}
+      value={raw}
+      placeholder={placeholder}
+      onFocus={() => { setFocused(true); setRaw(value || ""); }}
+      onBlur={() => {
+        setFocused(false);
+        const n = parseAdena(raw);
+        if (!isNaN(n) && n > 0) { onChange(String(n)); setRaw(fmtInputVal(n)); }
+        else if (raw === "") { onChange(""); setRaw(""); }
+        else setRaw(value ? fmtInputVal(value) : "");
+      }}
+      onChange={e => setRaw(e.target.value)}
+      onKeyDown={e => {
+        if (e.key === "Enter") {
+          const n = parseAdena(raw);
+          if (!isNaN(n) && n > 0) { onChange(String(n)); setRaw(fmtInputVal(n)); }
+          if (onKeyDown) onKeyDown(e);
+        }
+      }}
+    />
+  );
+}
+
+// ─── Storage (localStorage — per-browser, private) ──────────────────────────
+function loadStorage(key) {
+  try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : null; } catch { return null; }
+}
+function saveStorage(key, data) {
+  try { localStorage.setItem(key, JSON.stringify(data)); } catch (e) { console.error("Save failed:", e); }
+}
+
+// ─── Mini Chart ──────────────────────────────────────────────────────────────
+function MiniChart({ data, maData, width = 520, height = 180, fmt }) {
+  if (!data || data.length < 2) return (
+    <div style={{ width, height, display: "flex", alignItems: "center", justifyContent: "center", color: "#7a7464", fontSize: 13, fontStyle: "italic", border: "1px dashed #3a3428", borderRadius: 8 }}>Need 2+ data points</div>
+  );
+  const pad = { t: 16, r: 12, b: 28, l: 52 };
+  const w = width - pad.l - pad.r, h = height - pad.t - pad.b;
+  const allV = [...data, ...(maData || [])];
+  const min = Math.min(...allV) * 0.95, max = Math.max(...allV) * 1.05, range = max - min || 1;
+  const toX = (i) => pad.l + (i / (data.length - 1)) * w;
+  const toY = (v) => pad.t + h - ((v - min) / range) * h;
+  const pPath = data.map((v, i) => `${i === 0 ? "M" : "L"}${toX(i).toFixed(1)},${toY(v).toFixed(1)}`).join(" ");
+  const mPath = maData?.length >= 2 ? maData.map((v, i) => `${i === 0 ? "M" : "L"}${toX(i).toFixed(1)},${toY(v).toFixed(1)}`).join(" ") : null;
+  const yTicks = Array.from({ length: 5 }, (_, i) => min + (range * i) / 4);
+  return (
+    <svg width={width} height={height} style={{ display: "block" }}>
+      {yTicks.map((v, i) => <g key={i}><line x1={pad.l} y1={toY(v)} x2={width - pad.r} y2={toY(v)} stroke="#2a2520" /><text x={pad.l - 6} y={toY(v) + 4} textAnchor="end" fill="#7a7464" fontSize={10}>{fmt(v)}</text></g>)}
+      {mPath && <path d={mPath} fill="none" stroke="#d4a843" strokeWidth={2} strokeDasharray="6 3" opacity={0.7} />}
+      <path d={pPath} fill="none" stroke="#e8c55a" strokeWidth={2.5} strokeLinejoin="round" />
+      {data.map((v, i) => <circle key={i} cx={toX(i)} cy={toY(v)} r={3.5} fill="#1a1710" stroke="#e8c55a" strokeWidth={2} />)}
+    </svg>
+  );
+}
+
+// ─── Stock Chart (green above avg = SELL, red below = BUY) ──────────────────
+function StockChart({ prices, avg, width = 210, height = 90 }) {
+  if (!prices || prices.length < 2 || avg == null) return (
+    <div style={{ width, height, display: "flex", alignItems: "center", justifyContent: "center", color: "#5a5448", fontSize: 12, fontStyle: "italic", border: "1px dashed #2a2418", borderRadius: 6 }}>Need 2+ entries</div>
+  );
+  const pad = { t: 8, r: 6, b: 4, l: 6 };
+  const w = width - pad.l - pad.r, h = height - pad.t - pad.b;
+  const allV = [...prices, avg];
+  const min = Math.min(...allV) * 0.92, max = Math.max(...allV) * 1.08, range = max - min || 1;
+  const toX = (i) => pad.l + (i / (prices.length - 1)) * w;
+  const toY = (v) => pad.t + h - ((v - min) / range) * h;
+  const avgY = toY(avg);
+  const uid = "sc" + Math.random().toString(36).slice(2, 7);
+
+  // Build line points
+  const pts = prices.map((v, i) => ({ x: toX(i), y: toY(v) }));
+  const linePath = pts.map((p, i) => `${i === 0 ? "M" : "L"}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ");
+
+  // Area path (fill under line to bottom)
+  const areaPath = linePath + ` L${pts[pts.length - 1].x.toFixed(1)},${(pad.t + h).toFixed(1)} L${pts[0].x.toFixed(1)},${(pad.t + h).toFixed(1)} Z`;
+
+  const latest = prices[prices.length - 1];
+  const isAbove = latest >= avg;
+
+  return (
+    <svg width={width} height={height} style={{ display: "block" }}>
+      <defs>
+        <clipPath id={`${uid}-above`}><rect x={0} y={0} width={width} height={avgY} /></clipPath>
+        <clipPath id={`${uid}-below`}><rect x={0} y={avgY} width={width} height={height - avgY} /></clipPath>
+      </defs>
+      {/* Green fill above avg */}
+      <path d={areaPath} fill="#4ade8018" clipPath={`url(#${uid}-above)`} />
+      {/* Red fill below avg */}
+      <path d={areaPath} fill="#f8717118" clipPath={`url(#${uid}-below)`} />
+      {/* Average line */}
+      <line x1={pad.l} y1={avgY} x2={width - pad.r} y2={avgY} stroke="#7a746444" strokeWidth={1} strokeDasharray="4 2" />
+      {/* Green line segments above avg */}
+      <path d={linePath} fill="none" stroke="#4ade80" strokeWidth={2} strokeLinejoin="round" clipPath={`url(#${uid}-above)`} />
+      {/* Red line segments below avg */}
+      <path d={linePath} fill="none" stroke="#f87171" strokeWidth={2} strokeLinejoin="round" clipPath={`url(#${uid}-below)`} />
+      {/* Latest point */}
+      <circle cx={pts[pts.length - 1].x} cy={pts[pts.length - 1].y} r={3} fill={isAbove ? "#4ade80" : "#f87171"} stroke="#12100c" strokeWidth={1} />
+    </svg>
+  );
+}
+
+// ─── STYLES ──────────────────────────────────────────────────────────────────
+const S = {
+  root: { background: "#12100c", minHeight: "100vh", fontFamily: "'Crimson Text','Georgia',serif", color: "#d4c9a8", paddingBottom: 40, fontSize: 14 },
+  header: { background: "linear-gradient(180deg,#1e1a12,#12100c)", borderBottom: "2px solid #3a3020", padding: "20px 24px 16px", textAlign: "center" },
+  title: { fontFamily: "'Cinzel','Georgia',serif", fontSize: 24, color: "#e8c55a", margin: 0, letterSpacing: 2, textTransform: "uppercase" },
+  subtitle: { fontSize: 13, color: "#7a7464", marginTop: 4, letterSpacing: 1 },
+  tabs: { display: "flex", justifyContent: "center", gap: 0, marginTop: 16, flexWrap: "wrap" },
+  tab: (a) => ({ padding: "8px 18px", cursor: "pointer", fontSize: 13, letterSpacing: 1, background: a ? "#2a2418" : "transparent", color: a ? "#e8c55a" : "#7a7464", border: `1px solid ${a ? "#3a3020" : "transparent"}`, borderBottom: a ? "1px solid #2a2418" : "1px solid #3a3020", borderRadius: "6px 6px 0 0", fontFamily: "'Cinzel',serif", fontWeight: a ? 700 : 400, transition: "all .2s" }),
+  card: { background: "#1a1710", border: "1px solid #2a2418", borderRadius: 10, padding: 18, marginBottom: 14 },
+  label: { fontSize: 12, color: "#7a7464", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 5, display: "block" },
+  select: { width: "100%", padding: "9px 12px", background: "#0f0d09", border: "1px solid #2a2418", borderRadius: 6, color: "#d4c9a8", fontSize: 14, fontFamily: "inherit", outline: "none", boxSizing: "border-box" },
+  input: { width: "100%", padding: "9px 12px", background: "#0f0d09", border: "1px solid #2a2418", borderRadius: 6, color: "#e8c55a", fontSize: 15, fontFamily: "'Fira Mono',monospace", outline: "none", boxSizing: "border-box" },
+  inputSm: { width: "100%", padding: "7px 10px", background: "#0f0d09", border: "1px solid #2a2418", borderRadius: 6, color: "#e8c55a", fontSize: 14, fontFamily: "'Fira Mono',monospace", outline: "none", boxSizing: "border-box" },
+  btn: (v) => ({ padding: "10px 24px", border: "none", borderRadius: 6, cursor: "pointer", fontSize: 14, fontFamily: "'Cinzel',serif", letterSpacing: 1, fontWeight: 700, ...(v === "primary" ? { background: "linear-gradient(135deg,#d4a843,#b8922e)", color: "#12100c" } : { background: "#2a2418", color: "#d4c9a8", border: "1px solid #3a3020" }) }),
+  badge: (c) => ({ display: "inline-block", padding: "3px 10px", borderRadius: 4, fontSize: 11, fontWeight: 700, letterSpacing: 1, fontFamily: "'Cinzel',serif", background: c + "22", color: c, border: `1px solid ${c}44` }),
+  radioGroup: { display: "flex", gap: 0, borderRadius: 6, overflow: "hidden", border: "1px solid #2a2418" },
+  radio: (a, c) => ({ flex: 1, padding: "9px 16px", textAlign: "center", cursor: "pointer", fontSize: 13, fontFamily: "'Cinzel',serif", fontWeight: 700, letterSpacing: 1, background: a ? (c === "sell" ? "#1f1a2d" : "#1f2d1f") : "#0f0d09", color: a ? (c === "sell" ? "#c084fc" : "#4ade80") : "#5a5448", transition: "all .15s" }),
+  signalBox: (c) => ({ background: "#1a1710", border: "1px solid #2a2418", borderRadius: 10, padding: 18, marginBottom: 14, textAlign: "center", borderColor: c + "44", backgroundColor: c + "08" }),
+  mono: { fontFamily: "'Fira Mono',monospace" },
+  sectionTitle: { fontSize: 15, fontFamily: "'Cinzel',serif", color: "#d4a843", fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", marginBottom: 12 },
+  dimText: { fontSize: 12, color: "#5a5448" },
+  goldText: { color: "#e8c55a" },
+  greenText: { color: "#4ade80" },
+  purpleText: { color: "#c084fc" },
+  redText: { color: "#f87171" },
+};
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// MAIN APP
+// ═══════════════════════════════════════════════════════════════════════════════
+function L2MarketTracker() {
+  const [entries, setEntries] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [tab, setTab] = useState("log");
+  const [numFmt, setNumFmt] = useState("comma");
+
+  // Bound formatters
+  const fmt = useCallback((n) => _fmt(n, numFmt), [numFmt]);
+  const fmtDec = useCallback((n, d = 2) => _fmtDec(n, d, numFmt), [numFmt]);
+
+  // Log form
+  const [item, setItem] = useState(ITEMS[0]);
+  const [customItem, setCustomItem] = useState("");
+  const [txType, setTxType] = useState("sell");
+  const [price, setPrice] = useState("");
+  const [location, setLocation] = useState(LOCATIONS[0]);
+  const [notes, setNotes] = useState("");
+  const [flash, setFlash] = useState(null);
+
+  // Analytics — per-item watchlist
+  const [analyticsWatched, setAnalyticsWatched] = useState([]);
+  const [analyticsSearch, setAnalyticsSearch] = useState("");
+  const [analyticsDropdownIdx, setAnalyticsDropdownIdx] = useState(-1);
+
+  // Shots calculator
+  const [playerPrices, setPlayerPrices] = useState({
+    crystalD: "", crystalC: "",
+    ssD: "", spsD: "", bspsD: "",
+    ssC: "", spsC: "", bspsC: "",
+  });
+
+  // Bargain calculator
+  const [bargainSearch, setBargainSearch] = useState("");
+  const [bargainItems, setBargainItems] = useState([]);
+  const [bargainAskingPrice, setBargainAskingPrice] = useState("");
+  const [bargainDropdownIdx, setBargainDropdownIdx] = useState(-1);
+
+  // Crafting calculator
+  const [craftOverrides, setCraftOverrides] = useState({});
+
+  useEffect(() => {
+    const e = loadStorage(STORAGE_KEY);
+    const sp = loadStorage(SHOTS_STORAGE_KEY);
+    const nf = loadStorage(NUMFMT_KEY);
+    const aw = loadStorage(ANALYTICS_WATCH_KEY);
+    setEntries(e || []);
+    if (sp) setPlayerPrices(p => ({ ...p, ...sp }));
+    if (nf) setNumFmt(nf);
+    if (aw) setAnalyticsWatched(aw);
+    setLoading(false);
+  }, []);
+
+  const persist = useCallback((next) => { setEntries(next); saveStorage(STORAGE_KEY, next); }, []);
+
+  const toggleNumFmt = () => {
+    const next = numFmt === "comma" ? "k" : "comma";
+    setNumFmt(next);
+    saveStorage(NUMFMT_KEY, next);
+  };
+
+  const updatePlayerPrice = (key, val) => {
+    const next = { ...playerPrices, [key]: val };
+    setPlayerPrices(next);
+    saveStorage(SHOTS_STORAGE_KEY, next);
+  };
+
+  // ─── Crystal cost calculations (cascading) ────────────────────────────────
+  const crystalDCost = useMemo(() => {
+    const playerP = playerPrices.crystalD ? Number(playerPrices.crystalD) : null;
+    const npcP = CRYSTAL_PATHS_D[0].perCrystal;
+    if (playerP && playerP < npcP) return { price: playerP, source: "Player Shop", isBetter: true };
+    return { price: npcP, source: "Crystallize (Winged Spear)", isBetter: false };
+  }, [playerPrices.crystalD]);
+
+  const crystalCCost = useMemo(() => {
+    const playerP = playerPrices.crystalC ? Number(playerPrices.crystalC) : null;
+    const bestPath = CRYSTAL_PATHS_C[0];
+    const npcP = (bestPath.weaponCost + bestPath.dCrystals * crystalDCost.price + bestPath.bsFee) / bestPath.yield;
+    if (playerP && playerP < npcP) return { price: playerP, source: "Player Shop", isBetter: true };
+    return { price: npcP, source: `Crystallize (${bestPath.name})`, isBetter: false };
+  }, [playerPrices.crystalC, crystalDCost]);
+
+  // ─── Shot cost calculations ────────────────────────────────────────────────
+  const shotCalcs = useMemo(() => {
+    const results = {};
+    for (const grade of ["D", "C"]) {
+      results[grade] = {};
+      const cCost = grade === "D" ? crystalDCost.price : crystalCCost.price;
+      for (const type of ["SS", "SPS", "BSPS"]) {
+        const r = SHOT_RECIPES[grade][type];
+        const oreCost = r.ore === "soul" ? NPC_PRICES.soulOre : NPC_PRICES.spiritOre;
+        const craftTotal = r.oreQty * oreCost + r.crystals * cCost;
+        const craftPer = craftTotal / r.yield;
+        const playerKey = `${type.toLowerCase()}${grade}`;
+        const playerP = playerPrices[playerKey] ? Number(playerPrices[playerKey]) : null;
+        const signal = playerP != null
+          ? (playerP < craftPer ? { label: "BUY", color: "#4ade80", detail: `Player saves ${fmtDec(craftPer - playerP)} /ea` } : { label: "CRAFT", color: "#e8c55a", detail: `Crafting saves ${fmtDec(playerP - craftPer)} /ea` })
+          : { label: "CRAFT", color: "#7a7464", detail: "No player price entered" };
+        results[grade][type] = { recipe: r, craftTotal, craftPer, playerP, signal, oreCost, cCost };
+      }
+    }
+    return results;
+  }, [crystalDCost, crystalCCost, playerPrices, fmtDec]);
+
+  // ─── Bargain search & calculations ─────────────────────────────────────────
+  const bargainSearchResults = useMemo(() => {
+    if (bargainSearch.length < 3) return [];
+    const q = bargainSearch.toLowerCase();
+    return ITEM_DB.filter(i => i.n.toLowerCase().includes(q)).slice(0, 6);
+  }, [bargainSearch]);
+
+  const bargainTotals = useMemo(() => {
+    const dCrystals = bargainItems.filter(i => i.g === "d").reduce((s, i) => s + i.c, 0);
+    const cCrystals = bargainItems.filter(i => i.g === "c").reduce((s, i) => s + i.c, 0);
+    const dValue = dCrystals * crystalDCost.price;
+    const cValue = cCrystals * crystalCCost.price;
+    const totalValue = dValue + cValue;
+    const askingPrice = bargainAskingPrice ? Number(bargainAskingPrice) : null;
+    const profit = askingPrice != null ? totalValue - askingPrice : null;
+    return { dCrystals, cCrystals, dValue, cValue, totalValue, askingPrice, profit };
+  }, [bargainItems, crystalDCost, crystalCCost, bargainAskingPrice]);
+
+  const addBargainItem = (item) => {
+    setBargainItems(prev => [...prev, { ...item, uid: Date.now().toString(36) + Math.random().toString(36).slice(2, 5) }]);
+    setBargainSearch("");
+    setBargainDropdownIdx(-1);
+  };
+  const removeBargainItem = (uid) => setBargainItems(prev => prev.filter(i => i.uid !== uid));
+  const clearBargainItems = () => { setBargainItems([]); setBargainAskingPrice(""); };
+
+  // ─── Crafting resolver engine ─────────────────────────────────────────────
+  const getAvgPrice = useCallback((itemName, type) => {
+    const prices = entries.filter(e => norm(e.item) === norm(itemName) && e.type === type).map(e => e.price);
+    return prices.length > 0 ? prices.reduce((a, b) => a + b, 0) / prices.length : null;
+  }, [entries]);
+
+  const resolveCheapest = useCallback((itemName, visited = new Set()) => {
+    const key = norm(itemName);
+    if (visited.has(key)) return { cost: null, path: "circular" };
+    const next = new Set([...visited, key]);
+
+    const ov = craftOverrides[key];
+    if (ov != null && ov !== "") return { cost: Number(ov), path: "override", source: "⚡ Override" };
+
+    const marketPrice = getAvgPrice(itemName, "sell");
+
+    if (BASE_MATERIALS.some(b => norm(b) === key)) {
+      return { cost: marketPrice, path: "buy", source: marketPrice != null ? "Market" : null };
+    }
+
+    const recipe = CRAFT_RECIPES.find(r => norm(r.name) === key);
+    if (!recipe) return { cost: marketPrice, path: "buy", source: marketPrice != null ? "Market" : null };
+
+    let craftCost = recipe.adenaCost || 0;
+    let allResolved = true;
+    const details = [];
+    for (const ing of recipe.ingredients) {
+      const res = resolveCheapest(ing.name, next);
+      details.push({ ...ing, resolved: res });
+      if (res.cost == null) allResolved = false;
+      else craftCost += res.cost * ing.qty;
+    }
+    const craftPer = allResolved ? craftCost / recipe.yield : null;
+
+    if (marketPrice != null && craftPer != null) {
+      return marketPrice <= craftPer
+        ? { cost: marketPrice, path: "buy", source: "Buy (cheaper)", craftCost: craftPer, ingredients: details, recipe }
+        : { cost: craftPer, path: "craft", source: "Craft (cheaper)", marketPrice, ingredients: details, recipe };
+    }
+    if (marketPrice != null) return { cost: marketPrice, path: "buy", source: "Buy (only data)", ingredients: details, recipe };
+    if (craftPer != null) return { cost: craftPer, path: "craft", source: "Craft (only data)", ingredients: details, recipe };
+    return { cost: null, path: null, source: null, ingredients: details, recipe };
+  }, [entries, craftOverrides, getAvgPrice]);
+
+  const craftingAnalysis = useMemo(() => {
+    return CRAFT_RECIPES.map(recipe => {
+      const avgBuyFor = getAvgPrice(recipe.name, "buy");
+      const avgSellFor = getAvgPrice(recipe.name, "sell");
+      let totalCraftCost = recipe.adenaCost || 0;
+      let allResolved = true;
+      const ingredientDetails = [];
+      for (const ing of recipe.ingredients) {
+        const res = resolveCheapest(ing.name);
+        ingredientDetails.push({ ...ing, resolved: res });
+        if (res.cost == null) allResolved = false;
+        else totalCraftCost += res.cost * ing.qty;
+      }
+      const craftPer = allResolved ? totalCraftCost / recipe.yield : null;
+      const revenue = avgBuyFor != null ? avgBuyFor * recipe.yield : null;
+      const profit = (revenue != null && allResolved) ? revenue - totalCraftCost : null;
+      const profitPct = (revenue != null && totalCraftCost > 0) ? ((revenue / totalCraftCost) - 1) * 100 : null;
+      const hasData = avgBuyFor != null && allResolved;
+      return { recipe, avgBuyFor, avgSellFor, craftPer, totalCraftCost: allResolved ? totalCraftCost : null, revenue, profit, profitPct, ingredientDetails, hasData };
+    }).sort((a, b) => {
+      if (a.hasData && !b.hasData) return -1;
+      if (!a.hasData && b.hasData) return 1;
+      if (!a.hasData && !b.hasData) return 0;
+      return (b.profitPct || -999) - (a.profitPct || -999);
+    });
+  }, [getAvgPrice, resolveCheapest]);
+
+  // ─── Market log handlers ───────────────────────────────────────────────────
+  const handleSubmit = () => {
+    const resolvedItem = (item === "Custom..." ? customItem.trim() : item).trim();
+    if (!resolvedItem || !price) return;
+    const entry = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), item: resolvedItem, type: txType, price: Number(price), location, notes: notes.trim(), timestamp: new Date().toISOString() };
+    persist([entry, ...entries]);
+    setPrice(""); setNotes("");
+    setFlash("Logged!"); setTimeout(() => setFlash(null), 1500);
+  };
+  const handleDelete = (id) => { persist(entries.filter(e => e.id !== id)); };
+  const handleExportCSV = () => {
+    const rows = ["Date,Time,Item,Type,Price,Location,Notes", ...entries.map(e => `${fmtDate(e.timestamp)},${fmtTime(e.timestamp)},${e.item},${e.type},${e.price},${e.location},"${e.notes || ""}"`)].join("\n");
+    const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([rows], { type: "text/csv" }));
+    a.download = `l2_market_${new Date().toISOString().slice(0, 10)}.csv`; a.click();
+  };
+
+  const uniqueItems = useMemo(() => [...new Set(entries.map(e => e.item))].sort(), [entries]);
+
+  // ─── Analytics: searchable watchlist ─────────────────────────────────────────
+  const analyticsSearchResults = useMemo(() => {
+    if (analyticsSearch.length < 2) return [];
+    const q = analyticsSearch.toLowerCase();
+    return uniqueItems.filter(i => i.toLowerCase().includes(q) && !analyticsWatched.some(w => norm(w) === norm(i))).slice(0, 6);
+  }, [analyticsSearch, uniqueItems, analyticsWatched]);
+
+  const addAnalyticsItem = (itemName) => {
+    const next = [...analyticsWatched, itemName];
+    setAnalyticsWatched(next);
+    saveStorage(ANALYTICS_WATCH_KEY, next);
+    setAnalyticsSearch("");
+    setAnalyticsDropdownIdx(-1);
+  };
+  const removeAnalyticsItem = (itemName) => {
+    const next = analyticsWatched.filter(w => norm(w) !== norm(itemName));
+    setAnalyticsWatched(next);
+    saveStorage(ANALYTICS_WATCH_KEY, next);
+  };
+
+  // Per-item analytics data
+  const perItemAnalytics = useMemo(() => {
+    return analyticsWatched.map(itemName => {
+      const data = entries.filter(e => norm(e.item) === norm(itemName)).sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+      const prices = data.map(e => e.price);
+      const avg = prices.length > 0 ? prices.reduce((a, b) => a + b, 0) / prices.length : null;
+      const latest = prices.length > 0 ? prices[prices.length - 1] : null;
+      const sellP = data.filter(e => e.type === "sell").map(e => e.price);
+      const buyP = data.filter(e => e.type === "buy").map(e => e.price);
+      const avgSell = sellP.length ? sellP.reduce((a, b) => a + b, 0) / sellP.length : null;
+      const avgBuy = buyP.length ? buyP.reduce((a, b) => a + b, 0) / buyP.length : null;
+      const sd = stdDev(prices);
+      const signal = latest != null && avg != null ? getSignal(latest, avg, sd) : { label: "—", color: "#7a7464", detail: "No data" };
+      return { itemName, data, prices, avg, latest, avgSell, avgBuy, sd, signal, count: data.length };
+    });
+  }, [analyticsWatched, entries]);
+
+  if (loading) return <div style={{ ...S.root, display: "flex", alignItems: "center", justifyContent: "center", minHeight: "100vh" }}><span style={{ color: "#e8c55a", fontFamily: "'Cinzel',serif" }}>Loading...</span></div>;
+
+  return (
+    <div style={S.root}>
+      <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Crimson+Text:wght@400;600&family=Fira+Mono&display=swap" rel="stylesheet" />
+      <div style={S.header}>
+        <h1 style={S.title}>⚔ Giran Insider Trading</h1>
+        <div style={S.subtitle}>L2 Reborn Franz, made by Vaxil with Claude Opus 4.6</div>
+        <div style={{ display: "flex", justifyContent: "center", marginTop: 8 }}>
+          <label style={{ display: "flex", alignItems: "center", gap: 6, cursor: "pointer", fontSize: 12, color: "#7a7464", userSelect: "none" }}>
+            <input type="checkbox" checked={numFmt === "k"} onChange={toggleNumFmt} style={{ accentColor: "#d4a843" }} />
+            <span>Use <strong style={{ color: numFmt === "k" ? "#e8c55a" : "#5a5448" }}>1k / 1kk</strong> format</span>
+          </label>
+        </div>
+        <div style={S.tabs}>
+          {[["log","Log"],["history","History"],["analytics","Analytics"],["shots","⚔ Shots"],["bargain","💎 Bargain"],["crafting","🔨 Crafting"]].map(([k,l]) => (
+            <div key={k} style={S.tab(tab === k)} onClick={() => setTab(k)}>{l}</div>
+          ))}
+        </div>
+      </div>
+      <div style={{ maxWidth: tab === "crafting" || tab === "analytics" ? 960 : 680, margin: "0 auto", padding: "20px 16px", transition: "max-width .3s" }}>
+
+        {/* ═══ LOG TAB ═══ */}
+        {tab === "log" && (
+          <div>
+            <div style={{ ...S.card, background: "#14120e" }}>
+              <div style={{ fontSize: 13, color: "#7a7464", lineHeight: 1.7 }}>
+                <strong style={{ color: "#d4a843" }}>📖 How to use:</strong> Log prices you see from player shops in town. <span style={{ color: "#c084fc" }}>SELL FOR</span> = what players charge. <span style={{ color: "#4ade80" }}>BUY FOR</span> = what players pay. Accepts <span style={S.goldText}>k</span> (×1,000) and <span style={S.goldText}>kk</span> (×1,000,000) in all inputs. Check <strong style={{ ...S.goldText, cursor: "pointer" }} onClick={() => setTab("analytics")}>Analytics</strong> for market signals. Use <strong style={{ ...S.goldText, cursor: "pointer" }} onClick={() => setTab("shots")}>Shots Calc</strong> to know if you should craft or buy your shots.
+              </div>
+            </div>
+            <div style={S.card}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+                <div style={{ gridColumn: item === "Custom..." ? "1" : "1/-1" }}>
+                  <label style={S.label}>Item</label>
+                  <select style={S.select} value={item} onChange={e => setItem(e.target.value)}>{ITEMS.map(i => <option key={i}>{i}</option>)}</select>
+                </div>
+                {item === "Custom..." && <div><label style={S.label}>Custom</label><input style={S.input} value={customItem} onChange={e => setCustomItem(e.target.value)} placeholder="Item name" /></div>}
+                <div style={{ gridColumn: "1/-1" }}>
+                  <label style={S.label}>Transaction</label>
+                  <div style={S.radioGroup}>
+                    <div style={S.radio(txType === "sell", "sell")} onClick={() => setTxType("sell")}>SELL FOR</div>
+                    <div style={S.radio(txType === "buy", "buy")} onClick={() => setTxType("buy")}>BUY FOR</div>
+                  </div>
+                  <div style={{ ...S.dimText, marginTop: 4 }}>{txType === "sell" ? "🏪 A player is selling this item for this price" : "💰 A player wants to buy this item at this price"}</div>
+                </div>
+                <div><label style={S.label}>Price (Adena)</label><AdenaInput style={S.input} value={price} onChange={v => setPrice(v)} placeholder="1,000 or 50k or 1.5kk" onKeyDown={e => e.key === "Enter" && handleSubmit()} /></div>
+                <div><label style={S.label}>Location</label><select style={S.select} value={location} onChange={e => setLocation(e.target.value)}>{LOCATIONS.map(l => <option key={l}>{l}</option>)}</select></div>
+                <div style={{ gridColumn: "1/-1" }}><label style={S.label}>Notes</label><input style={S.input} value={notes} onChange={e => setNotes(e.target.value)} placeholder="Player Shop Name..." /></div>
+              </div>
+              <div style={{ marginTop: 16, display: "flex", alignItems: "center", gap: 12 }}>
+                <button style={S.btn("primary")} onClick={handleSubmit}>⚔ Log Entry</button>
+                {flash && <span style={{ ...S.greenText, fontSize: 13, fontWeight: 700 }}>✓ {flash}</span>}
+              </div>
+            </div>
+            <div style={{ ...S.card, background: "#16140e" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, textAlign: "center" }}>
+                <div><div style={{ fontSize: 22, ...S.goldText, ...S.mono }}>{entries.length}</div><div style={S.dimText}>Entries</div></div>
+                <div><div style={{ fontSize: 22, ...S.goldText, ...S.mono }}>{uniqueItems.length}</div><div style={S.dimText}>Items</div></div>
+                <div><div style={{ fontSize: 18, ...S.goldText, ...S.mono }}>{entries.length > 0 ? fmtDate(entries[0].timestamp) : "—"}</div><div style={S.dimText}>Last Entry</div></div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ═══ HISTORY TAB ═══ */}
+        {tab === "history" && (
+          <div>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+              <span style={{ fontSize: 13, color: "#7a7464" }}>{entries.length} entries</span>
+              <button style={S.btn("secondary")} onClick={handleExportCSV}>⬇ Export CSV</button>
+            </div>
+            {entries.length === 0
+              ? <div style={{ ...S.card, textAlign: "center", color: "#5a5448", fontStyle: "italic", padding: 40 }}>No entries yet.</div>
+              : <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                  {entries.slice(0, 100).map(e => (
+                    <div key={e.id} style={{ ...S.card, padding: "12px 16px", marginBottom: 0, display: "grid", gridTemplateColumns: "1fr auto auto", alignItems: "center", gap: 12 }}>
+                      <div>
+                        <div style={{ fontWeight: 600, fontSize: 15 }}>{e.item}</div>
+                        <div style={S.dimText}>{fmtDate(e.timestamp)} {fmtTime(e.timestamp)} · {e.location}{e.notes ? ` · ${e.notes}` : ""}</div>
+                      </div>
+                      <div style={{ textAlign: "right" }}>
+                        <span style={S.badge(e.type === "sell" ? "#c084fc" : "#4ade80")}>{e.type === "sell" ? "SELL FOR" : "BUY FOR"}</span>
+                        <div style={{ fontSize: 18, ...S.mono, ...S.goldText, marginTop: 4 }}>{fmt(e.price)}</div>
+                      </div>
+                      <button onClick={() => handleDelete(e.id)} style={{ background: "none", border: "none", color: "#5a5448", cursor: "pointer", fontSize: 16, padding: "4px 8px" }}>✕</button>
+                    </div>
+                  ))}
+                </div>
+            }
+          </div>
+        )}
+
+        {/* ═══ ANALYTICS TAB ═══ */}
+        {tab === "analytics" && (
+          <div>
+            {/* How it works - TOP */}
+            <div style={{ ...S.card, background: "#14120e" }}>
+              <div style={{ fontSize: 12, color: "#7a7464", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>📖 Market Dashboard</div>
+              <div style={{ fontSize: 13, color: "#7a7464", lineHeight: 1.7 }}>
+                Search items below to add them to your watchlist. Each chart shows price history like a stock ticker.
+                <span style={{ color: "#4ade80" }}> ■ Green</span> = price above average (SELL → profit).
+                <span style={{ color: "#f87171" }}> ■ Red</span> = price below average (BUY → stockpile). Charts persist between sessions.
+              </div>
+            </div>
+
+            {/* Search box */}
+            <div style={{ ...S.card, paddingTop: 14, paddingBottom: 14 }}>
+              <div style={{ position: "relative" }}>
+                <input
+                  style={S.input}
+                  value={analyticsSearch}
+                  onChange={e => { setAnalyticsSearch(e.target.value); setAnalyticsDropdownIdx(-1); }}
+                  onKeyDown={e => {
+                    if (e.key === "ArrowDown") { e.preventDefault(); setAnalyticsDropdownIdx(p => Math.min(p + 1, analyticsSearchResults.length - 1)); }
+                    else if (e.key === "ArrowUp") { e.preventDefault(); setAnalyticsDropdownIdx(p => Math.max(p - 1, 0)); }
+                    else if (e.key === "Enter" && analyticsSearchResults.length > 0) {
+                      e.preventDefault();
+                      addAnalyticsItem(analyticsSearchResults[Math.max(0, analyticsDropdownIdx)]);
+                    }
+                  }}
+                  placeholder="Type to add item (2+ chars)... e.g. Steel, Enria"
+                />
+                {analyticsSearchResults.length > 0 && analyticsSearch.length >= 2 && (
+                  <div style={{ position: "absolute", top: "100%", left: 0, right: 0, zIndex: 50, background: "#1a1710", border: "1px solid #3a3020", borderTop: "none", borderRadius: "0 0 8px 8px", overflow: "hidden", boxShadow: "0 8px 24px rgba(0,0,0,0.5)" }}>
+                    {analyticsSearchResults.map((itemName, idx) => (
+                      <div
+                        key={itemName}
+                        onClick={() => addAnalyticsItem(itemName)}
+                        style={{
+                          padding: "10px 14px", cursor: "pointer", fontSize: 14, color: "#d4c9a8", fontWeight: 600,
+                          background: idx === analyticsDropdownIdx ? "#2a2418" : "transparent",
+                          borderBottom: idx < analyticsSearchResults.length - 1 ? "1px solid #1f1c15" : "none",
+                        }}
+                        onMouseEnter={() => setAnalyticsDropdownIdx(idx)}
+                      >
+                        {itemName}
+                        <span style={{ ...S.dimText, marginLeft: 8, fontWeight: 400 }}>
+                          ({entries.filter(e => norm(e.item) === norm(itemName)).length} entries)
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+              {analyticsWatched.length > 0 && (
+                <div style={{ marginTop: 8, display: "flex", gap: 6, flexWrap: "wrap" }}>
+                  <span style={{ fontSize: 12, color: "#5a5448", alignSelf: "center" }}>Watching:</span>
+                  {analyticsWatched.map(w => (
+                    <span key={w} style={{ ...S.badge("#d4a843"), display: "inline-flex", alignItems: "center", gap: 4 }}>
+                      {w}
+                      <span onClick={() => removeAnalyticsItem(w)} style={{ cursor: "pointer", fontSize: 13, marginLeft: 2, color: "#d4a843", fontWeight: 700 }}>✕</span>
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Chart grid — 4 per row */}
+            {perItemAnalytics.length === 0 ? (
+              <div style={{ ...S.card, textAlign: "center", color: "#5a5448", fontStyle: "italic", padding: 40 }}>
+                {entries.length === 0 ? "No data yet. Log some prices first." : "Add items above to start tracking."}
+              </div>
+            ) : (
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 10 }}>
+                {perItemAnalytics.map(a => {
+                  const isAbove = a.latest != null && a.avg != null && a.latest >= a.avg;
+                  const sigColor = a.signal.color;
+                  return (
+                    <div key={a.itemName} style={{
+                      background: "#1a1710", border: `1px solid ${sigColor}33`, borderRadius: 8, padding: 10, position: "relative",
+                      borderColor: a.count < 2 ? "#2a2418" : sigColor + "44",
+                    }}>
+                      {/* ✕ remove button */}
+                      <div
+                        onClick={() => removeAnalyticsItem(a.itemName)}
+                        style={{ position: "absolute", top: 4, right: 6, cursor: "pointer", color: "#5a5448", fontSize: 13, fontWeight: 700, lineHeight: 1, padding: "2px 4px", zIndex: 2 }}
+                      >✕</div>
+
+                      {/* Header */}
+                      <div style={{ marginBottom: 4 }}>
+                        <div style={{ fontSize: 13, fontWeight: 700, color: "#d4c9a8", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", paddingRight: 16 }}>{a.itemName}</div>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 2 }}>
+                          <span style={{ ...S.mono, fontSize: 16, fontWeight: 700, color: a.latest != null ? (isAbove ? "#4ade80" : "#f87171") : "#5a5448" }}>
+                            {a.latest != null ? fmt(a.latest) : "—"}
+                          </span>
+                          {a.count >= 2 && <span style={S.badge(sigColor)}>{a.signal.label}</span>}
+                        </div>
+                      </div>
+
+                      {/* Chart */}
+                      <StockChart prices={a.prices} avg={a.avg} width={210} height={85} />
+
+                      {/* Stats row */}
+                      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 4, fontSize: 11, color: "#5a5448" }}>
+                        <span>Avg: <span style={{ ...S.mono, color: "#d4a843" }}>{a.avg != null ? fmt(Math.round(a.avg)) : "—"}</span></span>
+                        <span>σ: <span style={S.mono}>{a.sd > 0 ? "±" + fmt(Math.round(a.sd)) : "—"}</span></span>
+                      </div>
+                      {a.avgSell != null && a.avgBuy != null && (
+                        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, marginTop: 2 }}>
+                          <span style={{ color: "#c084fc" }}>S:{fmt(Math.round(a.avgSell))}</span>
+                          <span style={{ color: "#4ade80" }}>B:{fmt(Math.round(a.avgBuy))}</span>
+                        </div>
+                      )}
+                      <div style={{ fontSize: 11, color: "#3a3428", marginTop: 2 }}>{a.count} entries</div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ═══ BARGAIN CALCULATOR TAB ═══ */}
+        {tab === "bargain" && (
+          <div>
+            {/* How it works - TOP */}
+            <div style={{ ...S.card, background: "#14120e" }}>
+              <div style={{ fontSize: 12, color: "#7a7464", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>📖 How this works</div>
+              <div style={{ fontSize: 13, color: "#7a7464", lineHeight: 1.8 }}>
+                <strong style={{ color: "#d4a843" }}>Step 1</strong> — Search and add D/C grade equipment a player is selling.
+                <strong style={{ color: "#d4a843" }}> Step 2</strong> — Enter their total asking price.
+                <strong style={{ color: "#d4a843" }}> Step 3</strong> — Calculator values all crystal yields at cheapest cost and tells you if it's a bargain.
+                <br />
+                Crystal costs: D = {fmtDec(crystalDCost.price, 0)}/ea ({crystalDCost.source}), C = {fmtDec(crystalCCost.price, 0)}/ea ({crystalCCost.source}). DB: 440 items (lineage2wiki.org C5).
+              </div>
+            </div>
+            <div style={S.card}>
+              <div style={S.sectionTitle}>💎 Equipment Bargain Calculator</div>
+
+              {/* Search box */}
+              <div style={{ position: "relative", marginBottom: 16 }}>
+                <div style={{ display: "flex", gap: 8 }}>
+                  <div style={{ flex: 1, position: "relative" }}>
+                    <input
+                      style={S.input}
+                      value={bargainSearch}
+                      onChange={e => { setBargainSearch(e.target.value); setBargainDropdownIdx(-1); }}
+                      onKeyDown={e => {
+                        if (e.key === "ArrowDown") { e.preventDefault(); setBargainDropdownIdx(p => Math.min(p + 1, bargainSearchResults.length - 1)); }
+                        else if (e.key === "ArrowUp") { e.preventDefault(); setBargainDropdownIdx(p => Math.max(p - 1, 0)); }
+                        else if (e.key === "Enter" && bargainSearchResults.length > 0) {
+                          e.preventDefault();
+                          addBargainItem(bargainSearchResults[Math.max(0, bargainDropdownIdx)]);
+                        }
+                      }}
+                      placeholder="Type item name (3+ chars)... e.g. Brig"
+                    />
+                    {/* Autocomplete dropdown */}
+                    {bargainSearchResults.length > 0 && bargainSearch.length >= 3 && (
+                      <div style={{ position: "absolute", top: "100%", left: 0, right: 0, zIndex: 50, background: "#1a1710", border: "1px solid #3a3020", borderTop: "none", borderRadius: "0 0 8px 8px", overflow: "hidden", boxShadow: "0 8px 24px rgba(0,0,0,0.5)" }}>
+                        {bargainSearchResults.map((item, idx) => (
+                          <div
+                            key={item.n + item.g}
+                            onClick={() => addBargainItem(item)}
+                            style={{
+                              padding: "10px 14px", cursor: "pointer", fontSize: 14, display: "flex", justifyContent: "space-between", alignItems: "center",
+                              background: idx === bargainDropdownIdx ? "#2a2418" : "transparent",
+                              borderBottom: idx < bargainSearchResults.length - 1 ? "1px solid #1f1c15" : "none",
+                            }}
+                            onMouseEnter={() => setBargainDropdownIdx(idx)}
+                          >
+                            <span>
+                              <span style={{ color: "#d4c9a8", fontWeight: 600 }}>{item.n}</span>
+                              <span style={{ ...S.dimText, marginLeft: 8 }}>{item.t}</span>
+                            </span>
+                            <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                              <span style={S.badge(item.g === "d" ? "#e8c55a" : "#a78bfa")}>{item.g.toUpperCase()}</span>
+                              <span style={{ ...S.mono, color: "#e8c55a", fontSize: 13 }}>{item.c} cr</span>
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Selected items list */}
+              {bargainItems.length > 0 && (
+                <div style={{ marginBottom: 16 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+                    <span style={{ ...S.label, marginBottom: 0 }}>Selected Items ({bargainItems.length})</span>
+                    <button onClick={clearBargainItems} style={{ ...S.btn("secondary"), padding: "5px 12px", fontSize: 11 }}>✕ Clear All</button>
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                    {bargainItems.map((item) => (
+                      <div key={item.uid} style={{ display: "grid", gridTemplateColumns: "1fr auto auto auto", gap: 10, alignItems: "center", padding: "8px 12px", background: "#14120e", borderRadius: 6, border: "1px solid #1f1c15" }}>
+                        <span style={{ fontSize: 14, color: "#d4c9a8" }}>{item.n}</span>
+                        <span style={S.badge(item.g === "d" ? "#e8c55a" : "#a78bfa")}>{item.g.toUpperCase()}</span>
+                        <span style={{ ...S.mono, fontSize: 13, color: "#e8c55a" }}>{item.c} cr</span>
+                        <button onClick={() => removeBargainItem(item.uid)} style={{ background: "none", border: "none", color: "#5a5448", cursor: "pointer", fontSize: 15, padding: "2px 6px" }}>−</button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Asking price input */}
+              {bargainItems.length > 0 && (
+                <div style={{ marginBottom: 16 }}>
+                  <label style={S.label}>Seller's asking price (total adena)</label>
+                  <AdenaInput
+                    style={S.input}
+                    value={bargainAskingPrice}
+                    onChange={v => setBargainAskingPrice(v)}
+                    placeholder="e.g. 500k or 1.5kk"
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* Results */}
+            {bargainItems.length > 0 && (
+              <div>
+                {/* Crystal totals */}
+                <div style={{ display: "grid", gridTemplateColumns: bargainTotals.cCrystals > 0 && bargainTotals.dCrystals > 0 ? "1fr 1fr" : "1fr", gap: 12, marginBottom: 12 }}>
+                  {bargainTotals.dCrystals > 0 && (
+                    <div style={S.card}>
+                      <div style={S.label}>Crystal D Yield</div>
+                      <div style={{ fontSize: 22, ...S.mono, ...S.goldText }}>{fmt(bargainTotals.dCrystals)}</div>
+                      <div style={S.dimText}>@ {fmtDec(crystalDCost.price, 0)}/ea = <span style={S.goldText}>{fmt(Math.round(bargainTotals.dValue))}</span></div>
+                    </div>
+                  )}
+                  {bargainTotals.cCrystals > 0 && (
+                    <div style={S.card}>
+                      <div style={S.label}>Crystal C Yield</div>
+                      <div style={{ fontSize: 22, ...S.mono, color: "#a78bfa" }}>{fmt(bargainTotals.cCrystals)}</div>
+                      <div style={S.dimText}>@ {fmtDec(crystalCCost.price, 0)}/ea = <span style={{ color: "#a78bfa" }}>{fmt(Math.round(bargainTotals.cValue))}</span></div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Total crystal value */}
+                <div style={{ ...S.card, textAlign: "center" }}>
+                  <div style={S.label}>Total Crystal Value</div>
+                  <div style={{ fontSize: 28, ...S.mono, ...S.goldText, fontWeight: 700 }}>
+                    {fmt(Math.round(bargainTotals.totalValue))} adena
+                  </div>
+                </div>
+
+                {/* Verdict */}
+                {bargainTotals.askingPrice != null && bargainTotals.askingPrice > 0 && (() => {
+                  const profit = bargainTotals.profit;
+                  const isBargain = profit > 0;
+                  const pct = ((bargainTotals.totalValue / bargainTotals.askingPrice) - 1) * 100;
+                  return (
+                    <div style={S.signalBox(isBargain ? "#4ade80" : "#f87171")}>
+                      <div style={{ fontSize: 11, color: "#7a7464", textTransform: "uppercase", letterSpacing: 2, marginBottom: 6 }}>Verdict</div>
+                      <div style={{ fontSize: 32, fontFamily: "'Cinzel',serif", fontWeight: 700, color: isBargain ? "#4ade80" : "#f87171", letterSpacing: 3 }}>
+                        {isBargain ? "BARGAIN!" : "NOT WORTH"}
+                      </div>
+                      <div style={{ fontSize: 15, ...S.mono, color: isBargain ? "#4ade80" : "#f87171", marginTop: 8 }}>
+                        {isBargain ? "+" : ""}{fmt(Math.round(profit))} adena ({isBargain ? "+" : ""}{pct.toFixed(1)}%)
+                      </div>
+                      <div style={{ fontSize: 13, color: "#7a7464", marginTop: 8 }}>
+                        Asking: {fmt(bargainTotals.askingPrice)} → Crystals worth: {fmt(Math.round(bargainTotals.totalValue))}
+                      </div>
+                    </div>
+                  );
+                })()}
+              </div>
+            )}
+
+          </div>
+        )}
+        {tab === "shots" && (
+          <div>
+            {/* How it works - TOP */}
+            <div style={{ ...S.card, background: "#14120e" }}>
+              <div style={{ fontSize: 12, color: "#7a7464", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 8 }}>📖 How this works</div>
+              <div style={{ fontSize: 13, color: "#7a7464", lineHeight: 1.8 }}>
+                <strong style={{ color: "#d4a843" }}>Crystal D</strong> — crystallize Giran NPC gear (best: Winged Spear @ 677/ea).
+                <strong style={{ color: "#d4a843" }}> Crystal C</strong> — cascades from D. Two D-swords → dual sword → crystallize. Best: SoR×SoR @ ~3,118/ea.
+                <br />
+                <strong style={{ color: "#d4a843" }}>Shots</strong> — ore from NPC + cheapest crystal source. If player <span style={{ color: "#c084fc" }}>SELL FOR</span> price is cheaper → BUY. If craft cost is lower → CRAFT.
+                <strong style={{ color: "#d4a843" }}> Cascading</strong> — crystal D price changes ripple through Crystal C and all shot costs automatically.
+              </div>
+            </div>
+
+            {/* Shot Calculators by Grade */}
+            {["D", "C"].map(grade => (
+              <div key={grade} style={S.card}>
+                <div style={S.sectionTitle}>⚔ {grade}-Grade Shots</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                  {["SS", "SPS", "BSPS"].map(type => {
+                    const d = shotCalcs[grade]?.[type];
+                    if (!d) return null;
+                    const r = d.recipe;
+                    const ppKey = `${type.toLowerCase()}${grade}`;
+                    return (
+                      <div key={type} style={{ background: "#14120e", borderRadius: 8, padding: 14, border: `1px solid ${d.signal.color}33` }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+                          <div>
+                            <span style={{ fontSize: 15, fontWeight: 700, color: "#d4c9a8" }}>{r.label}</span>
+                            <span style={{ ...S.dimText, marginLeft: 8 }}>({r.yield}/craft)</span>
+                          </div>
+                          <span style={S.badge(d.signal.color)}>{d.signal.label}</span>
+                        </div>
+
+                        <div style={{ fontSize: 13, color: "#7a7464", marginBottom: 8, lineHeight: 1.8 }}>
+                          {r.oreQty}× {r.ore === "soul" ? "Soul Ore" : "Spirit Ore"} @ {fmt(d.oreCost)} = <span style={S.goldText}>{fmt(r.oreQty * d.oreCost)}</span>
+                          <br />
+                          {r.crystals}× Crystal {grade} @ {fmtDec(d.cCost, 0)} = <span style={S.goldText}>{fmt(Math.round(r.crystals * d.cCost))}</span>
+                          <br />
+                          Total: <span style={S.goldText}>{fmt(Math.round(d.craftTotal))}</span> ÷ {r.yield} = <span style={{ ...S.mono, ...S.goldText, fontWeight: 700 }}>{fmtDec(d.craftPer)} /shot</span>
+                        </div>
+
+                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, alignItems: "end" }}>
+                          <div>
+                            <div style={{ ...S.label, marginBottom: 4 }}>Player price /ea</div>
+                            <AdenaInput style={S.inputSm} value={playerPrices[ppKey]} onChange={v => updatePlayerPrice(ppKey, v)} placeholder="e.g. 15" />
+                          </div>
+                          <div>
+                            <div style={{ ...S.label, marginBottom: 4 }}>Quantity</div>
+                            <AdenaInput style={S.inputSm} value={playerPrices[ppKey + "Qty"] || ""} onChange={v => updatePlayerPrice(ppKey + "Qty", v)} placeholder="e.g. 5,000" />
+                          </div>
+                          <div style={{ padding: "8px 10px", background: "#0f0d09", borderRadius: 6, textAlign: "center" }}>
+                            <div style={{ fontSize: 12, color: "#7a7464" }}>Verdict:</div>
+                            <div style={{ fontSize: 14, fontWeight: 700, color: d.signal.color, fontFamily: "'Cinzel',serif" }}>{d.signal.label}</div>
+                            <div style={{ fontSize: 12, color: "#5a5448" }}>{d.signal.detail}</div>
+                          </div>
+                        </div>
+
+                        {d.playerP != null && (() => {
+                          const qty = playerPrices[ppKey + "Qty"] ? Number(playerPrices[ppKey + "Qty"]) : null;
+                          const diff = d.playerP - d.craftPer;
+                          const canProfit = diff > 0;
+                          return (
+                            <div style={{ marginTop: 8 }}>
+                              <div style={{ padding: "6px 10px", background: canProfit ? "#1f2d1f" : "#2d1f1f22", borderRadius: 6, fontSize: 12, marginBottom: qty ? 6 : 0 }}>
+                                {canProfit
+                                  ? <span style={S.greenText}>💰 Craft cost: <strong style={S.mono}>{fmtDec(d.craftPer)}</strong> → Sell at <strong style={S.mono}>{fmtDec(d.playerP, 2)}</strong> → Profit: <strong style={S.mono}>{fmtDec(diff)}</strong> /ea</span>
+                                  : <span style={{ color: "#fbbf24" }}>🛒 Player price <strong style={S.mono}>{fmtDec(d.playerP, 2)}</strong> is cheaper than crafting at <strong style={S.mono}>{fmtDec(d.craftPer)}</strong> → Save: <strong style={S.mono}>{fmtDec(Math.abs(diff))}</strong> /ea</span>
+                                }
+                              </div>
+                              {qty != null && qty > 0 && (
+                                <div style={{ padding: "8px 12px", background: canProfit ? "#1a2e1a" : "#2e1a1a", borderRadius: 6, fontSize: 13, border: `1px solid ${canProfit ? "#4ade8033" : "#f8717133"}` }}>
+                                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                                    <span style={{ color: "#7a7464" }}>× {fmt(qty)} shots:</span>
+                                    <span style={{ ...S.mono, fontSize: 17, fontWeight: 700, color: canProfit ? "#4ade80" : "#fbbf24" }}>
+                                      {canProfit ? "+" : ""}{fmt(Math.round(diff * qty))} adena
+                                    </span>
+                                  </div>
+                                  <div style={{ ...S.dimText, marginTop: 4 }}>
+                                    {canProfit
+                                      ? `Total craft cost: ${fmt(Math.round(d.craftPer * qty))} → Sell for: ${fmt(Math.round(d.playerP * qty))}`
+                                      : `Buy for: ${fmt(Math.round(d.playerP * qty))} instead of crafting for: ${fmt(Math.round(d.craftPer * qty))}`
+                                    }
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })()}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+
+            {/* NPC Reference */}
+            <div style={{ ...S.card, background: "#14120e" }}>
+              <div style={S.sectionTitle}>📋 Giran NPC Prices (with tax)</div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, fontSize: 13 }}>
+                <div><span style={S.dimText}>Soul Ore:</span> <span style={{ ...S.mono, ...S.goldText }}>{fmt(NPC_PRICES.soulOre)}</span></div>
+                <div><span style={S.dimText}>Spirit Ore:</span> <span style={{ ...S.mono, ...S.goldText }}>{fmt(NPC_PRICES.spiritOre)}</span></div>
+                <div><span style={S.dimText}>Gem D:</span> <span style={{ ...S.mono, ...S.goldText }}>{fmt(NPC_PRICES.gemD)}</span></div>
+                <div><span style={S.dimText}>Gem C:</span> <span style={{ ...S.mono, ...S.goldText }}>{fmt(NPC_PRICES.gemC)}</span></div>
+                <div><span style={S.dimText}>Gem B:</span> <span style={{ ...S.mono, ...S.goldText }}>{fmt(NPC_PRICES.gemB)}</span></div>
+              </div>
+            </div>
+
+            {/* Crystallization Paths — BOTTOM (reference only, no player inputs) */}
+            <div style={{ ...S.card, background: "#14120e" }}>
+              <div style={S.sectionTitle}>📊 Crystallization Paths (Reference)</div>
+              <div style={{ marginBottom: 14 }}>
+                <div style={{ fontSize: 12, color: "#d4a843", fontWeight: 700, marginBottom: 6 }}>Crystal D (Giran NPC gear → crystallize):</div>
+                {CRYSTAL_PATHS_D.map((p, i) => (
+                  <div key={i} style={{ display: "grid", gridTemplateColumns: "140px 1fr 80px 80px", gap: 8, padding: "4px 0", fontSize: 13, borderBottom: i < CRYSTAL_PATHS_D.length - 1 ? "1px solid #1f1c15" : "none" }}>
+                    <span style={{ color: i === 0 ? "#4ade80" : "#7a7464" }}>{i === 0 ? "★ " : ""}{p.name}</span>
+                    <span style={S.dimText}>Buy: {fmt(p.cost)}</span>
+                    <span style={S.dimText}>→ {p.yield}</span>
+                    <span style={{ ...S.mono, color: i === 0 ? "#4ade80" : "#d4c9a8", fontSize: 12 }}>{fmtDec(p.perCrystal, 0)}/ea</span>
+                  </div>
+                ))}
+              </div>
+              <div>
+                <div style={{ fontSize: 12, color: "#d4a843", fontWeight: 700, marginBottom: 6 }}>Crystal C (Dual Sword pipeline):</div>
+                {CRYSTAL_PATHS_C.map((p, i) => {
+                  const total = p.weaponCost + p.dCrystals * crystalDCost.price + p.bsFee;
+                  const per = total / p.yield;
+                  return (
+                    <div key={i} style={{ display: "grid", gridTemplateColumns: "120px 1fr 60px 80px", gap: 8, padding: "5px 0", fontSize: 13, borderBottom: i < CRYSTAL_PATHS_C.length - 1 ? "1px solid #1f1c15" : "none" }}>
+                      <span style={{ color: i === 0 ? "#4ade80" : "#7a7464" }}>{i === 0 ? "★ " : ""}{p.name}</span>
+                      <span style={S.dimText}>{p.weapons} + {p.dCrystals}×CrD + {fmt(p.bsFee)} fee</span>
+                      <span style={S.dimText}>→ {p.yield}C</span>
+                      <span style={{ ...S.mono, color: i === 0 ? "#4ade80" : "#d4c9a8", fontSize: 12 }}>{fmtDec(per, 0)}/ea</span>
+                    </div>
+                  );
+                })}
+              </div>
+              <div style={{ marginTop: 10, fontSize: 12, color: "#5a5448" }}>
+                Crystal costs used: D = <span style={S.goldText}>{fmtDec(crystalDCost.price, 0)}/ea</span> ({crystalDCost.source}), C = <span style={S.goldText}>{fmtDec(crystalCCost.price, 0)}/ea</span> ({crystalCCost.source})
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ═══ CRAFTING TAB ═══ */}
+        {tab === "crafting" && (
+          <div>
+            <div style={{ ...S.card, background: "#14120e" }}>
+              <div style={{ fontSize: 13, color: "#7a7464", lineHeight: 1.7 }}>
+                <strong style={{ color: "#d4a843" }}>🔨 Crafting Profitability</strong> — Each card shows if crafting a recipe and selling the product at current <span style={{ color: "#4ade80" }}>BUY FOR</span> prices is profitable vs buying ingredients at <span style={{ color: "#c084fc" }}>SELL FOR</span> prices. The engine recursively finds the <strong style={{ color: "#e8c55a" }}>cheapest path</strong> for every ingredient.
+              </div>
+            </div>
+
+            {craftingAnalysis.length > 0 && (() => {
+              const bestIdx = craftingAnalysis.findIndex(a => a.hasData && a.profitPct != null && a.profitPct > 0);
+              return (
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                  {craftingAnalysis.map((a, idx) => {
+                    const isBest = idx === bestIdx && bestIdx >= 0;
+                    const borderColor = !a.hasData ? "#3a3428" : a.profitPct > 25 ? "#e8c55a" : a.profitPct > 0 ? "#4ade80" : "#f87171";
+                    const bgColor = isBest ? "#1e1a0c" : !a.hasData ? "#100e0a" : "#1a1710";
+                    return (
+                      <div key={a.recipe.name} style={{ background: bgColor, border: `2px solid ${borderColor}`, borderRadius: 8, padding: 12, position: "relative" }}>
+                        {isBest && <div style={{ position: "absolute", top: -9, right: 10, background: "#e8c55a", color: "#12100c", fontSize: 11, fontWeight: 700, padding: "2px 8px", borderRadius: 4, fontFamily: "'Cinzel',serif", letterSpacing: 1 }}>★ BEST</div>}
+
+                        {/* Header */}
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+                          <div style={{ minWidth: 0 }}>
+                            <span style={{ fontSize: 14, fontWeight: 700, color: a.hasData ? "#d4c9a8" : "#5a5448" }}>{a.recipe.name}</span>
+                            {a.recipe.yield > 1 && <span style={{ ...S.dimText, marginLeft: 6 }}>×{a.recipe.yield}</span>}
+                          </div>
+                          {a.hasData ? (
+                            <span style={S.badge(borderColor)}>{a.profitPct > 0 ? `+${a.profitPct.toFixed(1)}%` : `${a.profitPct.toFixed(1)}%`}</span>
+                          ) : (
+                            <span style={S.badge("#3a3428")}>N/A</span>
+                          )}
+                        </div>
+
+                        {a.hasData ? (
+                          <div>
+                            {/* Compact summary row */}
+                            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8, padding: "6px 8px", background: "#0f0d09", borderRadius: 6, fontSize: 12 }}>
+                              <div style={{ textAlign: "center" }}>
+                                <div style={{ color: "#7a7464", fontSize: 11 }}>Sell</div>
+                                <div style={{ ...S.mono, color: "#4ade80" }}>{fmtDec(a.avgBuyFor, 0)}</div>
+                              </div>
+                              <div style={{ textAlign: "center" }}>
+                                <div style={{ color: "#7a7464", fontSize: 11 }}>Craft</div>
+                                <div style={{ ...S.mono, color: "#c084fc" }}>{fmtDec(a.craftPer, 0)}</div>
+                              </div>
+                              <div style={{ textAlign: "center" }}>
+                                <div style={{ color: "#7a7464", fontSize: 11 }}>Profit</div>
+                                <div style={{ ...S.mono, fontWeight: 700, color: a.profitPct > 0 ? "#4ade80" : "#f87171" }}>{a.profitPct > 0 ? "+" : ""}{fmtDec(a.avgBuyFor - a.craftPer, 0)}</div>
+                              </div>
+                            </div>
+                            {a.recipe.yield > 1 && a.profit != null && (
+                              <div style={{ background: a.profit > 0 ? "#1a2e1a" : "#2e1a1a", borderRadius: 4, padding: "4px 8px", marginBottom: 8, textAlign: "center", fontSize: 12 }}>
+                                <span style={{ color: "#7a7464" }}>Batch ({a.recipe.yield}×): </span>
+                                <span style={{ ...S.mono, fontWeight: 700, color: a.profit > 0 ? "#4ade80" : "#f87171" }}>{a.profit > 0 ? "+" : ""}{fmt(Math.round(a.profit))}</span>
+                              </div>
+                            )}
+
+                            {/* Ingredients */}
+                            <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                              {a.ingredientDetails.map((ing, i) => (
+                                <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr auto auto", gap: 6, alignItems: "center", padding: "3px 6px", background: "#0f0d09", borderRadius: 4, fontSize: 12 }}>
+                                  <div>
+                                    <span style={{ color: "#d4c9a8" }}>{ing.qty}× {ing.name}</span>
+                                    {ing.resolved.path === "craft" && <span style={{ fontSize: 11, color: "#e8c55a", marginLeft: 4 }}>⚒</span>}
+                                    {ing.resolved.path === "buy" && <span style={{ fontSize: 11, color: "#c084fc", marginLeft: 4 }}>🛒</span>}
+                                    {ing.resolved.path === "override" && <span style={{ fontSize: 11, color: "#fbbf24", marginLeft: 4 }}>⚡</span>}
+                                  </div>
+                                  <span style={{ ...S.mono, fontSize: 12, color: ing.resolved.cost != null ? "#e8c55a" : "#5a5448" }}>
+                                    {ing.resolved.cost != null ? `${fmtDec(ing.resolved.cost, 0)}` : "—"}
+                                  </span>
+                                  <AdenaInput
+                                    style={{ ...S.inputSm, width: 58, padding: "3px 5px", fontSize: 11, textAlign: "right" }}
+                                    placeholder="⚡"
+                                    value={craftOverrides[norm(ing.name)] || ""}
+                                    onChange={v => setCraftOverrides(p => ({ ...p, [norm(ing.name)]: v }))}
+                                  />
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        ) : (
+                          <div>
+                            <div style={{ fontSize: 12, color: "#5a5448", fontStyle: "italic", marginBottom: 8 }}>
+                              {a.avgBuyFor == null ? "No BUY FOR data. " : ""}
+                              {a.ingredientDetails.some(i => i.resolved.cost == null) ? "Missing prices. " : ""}
+                            </div>
+                            <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                              {a.ingredientDetails.map((ing, i) => (
+                                <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr auto auto", gap: 6, alignItems: "center", padding: "3px 6px", background: "#0f0d09", borderRadius: 4, fontSize: 12 }}>
+                                  <span style={{ color: ing.resolved.cost != null ? "#7a7464" : "#5a5448" }}>{ing.qty}× {ing.name}</span>
+                                  <span style={{ fontSize: 12, color: ing.resolved.cost != null ? "#5a5448" : "#f87171" }}>{ing.resolved.cost != null ? "✓" : "✕"}</span>
+                                  <AdenaInput
+                                    style={{ ...S.inputSm, width: 58, padding: "3px 5px", fontSize: 11, textAlign: "right" }}
+                                    placeholder="⚡"
+                                    value={craftOverrides[norm(ing.name)] || ""}
+                                    onChange={v => setCraftOverrides(p => ({ ...p, [norm(ing.name)]: v }))}
+                                  />
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })()}
+
+            {/* Clear overrides */}
+            {Object.values(craftOverrides).some(v => v !== "") && (
+              <div style={{ marginTop: 12, textAlign: "center" }}>
+                <button style={S.btn("secondary")} onClick={() => setCraftOverrides({})}>✕ Clear All Overrides</button>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// Mount the app
+ReactDOM.render(React.createElement(L2MarketTracker), document.getElementById("root"));
+  </script>
+</body>
+</html>
