@@ -2,6 +2,10 @@
 
 A browser-based market tracker for **Lineage 2 Reborn** (C5 Chronicle). It logs prices, detects bargains, calculates crafting profitability, and tells you whether to buy or craft your soulshots — all without a server. Every byte of data stays in your browser's localStorage.
 
+## How to use:
+Open the github page below:
+https://vkotzamanis.github.io/L2InsiderTrading/
+Import your own data or load the sample .json file  inlcuded in this repo and play around.
 ## What it does
 
 The app has six tabs. Each solves a different problem.
