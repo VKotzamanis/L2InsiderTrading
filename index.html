@@ -296,7 +296,7 @@ function saveStorage(key, data) {
 // ─── Stock Chart (green above EMA = SELL, red below = BUY) w/ Tooltips ──────
 function StockChart({ data, ema, fmt, width = 210, height = 90 }) {
   if (!data || data.length < 2 || !ema || ema.length < 2) return (
-    <div style={{ width, height, display: "flex", alignItems: "center", justifyContent: "center", color: "#4f637a", fontSize: 12, fontStyle: "italic", border: "1px dashed #283a54", borderRadius: 6 }}>Need 2+ entries</div>
+    <div style={{ width, height, display: "flex", alignItems: "center", justifyContent: "center", color: "#4f637a", fontSize: 15, fontStyle: "italic", border: "1px dashed #283a54", borderRadius: 6 }}>Need 2+ entries</div>
   );
   const prices = data.map(d => d.price);
   const pad = { t: 8, r: 6, b: 4, l: 6 };
@@ -362,22 +362,22 @@ function StockChart({ data, ema, fmt, width = 210, height = 90 }) {
 const S = {
   root: { background: "#0b101a", minHeight: "100vh", fontFamily: "'Crimson Text','Georgia',serif", color: "#d1dce8", paddingBottom: 40, fontSize: 14 },
   header: { background: "linear-gradient(180deg,#1b263b,#0b101a)", borderBottom: "2px solid #283a54", padding: "20px 24px 16px", textAlign: "center" },
-  title: { fontFamily: "'Cinzel','Georgia',serif", fontSize: 24, color: "#ebd48d", margin: 0, letterSpacing: 2, textTransform: "uppercase" },
-  subtitle: { fontSize: 13, color: "#6b829e", marginTop: 4, letterSpacing: 1 },
+  title: { fontFamily: "'Cinzel','Georgia',serif", fontSize: 22, color: "#ebd48d", margin: 0, letterSpacing: 2, textTransform: "uppercase" },
+  subtitle: { fontSize: 12, color: "#6b829e", marginTop: 4, letterSpacing: 1 },
   tabs: { display: "flex", justifyContent: "center", gap: 0, marginTop: 16, flexWrap: "wrap" },
-  tab: (a) => ({ display: "flex", alignItems: "center", gap: "6px", padding: "8px 18px", cursor: "pointer", fontSize: 13, letterSpacing: 1, background: a ? "#111824" : "transparent", color: a ? "#ebd48d" : "#6b829e", border: `1px solid ${a ? "#283a54" : "transparent"}`, borderBottom: a ? "1px solid #111824" : "1px solid #283a54", borderRadius: "6px 6px 0 0", fontFamily: "'Cinzel',serif", fontWeight: a ? 700 : 400, transition: "all .2s" }),
+  tab: (a) => ({ display: "flex", alignItems: "center", gap: "6px", padding: "8px 18px", cursor: "pointer", fontSize: 14, letterSpacing: 1, background: a ? "#111824" : "transparent", color: a ? "#ebd48d" : "#6b829e", border: `1px solid ${a ? "#283a54" : "transparent"}`, borderBottom: a ? "1px solid #111824" : "1px solid #283a54", borderRadius: "6px 6px 0 0", fontFamily: "'Cinzel',serif", fontWeight: a ? 700 : 400, transition: "all .2s" }),
   card: { background: "#111824", border: "1px solid #283a54", borderRadius: 10, padding: 18, marginBottom: 14 },
-  label: { fontSize: 12, color: "#6b829e", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 5, display: "block" },
+  label: { fontSize: 16, color: "#6b829e", textTransform: "uppercase", letterSpacing: 1.5, marginBottom: 5, display: "block" },
   select: { width: "100%", padding: "9px 12px", background: "#080c14", border: "1px solid #283a54", borderRadius: 6, color: "#d1dce8", fontSize: 14, fontFamily: "inherit", outline: "none", boxSizing: "border-box" },
-  input: { width: "100%", padding: "9px 12px", background: "#080c14", border: "1px solid #283a54", borderRadius: 6, color: "#ebd48d", fontSize: 15, fontFamily: "'Fira Mono',monospace", outline: "none", boxSizing: "border-box" },
-  inputSm: { width: "100%", padding: "7px 10px", background: "#080c14", border: "1px solid #283a54", borderRadius: 6, color: "#ebd48d", fontSize: 14, fontFamily: "'Fira Mono',monospace", outline: "none", boxSizing: "border-box" },
-  btn: (v) => ({ padding: "10px 24px", border: "none", borderRadius: 6, cursor: "pointer", fontSize: 14, fontFamily: "'Cinzel',serif", letterSpacing: 1, fontWeight: 700, ...(v === "primary" ? { background: "linear-gradient(135deg,#ebd48d,#c2a34f)", color: "#0b101a" } : { background: "#1e2b40", color: "#d1dce8", border: "1px solid #283a54" }) }),
-  badge: (c) => ({ display: "inline-block", padding: "3px 10px", borderRadius: 4, fontSize: 11, fontWeight: 700, letterSpacing: 1, fontFamily: "'Cinzel',serif", background: c + "22", color: c, border: `1px solid ${c}44` }),
+  input: { width: "100%", padding: "9px 12px", background: "#080c14", border: "1px solid #283a54", borderRadius: 6, color: "#ebd48d", fontSize: 14, fontFamily: "'Fira Mono',monospace", outline: "none", boxSizing: "border-box" },
+  inputSm: { width: "100%", padding: "7px 10px", background: "#080c14", border: "1px solid #283a54", borderRadius: 6, color: "#ebd48d", fontSize: 12, fontFamily: "'Fira Mono',monospace", outline: "none", boxSizing: "border-box" },
+  btn: (v) => ({ padding: "10px 24px", border: "none", borderRadius: 6, cursor: "pointer", fontSize: 16, fontFamily: "'Cinzel',serif", letterSpacing: 1, fontWeight: 700, ...(v === "primary" ? { background: "linear-gradient(135deg,#ebd48d,#c2a34f)", color: "#0b101a" } : { background: "#1e2b40", color: "#d1dce8", border: "1px solid #283a54" }) }),
+  badge: (c) => ({ display: "inline-block", padding: "3px 10px", borderRadius: 4, fontSize: 12, fontWeight: 700, letterSpacing: 1, fontFamily: "'Cinzel',serif", background: c + "22", color: c, border: `1px solid ${c}44` }),
   radioGroup: { display: "flex", gap: 0, borderRadius: 6, overflow: "hidden", border: "1px solid #283a54" },
-  radio: (a, c) => ({ flex: 1, padding: "9px 16px", textAlign: "center", cursor: "pointer", fontSize: 13, fontFamily: "'Cinzel',serif", fontWeight: 700, letterSpacing: 1, background: a ? (c === "sell" ? "#1e142e" : "#11241a") : "#080c14", color: a ? (c === "sell" ? "#c084fc" : "#4ade80") : "#4f637a", transition: "all .15s" }),
+  radio: (a, c) => ({ flex: 1, padding: "9px 16px", textAlign: "center", cursor: "pointer", fontSize: 16, fontFamily: "'Cinzel',serif", fontWeight: 700, letterSpacing: 1, background: a ? (c === "sell" ? "#1e142e" : "#11241a") : "#080c14", color: a ? (c === "sell" ? "#c084fc" : "#4ade80") : "#4f637a", transition: "all .15s" }),
   signalBox: (c) => ({ background: "#111824", border: "1px solid #283a54", borderRadius: 10, padding: 18, marginBottom: 14, textAlign: "center", borderColor: c + "44", backgroundColor: c + "08" }),
   mono: { fontFamily: "'Fira Mono',monospace" },
-  sectionTitle: { display: "flex", alignItems: "center", gap: "8px", fontSize: 15, fontFamily: "'Cinzel',serif", color: "#ebd48d", fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", marginBottom: 12 },
+  sectionTitle: { display: "flex", alignItems: "center", gap: "8px", fontSize: 12, fontFamily: "'Cinzel',serif", color: "#ebd48d", fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", marginBottom: 12 },
   dimText: { fontSize: 12, color: "#6b829e" },
   goldText: { color: "#ebd48d" },
   greenText: { color: "#4ade80" },
@@ -760,7 +760,7 @@ function L2MarketTracker() {
         <h1 style={S.title}>✠ Giran Insider Trading ✠</h1>
         <div style={S.subtitle}>Made by Vaxil with Claude Opus 4.6, L2 Reborn Franz</div>
         <div style={{ display: "flex", justifyContent: "center", marginTop: 8 }}>
-          <label style={{ display: "flex", alignItems: "center", gap: 6, cursor: "pointer", fontSize: 20, color: "#6b829e", userSelect: "none" }}>
+          <label style={{ display: "flex", alignItems: "center", gap: 6, cursor: "pointer", fontSize: 18, color: "#6b829e", userSelect: "none" }}>
             <input type="checkbox" checked={numFmt === "k"} onChange={toggleNumFmt} style={{ accentColor: "#ebd48d" }} />
             <span>Check this to use <strong style={{ color: numFmt === "k" ? "#e8c55a" : "#5a5448" }}>1k / 1kk</strong> abbreviations.</span>
           </label>
@@ -780,10 +780,10 @@ function L2MarketTracker() {
         {tab === "log" && (
           <div>
             <div style={{ ...S.card, background: "#0c121d" }}>
-              <details style={{ fontSize: 13, color: "#6b829e", lineHeight: 1.7 }}>
-             <summary style={{ display: "flex", alignItems: "center", gap: "6px", cursor: "pointer", color: "#ebd48d", fontWeight: 700, userSelect: "none", fontSize: 12, textTransform: "uppercase", letterSpacing: 1.5 }}>
+              <details style={{ fontSize: 14, color: "#6b829e", lineHeight: 1.7 }}>
+             <summary style={{ display: "flex", alignItems: "center", gap: "6px", cursor: "pointer", color: "#ebd48d", fontWeight: 700, userSelect: "none", fontSize: 14, textTransform: "uppercase", letterSpacing: 1.5 }}>
                   <img src={ICONS.bookWhite} style={{ width: 16, height: 16 }} alt="" /> 
-                  Instructions:
+                  Instructions (Click to expand)
                 </summary>
                 <strong style={{ color: "#d4a843" }}>📖 How to use:</strong> This page is meant to be used for you to log manually the prices you see in Player Shops; The log works in real-time (i.e., it gets the date and time from your browser. Click the appropriate tab before logging in a price.<br></br>
                 <span style={{ color: "#c084fc" }}>SELL FOR</span> = What other player shops are charging to sell you said item.<br></br>
@@ -805,7 +805,7 @@ function L2MarketTracker() {
                     <div style={S.radio(txType === "sell", "sell")} onClick={() => setTxType("sell")}>SELL FOR</div>
                     <div style={S.radio(txType === "buy", "buy")} onClick={() => setTxType("buy")}>BUY FOR</div>
                   </div>
-                  <div style={{ ...S.dimText, marginTop: 4 }}>{txType === "sell" ? "💸 PLAYER SHOPS SELL THIS ITEM FOR:" : "💰 PLAYER SHOPS BUY THIS ITEM FOR"}</div>
+                  <div style={{ ...S.dimText, marginTop: 4 }}>{txType === "sell" ? "💸 PLAYER SHOPS SELL THIS ITEM FOR:" : "💰 PLAYER SHOPS BUY THIS ITEM FOR:"}</div>
                 </div>
                 <div><label style={S.label}>Price (Adena)</label><AdenaInput style={S.input} value={price} onChange={v => setPrice(v)} placeholder="1,000 or 50k or 1.5kk" onKeyDown={e => e.key === "Enter" && handleSubmit()} /></div>
                 <div><label style={S.label}>Location</label><select style={S.select} value={location} onChange={e => setLocation(e.target.value)}>{LOCATIONS.map(l => <option key={l}>{l}</option>)}</select></div>
@@ -813,14 +813,14 @@ function L2MarketTracker() {
               </div>
               <div style={{ marginTop: 16, display: "flex", alignItems: "center", gap: 12 }}>
                 <button style={S.btn("primary")} onClick={handleSubmit}>⚔ Log Entry</button>
-                {flash && <span style={{ ...S.greenText, fontSize: 13, fontWeight: 700 }}>✓ {flash}</span>}
+                {flash && <span style={{ ...S.greenText, fontSize: 12, fontWeight: 700 }}>✓ {flash}</span>}
               </div>
             </div>
             <div style={{ ...S.card, background: "#0d131f" }}>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, textAlign: "center" }}>
-                <div><div style={{ fontSize: 22, ...S.goldText, ...S.mono }}>{entries.length}</div><div style={S.dimText}>Entries</div></div>
-                <div><div style={{ fontSize: 22, ...S.goldText, ...S.mono }}>{uniqueItems.length}</div><div style={S.dimText}>Items</div></div>
-                <div><div style={{ fontSize: 18, ...S.goldText, ...S.mono }}>{entries.length > 0 ? fmtDate(entries[0].timestamp) : "—"}</div><div style={S.dimText}>Last Entry</div></div>
+                <div><div style={{ fontSize: 12, ...S.goldText, ...S.mono }}>{entries.length}</div><div style={S.dimText}>Entries</div></div>
+                <div><div style={{ fontSize: 12, ...S.goldText, ...S.mono }}>{uniqueItems.length}</div><div style={S.dimText}>Items</div></div>
+                <div><div style={{ fontSize: 12, ...S.goldText, ...S.mono }}>{entries.length > 0 ? fmtDate(entries[0].timestamp) : "—"}</div><div style={S.dimText}>Last Entry</div></div>
               </div>
             </div>
           </div>
@@ -830,7 +830,7 @@ function L2MarketTracker() {
         {tab === "history" && (
           <div>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-              <span style={{ fontSize: 13, color: "#6b829e" }}>{entries.length} entries</span>
+              <span style={{ fontSize: 12, color: "#6b829e" }}>{entries.length} entries</span>
               <button style={S.btn("secondary")} onClick={handleExportCSV}>⬇ Export CSV</button>
             </div>
             {entries.length === 0
@@ -841,17 +841,17 @@ function L2MarketTracker() {
                     return (
                     <div key={e.id} style={{ ...S.card, padding: "12px 16px", marginBottom: 0, display: "grid", gridTemplateColumns: "1fr auto auto", alignItems: "center", gap: 12, borderColor: outlier ? "#f8717144" : undefined }}>
                       <div>
-                        <div style={{ fontWeight: 600, fontSize: 15 }}>
+                        <div style={{ fontWeight: 600, fontSize: 14 }}>
                           {e.item}
-                          {outlier && <span title="Outlier: this price is far outside the normal range for this item. It is excluded from averages and crafting calculations." style={{ marginLeft: 6, cursor: "help", fontSize: 13 }}>⚠️</span>}
+                          {outlier && <span title="Outlier: this price is far outside the normal range for this item. It is excluded from averages and crafting calculations." style={{ marginLeft: 6, cursor: "help", fontSize: 14 }}>⚠️</span>}
                         </div>
                         <div style={S.dimText}>{fmtDate(e.timestamp)} {fmtTime(e.timestamp)} · {e.location}{e.notes ? ` · ${e.notes}` : ""}</div>
                       </div>
                       <div style={{ textAlign: "right" }}>
                         <span style={S.badge(e.type === "sell" ? "#c084fc" : "#4ade80")}>{e.type === "sell" ? "SELL FOR" : "BUY FOR"}</span>
-                        <div style={{ fontSize: 18, ...S.mono, color: outlier ? "#f87171" : "#ebd48d", marginTop: 4, textDecoration: outlier ? "line-through" : "none" }}>{fmt(e.price)}</div>
+                        <div style={{ fontSize: 14, ...S.mono, color: outlier ? "#f87171" : "#ebd48d", marginTop: 4, textDecoration: outlier ? "line-through" : "none" }}>{fmt(e.price)}</div>
                       </div>
-                      <button onClick={() => handleDelete(e.id)} style={{ background: "none", border: "none", color: "#4f637a", cursor: "pointer", fontSize: 16, padding: "4px 8px" }}>✕</button>
+                      <button onClick={() => handleDelete(e.id)} style={{ background: "none", border: "none", color: "#ff0000", cursor: "pointer", fontSize: 16, padding: "4px 8px" }}>✕</button>
                     </div>
                     );
                   })}
@@ -861,7 +861,7 @@ function L2MarketTracker() {
             {/* ─── Data Portability ─── */}
             <div style={{ ...S.card, background: "#0c121d", marginTop: 16 }}>
               <div style={S.sectionTitle}>⚙ Data Portability</div>
-              <div style={{ fontSize: 13, color: "#6b829e", marginBottom: 14 }}>
+              <div style={{ fontSize: 14, color: "#6b829e", marginBottom: 14 }}>
                 Export your entire database (entries, shot configs, watchlist) as a JSON file.
                 Import on another browser or device to bring your data with you. Duplicates are automatically skipped.
               </div>
@@ -874,7 +874,7 @@ function L2MarketTracker() {
                 <button style={{ ...S.btn("secondary"), padding: "10px 16px", fontSize: 12 }} onClick={handleExportCSV}>⬇ CSV (entries only)</button>
               </div>
               {importMsg && (
-                <div style={{ marginTop: 10, padding: "8px 12px", borderRadius: 6, fontSize: 13, background: importMsg.ok ? "#0e2116" : "#210e11", color: importMsg.ok ? "#4ade80" : "#f87171", border: `1px solid ${importMsg.ok ? "#4ade8033" : "#f8717133"}` }}>
+                <div style={{ marginTop: 10, padding: "8px 12px", borderRadius: 6, fontSize: 12, background: importMsg.ok ? "#0e2116" : "#210e11", color: importMsg.ok ? "#4ade80" : "#f87171", border: `1px solid ${importMsg.ok ? "#4ade8033" : "#f8717133"}` }}>
                   {importMsg.ok ? "✓ " : "✕ "}{importMsg.text}
                 </div>
               )}
@@ -887,10 +887,10 @@ function L2MarketTracker() {
           <div>
             {/* How it works - TOP */}
             <div style={{ ...S.card, background: "#0c121d" }}>
-              <details style={{ fontSize: 13, color: "#6b829e", lineHeight: 1.7 }}>
-                <summary style={{ display: "flex", alignItems: "center", gap: "6px", cursor: "pointer", color: "#ebd48d", fontWeight: 700, userSelect: "none", fontSize: 12, textTransform: "uppercase", letterSpacing: 1.5 }}>
+              <details style={{ fontSize: 14, color: "#6b829e", lineHeight: 1.7 }}>
+                <summary style={{ display: "flex", alignItems: "center", gap: "6px", cursor: "pointer", color: "#ebd48d", fontWeight: 700, userSelect: "none", fontSize: 14, textTransform: "uppercase", letterSpacing: 1.5 }}>
                   <img src={ICONS.bookMarket} style={{ width: 16, height: 16 }} alt="" /> 
-                  Market Watchlist
+                  Market Watchlist (Click to expand)
                 </summary>
                 <div style={{ marginTop: 6 }}>
                 Search items below to add them to your watchlist. Each chart shows the price history over a set period of time. Use this to monitor what is consistently profitable and spoil the shit out of it.<br></br>
@@ -924,7 +924,7 @@ function L2MarketTracker() {
                         key={itemName}
                         onClick={() => addAnalyticsItem(itemName)}
                         style={{
-                          padding: "10px 14px", cursor: "pointer", fontSize: 14, color: "#d1dce8", fontWeight: 600,
+                          padding: "10px 14px", cursor: "pointer", fontSize: 12, color: "#d1dce8", fontWeight: 600,
                           background: idx === analyticsDropdownIdx ? "#1e2b40" : "transparent",
                           borderBottom: idx < analyticsSearchResults.length - 1 ? "1px solid #1a2436" : "none",
                         }}
@@ -945,7 +945,7 @@ function L2MarketTracker() {
                   {analyticsWatched.map(w => (
                     <span key={w} style={{ ...S.badge("#ebd48d"), display: "inline-flex", alignItems: "center", gap: 4 }}>
                       {w}
-                      <span onClick={() => removeAnalyticsItem(w)} style={{ cursor: "pointer", fontSize: 13, marginLeft: 2, color: "#ebd48d", fontWeight: 700 }}>✕</span>
+                      <span onClick={() => removeAnalyticsItem(w)} style={{ cursor: "pointer", fontSize: 12, marginLeft: 2, color: "#ff0000", fontWeight: 700 }}>✕</span>
                     </span>
                   ))}
                 </div>
@@ -970,14 +970,14 @@ function L2MarketTracker() {
                       {/* ✕ remove button */}
                       <div
                         onClick={() => removeAnalyticsItem(a.itemName)}
-                        style={{ position: "absolute", top: 4, right: 6, cursor: "pointer", color: "#4f637a", fontSize: 13, fontWeight: 700, lineHeight: 1, padding: "2px 4px", zIndex: 2 }}
+                        style={{ position: "absolute", top: 4, right: 6, cursor: "pointer", color: "#ff0000", fontSize: 14, fontWeight: 700, lineHeight: 1, padding: "2px 4px", zIndex: 2 }}
                       >✕</div>
 
                       {/* Header */}
                       <div style={{ marginBottom: 4 }}>
-                        <div style={{ fontSize: 13, fontWeight: 700, color: "#d1dce8", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", paddingRight: 16 }}>{a.itemName}</div>
+                        <div style={{ fontSize: 14, fontWeight: 700, color: "#d1dce8", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", paddingRight: 16 }}>{a.itemName}</div>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 2 }}>
-                          <span style={{ ...S.mono, fontSize: 16, fontWeight: 700, color: a.latest != null ? (isAbove ? "#4ade80" : "#f87171") : "#4f637a" }}>
+                          <span style={{ ...S.mono, fontSize: 12, fontWeight: 700, color: a.latest != null ? (isAbove ? "#4ade80" : "#f87171") : "#4f637a" }}>
                             {a.latest != null ? fmt(a.latest) : "—"}
                           </span>
                           {a.count >= 2 && <span style={S.badge(sigColor)}>{a.signal.label}</span>}
@@ -988,17 +988,17 @@ function L2MarketTracker() {
                       <StockChart data={a.data} ema={a.ema} fmt={fmt} width={210} height={85} />
 
                       {/* Stats row */}
-                      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 4, fontSize: 11, color: "#4f637a" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 4, fontSize: 12, color: "#4f637a" }}>
                         <span>EMA: <span style={{ ...S.mono, color: "#ebd48d" }}>{a.emaLast != null ? fmt(Math.round(a.emaLast)) : "—"}</span></span>
                         <span>σ: <span style={S.mono}>{a.sd > 0 ? "±" + fmt(Math.round(a.sd)) : "—"}</span></span>
                       </div>
                       {a.avgSell != null && a.avgBuy != null && (
-                        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, marginTop: 2 }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, marginTop: 2 }}>
                           <span style={{ color: "#c084fc" }}>S:{fmt(Math.round(a.avgSell))}</span>
                           <span style={{ color: "#4ade80" }}>B:{fmt(Math.round(a.avgBuy))}</span>
                         </div>
                       )}
-                      <div style={{ fontSize: 11, color: "#2e3f59", marginTop: 2 }}>
+                      <div style={{ fontSize: 12, color: "#2e3f59", marginTop: 2 }}>
                         {a.count} entries{a.outlierCount > 0 && <span style={{ color: "#f87171" }}> · {a.outlierCount} outlier{a.outlierCount > 1 ? "s" : ""} excluded</span>}
                       </div>
                     </div>
@@ -1014,10 +1014,10 @@ function L2MarketTracker() {
           <div>
             {/* How it works - TOP */}
             <div style={{ ...S.card, background: "#0c121d" }}>
-              <details style={{ fontSize: 13, color: "#6b829e", lineHeight: 1.8 }}>
-                <summary style={{ display: "flex", alignItems: "center", gap: "6px", cursor: "pointer", color: "#ebd48d", fontWeight: 700, userSelect: "none", fontSize: 12, textTransform: "uppercase", letterSpacing: 1.5 }}>
+              <details style={{ fontSize: 14, color: "#6b829e", lineHeight: 1.8 }}>
+                <summary style={{ display: "flex", alignItems: "center", gap: "6px", cursor: "pointer", color: "#ebd48d", fontWeight: 700, userSelect: "none", fontSize: 14, textTransform: "uppercase", letterSpacing: 1.5 }}>
                   <img src={ICONS.bookWhite} style={{ width: 16, height: 16 }} alt="" /> 
-                  Instructions:
+                  Instructions (Click to expand)
                 </summary>
                 <div style={{ marginTop: 6 }}>
               <strong style={{ color: "#d4a843" }}>Use this to check whether equipment sold in a Player Shop is a bargain or not. Costs are normalized per X-Grade Crystal's base value. Implemented only for D, C grade so far.</strong><br></br>
@@ -1058,7 +1058,7 @@ function L2MarketTracker() {
                             key={item.n + item.g}
                             onClick={() => addBargainItem(item)}
                             style={{
-                              padding: "10px 14px", cursor: "pointer", fontSize: 14, display: "flex", justifyContent: "space-between", alignItems: "center",
+                              padding: "10px 14px", cursor: "pointer", fontSize: 12, display: "flex", justifyContent: "space-between", alignItems: "center",
                               background: idx === bargainDropdownIdx ? "#1e2b40" : "transparent",
                               borderBottom: idx < bargainSearchResults.length - 1 ? "1px solid #1a2436" : "none",
                             }}
@@ -1070,7 +1070,7 @@ function L2MarketTracker() {
                             </span>
                             <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                               <span style={S.badge(item.g === "d" ? "#ebd48d" : "#a78bfa")}>{item.g.toUpperCase()}</span>
-                              <span style={{ ...S.mono, color: "#ebd48d", fontSize: 13 }}>{item.c} cr</span>
+                              <span style={{ ...S.mono, color: "#ebd48d", fontSize: 14 }}>{item.c} cr</span>
                             </span>
                           </div>
                         ))}
@@ -1085,15 +1085,15 @@ function L2MarketTracker() {
                 <div style={{ marginBottom: 16 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
                     <span style={{ ...S.label, marginBottom: 0 }}>Selected Items ({bargainItems.length})</span>
-                    <button onClick={clearBargainItems} style={{ ...S.btn("secondary"), padding: "5px 12px", fontSize: 11 }}>✕ Clear All</button>
+                    <button onClick={clearBargainItems} style={{ ...S.btn("secondary"), padding: "5px 12px", fontSize: 12 }}>✕ Clear All</button>
                   </div>
                   <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
                     {bargainItems.map((item) => (
                       <div key={item.uid} style={{ display: "grid", gridTemplateColumns: "1fr auto auto auto", gap: 10, alignItems: "center", padding: "8px 12px", background: "#0c121d", borderRadius: 6, border: "1px solid #1a2436" }}>
-                        <span style={{ fontSize: 14, color: "#d1dce8" }}>{item.n}</span>
+                        <span style={{ fontSize: 12, color: "#d1dce8" }}>{item.n}</span>
                         <span style={S.badge(item.g === "d" ? "#ebd48d" : "#a78bfa")}>{item.g.toUpperCase()}</span>
-                        <span style={{ ...S.mono, fontSize: 13, color: "#ebd48d" }}>{item.c} cr</span>
-                        <button onClick={() => removeBargainItem(item.uid)} style={{ background: "none", border: "none", color: "#4f637a", cursor: "pointer", fontSize: 15, padding: "2px 6px" }}>−</button>
+                        <span style={{ ...S.mono, fontSize: 14, color: "#ebd48d" }}>{item.c} cr</span>
+                        <button onClick={() => removeBargainItem(item.uid)} style={{ background: "none", border: "none", color: "#ff0000", cursor: "pointer", fontSize: 16, padding: "2px 6px" }}>−</button>
                       </div>
                     ))}
                   </div>
@@ -1138,7 +1138,7 @@ function L2MarketTracker() {
                 {/* Total crystal value */}
                 <div style={{ ...S.card, textAlign: "center" }}>
                   <div style={S.label}>Total Crystal Value</div>
-                  <div style={{ fontSize: 28, ...S.mono, ...S.goldText, fontWeight: 700 }}>
+                  <div style={{ fontSize: 22, ...S.mono, ...S.goldText, fontWeight: 700 }}>
                     {fmt(Math.round(bargainTotals.totalValue))} adena
                   </div>
                 </div>
@@ -1151,13 +1151,13 @@ function L2MarketTracker() {
                   return (
                     <div style={S.signalBox(isBargain ? "#4ade80" : "#f87171")}>
                       <div style={{ fontSize: 11, color: "#6b829e", textTransform: "uppercase", letterSpacing: 2, marginBottom: 6 }}>Verdict</div>
-                      <div style={{ fontSize: 32, fontFamily: "'Cinzel',serif", fontWeight: 700, color: isBargain ? "#4ade80" : "#f87171", letterSpacing: 3 }}>
-                        {isBargain ? "BARGAIN!" : "NOT WORTH"}
+                      <div style={{ fontSize: 24, fontFamily: "'Cinzel',serif", fontWeight: 700, color: isBargain ? "#4ade80" : "#f87171", letterSpacing: 3 }}>
+                        {isBargain ? "PRICE < MIN VALUE" : "PRICE > MIN VALUE"}
                       </div>
-                      <div style={{ fontSize: 15, ...S.mono, color: isBargain ? "#4ade80" : "#f87171", marginTop: 8 }}>
+                      <div style={{ fontSize: 14, ...S.mono, color: isBargain ? "#4ade80" : "#f87171", marginTop: 8 }}>
                         {isBargain ? "+" : ""}{fmt(Math.round(profit))} adena ({isBargain ? "+" : ""}{pct.toFixed(1)}%)
                       </div>
-                      <div style={{ fontSize: 13, color: "#6b829e", marginTop: 8 }}>
+                      <div style={{ fontSize: 14, color: "#6b829e", marginTop: 8 }}>
                         Asking: {fmt(bargainTotals.askingPrice)} → Crystals worth: {fmt(Math.round(bargainTotals.totalValue))}
                       </div>
                     </div>
@@ -1172,12 +1172,12 @@ function L2MarketTracker() {
           <div>
             {/* How it works - TOP */}
             <div style={{ ...S.card, background: "#0c121d" }}>
-              <details style={{ fontSize: 13, color: "#6b829e", lineHeight: 1.8 }}>
-                <summary style={{ display: "flex", alignItems: "center", gap: "6px", cursor: "pointer", color: "#ebd48d", fontWeight: 700, userSelect: "none", fontSize: 12, textTransform: "uppercase", letterSpacing: 1.5 }}>
+              <details style={{ fontSize: 14, color: "#6b829e", lineHeight: 1.8 }}>
+                <summary style={{ display: "flex", alignItems: "center", gap: "6px", cursor: "pointer", color: "#ebd48d", fontWeight: 700, userSelect: "none", fontSize: 14, textTransform: "uppercase", letterSpacing: 1.5 }}>
                   <img src={ICONS.bookWhite} style={{ width: 16, height: 16 }} alt="" /> 
-                  Instructions:
+                  Instructions (Click to expand)
                 </summary>
-              <div style={{ fontSize: 13, color: "#7a7464", lineHeight: 1.8 }}>
+              <div style={{ fontSize: 14, color: "#7a7464", lineHeight: 1.8 }}>
               <strong style={{ color: "#d4a843" }}>Only Grade D and C implemented so far.</strong><br></br>
               
                 <strong style={{ color: "#d4a843" }}>Crystal D</strong> — Cheapest way to crystallize without crafting: Giran (or Oren) Weapon Shop (buy: Winged Spear @ 677 w/ 15% tax).<br></br>
@@ -1203,7 +1203,7 @@ function L2MarketTracker() {
                       <div key={type} style={{ background: "#0c121d", borderRadius: 8, padding: 14, border: `1px solid ${d.signal.color}33` }}>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
                           <div>
-                            <span style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: 15, fontWeight: 700, color: "#d1dce8" }}>
+                            <span style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: 16, fontWeight: 700, color: "#d1dce8" }}>
                               <img src={r.icon} style={{ width: 16, height: 16 }} alt="" />
                               {r.label} <span style={{ ...S.dimText, marginLeft: 2, fontWeight: 400 }}>({r.yield}/craft)</span>
                             </span>
@@ -1211,7 +1211,7 @@ function L2MarketTracker() {
                           <span style={S.badge(d.signal.color)}>{d.signal.label}</span>
                         </div>
 
-                        <div style={{ fontSize: 13, color: "#6b829e", marginBottom: 8, lineHeight: 1.8 }}>
+                        <div style={{ fontSize: 12, color: "#6b829e", marginBottom: 8, lineHeight: 1.8 }}>
                           {r.oreQty}× {r.ore === "soul" ? "Soul Ore" : "Spirit Ore"} @ {fmt(d.oreCost)} = <span style={S.goldText}>{fmt(r.oreQty * d.oreCost)}</span>
                           <br />
                           {r.crystals}× Crystal {grade} @ {fmtDec(d.cCost, 0)} = <span style={S.goldText}>{fmt(Math.round(r.crystals * d.cCost))}</span>
@@ -1229,9 +1229,9 @@ function L2MarketTracker() {
                             <AdenaInput style={S.inputSm} value={playerPrices[ppKey + "Qty"] || ""} onChange={v => updatePlayerPrice(ppKey + "Qty", v)} placeholder="e.g. 5,000" />
                           </div>
                           <div style={{ padding: "8px 10px", background: "#080c14", borderRadius: 6, textAlign: "center" }}>
-                            <div style={{ fontSize: 12, color: "#6b829e" }}>Verdict:</div>
+                            <div style={{ fontSize: 14, color: "#6b829e" }}>Verdict:</div>
                             <div style={{ fontSize: 14, fontWeight: 700, color: d.signal.color, fontFamily: "'Cinzel',serif" }}>{d.signal.label}</div>
-                            <div style={{ fontSize: 12, color: "#4f637a" }}>{d.signal.detail}</div>
+                            <div style={{ fontSize: 14, color: "#4f637a" }}>{d.signal.detail}</div>
                           </div>
                         </div>
 
@@ -1241,17 +1241,17 @@ function L2MarketTracker() {
                           const canProfit = diff > 0;
                           return (
                             <div style={{ marginTop: 8 }}>
-                              <div style={{ padding: "6px 10px", background: canProfit ? "#11241a" : "#241114", borderRadius: 6, fontSize: 12, marginBottom: qty ? 6 : 0 }}>
+                              <div style={{ padding: "6px 10px", background: canProfit ? "#11241a" : "#241114", borderRadius: 6, fontSize: 14, marginBottom: qty ? 6 : 0 }}>
                                 {canProfit
-                                  ? <span style={S.greenText}>💰 Craft cost: <strong style={S.mono}>{fmtDec(d.craftPer)}</strong> → Sell at <strong style={S.mono}>{fmtDec(d.playerP, 2)}</strong> → Profit: <strong style={S.mono}>{fmtDec(diff)}</strong> /ea</span>
-                                  : <span style={{ color: "#fbbf24" }}>🛒 Player price <strong style={S.mono}>{fmtDec(d.playerP, 2)}</strong> is cheaper than crafting at <strong style={S.mono}>{fmtDec(d.craftPer)}</strong> → Save: <strong style={S.mono}>{fmtDec(Math.abs(diff))}</strong> /ea</span>
+                                  ? <span style={S.greenText}> Craft cost: <strong style={S.mono}>{fmtDec(d.craftPer)}</strong> → Sell at <strong style={S.mono}>{fmtDec(d.playerP, 2)}</strong> → Profit: <strong style={S.mono}>{fmtDec(diff)}</strong> /ea</span>
+                                  : <span style={{ color: "#fbbf24" }}>Player price <strong style={S.mono}>{fmtDec(d.playerP, 2)}</strong> is cheaper than crafting at <strong style={S.mono}>{fmtDec(d.craftPer)}</strong> → Save: <strong style={S.mono}>{fmtDec(Math.abs(diff))}</strong> /ea</span>
                                 }
                               </div>
                               {qty != null && qty > 0 && (
-                                <div style={{ padding: "8px 12px", background: canProfit ? "#0e2116" : "#210e11", borderRadius: 6, fontSize: 13, border: `1px solid ${canProfit ? "#4ade8033" : "#f8717133"}` }}>
+                                <div style={{ padding: "8px 12px", background: canProfit ? "#0e2116" : "#210e11", borderRadius: 6, fontSize: 12, border: `1px solid ${canProfit ? "#4ade8033" : "#f8717133"}` }}>
                                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                                     <span style={{ color: "#6b829e" }}>× {fmt(qty)} shots:</span>
-                                    <span style={{ ...S.mono, fontSize: 17, fontWeight: 700, color: canProfit ? "#4ade80" : "#fbbf24" }}>
+                                    <span style={{ ...S.mono, fontSize: 14, fontWeight: 700, color: canProfit ? "#4ade80" : "#fbbf24" }}>
                                       {canProfit ? "+" : ""}{fmt(Math.round(diff * qty))} adena
                                     </span>
                                   </div>
@@ -1276,7 +1276,7 @@ function L2MarketTracker() {
             {/* NPC Reference */}
             <div style={{ ...S.card, background: "#0c121d" }}>
               <div style={S.sectionTitle}>Giran NPC Prices (with tax)</div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, fontSize: 13 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, fontSize: 12 }}>
                 <div><span style={S.dimText}>Soul Ore:</span> <span style={{ ...S.mono, ...S.goldText }}>{fmt(NPC_PRICES.soulOre)}</span></div>
                 <div><span style={S.dimText}>Spirit Ore:</span> <span style={{ ...S.mono, ...S.goldText }}>{fmt(NPC_PRICES.spiritOre)}</span></div>
                 <div><span style={S.dimText}>Gem D:</span> <span style={{ ...S.mono, ...S.goldText }}>{fmt(NPC_PRICES.gemD)}</span></div>
@@ -1294,7 +1294,7 @@ function L2MarketTracker() {
               <div style={{ marginBottom: 14 }}>
                 <div style={{ fontSize: 12, color: "#ebd48d", fontWeight: 700, marginBottom: 6 }}>Crystal D (Giran NPC gear → crystallize):</div>
                 {CRYSTAL_PATHS_D.map((p, i) => (
-                  <div key={i} style={{ display: "grid", gridTemplateColumns: "140px 1fr 80px 80px", gap: 8, padding: "4px 0", fontSize: 13, borderBottom: i < CRYSTAL_PATHS_D.length - 1 ? "1px solid #1a2436" : "none" }}>
+                  <div key={i} style={{ display: "grid", gridTemplateColumns: "140px 1fr 80px 80px", gap: 8, padding: "4px 0", fontSize: 12, borderBottom: i < CRYSTAL_PATHS_D.length - 1 ? "1px solid #1a2436" : "none" }}>
                     <span style={{ color: i === 0 ? "#4ade80" : "#6b829e" }}>{i === 0 ? "★ " : ""}{p.name}</span>
                     <span style={S.dimText}>Buy: {fmt(p.cost)}</span>
                     <span style={S.dimText}>→ {p.yield}</span>
@@ -1308,7 +1308,7 @@ function L2MarketTracker() {
                   const total = p.weaponCost + p.dCrystals * crystalDCost.price + p.bsFee;
                   const per = total / p.yield;
                   return (
-                    <div key={i} style={{ display: "grid", gridTemplateColumns: "120px 1fr 60px 80px", gap: 8, padding: "5px 0", fontSize: 13, borderBottom: i < CRYSTAL_PATHS_C.length - 1 ? "1px solid #1a2436" : "none" }}>
+                    <div key={i} style={{ display: "grid", gridTemplateColumns: "120px 1fr 60px 80px", gap: 8, padding: "5px 0", fontSize: 12, borderBottom: i < CRYSTAL_PATHS_C.length - 1 ? "1px solid #1a2436" : "none" }}>
                       <span style={{ color: i === 0 ? "#4ade80" : "#6b829e" }}>{i === 0 ? "★ " : ""}{p.name}</span>
                       <span style={S.dimText}>{p.weapons} + {p.dCrystals}×CrD + {fmt(p.bsFee)} fee</span>
                       <span style={S.dimText}>→ {p.yield}C</span>
@@ -1328,7 +1328,7 @@ function L2MarketTracker() {
         {tab === "crafting" && (
           <div>
             <div style={{ ...S.card, background: "#0c121d" }}>
-              <details style={{ fontSize: 13, color: "#6b829e", lineHeight: 1.7 }}>
+              <details style={{ fontSize: 14, color: "#6b829e", lineHeight: 1.7 }}>
                 <summary style={{ display: "flex", alignItems: "center", gap: "6px", cursor: "pointer", color: "#ebd48d", fontWeight: 700, userSelect: "none" }}>
                   <img src={ICONS.crafting} style={{ width: 16, height: 16 }} alt="" /> 
                   Crafting Profitability
@@ -1351,7 +1351,7 @@ function L2MarketTracker() {
                     const bgColor = isBest ? "#151e2e" : !a.hasData ? "#0a0e17" : "#111824";
                     return (
                       <div key={a.recipe.name} style={{ background: bgColor, border: `2px solid ${borderColor}`, borderRadius: 8, padding: 12, position: "relative" }}>
-                        {isBest && <div style={{ position: "absolute", top: -9, right: 10, background: "#ebd48d", color: "#0b101a", fontSize: 11, fontWeight: 700, padding: "2px 8px", borderRadius: 4, fontFamily: "'Cinzel',serif", letterSpacing: 1 }}>★ BEST</div>}
+                        {isBest && <div style={{ position: "absolute", top: -9, right: 10, background: "#ebd48d", color: "#0b101a", fontSize: 14, fontWeight: 700, padding: "2px 8px", borderRadius: 4, fontFamily: "'Cinzel',serif", letterSpacing: 1 }}>★ BEST</div>}
 
                         {/* Header */}
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
@@ -1362,7 +1362,7 @@ function L2MarketTracker() {
                           <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
                             {a.hasData && a.staleDays != null && (
                               <span title={`Oldest ingredient data: ${a.staleDays} day${a.staleDays !== 1 ? "s" : ""} ago`} style={{
-                                cursor: "help", fontSize: 11, fontWeight: 700, padding: "2px 6px", borderRadius: 4,
+                                cursor: "help", fontSize: 10, fontWeight: 700, padding: "2px 6px", borderRadius: 4,
                                 background: a.staleDays <= 2 ? "#4ade8018" : a.staleDays <= 7 ? "#fbbf2418" : "#f8717118",
                                 color: a.staleDays <= 2 ? "#4ade80" : a.staleDays <= 7 ? "#fbbf24" : "#f87171",
                                 border: `1px solid ${a.staleDays <= 2 ? "#4ade8033" : a.staleDays <= 7 ? "#fbbf2433" : "#f8717133"}`,
@@ -1383,15 +1383,15 @@ function L2MarketTracker() {
                             {/* Compact summary row */}
                             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8, padding: "6px 8px", background: "#080c14", borderRadius: 6, fontSize: 12 }}>
                               <div style={{ textAlign: "center" }}>
-                                <div style={{ color: "#6b829e", fontSize: 11 }}>Sell</div>
+                                <div style={{ color: "#6b829e", fontSize: 12 }}>Sell</div>
                                 <div style={{ ...S.mono, color: "#4ade80" }}>{fmtDec(a.avgBuyFor, 0)}</div>
                               </div>
                               <div style={{ textAlign: "center" }}>
-                                <div style={{ color: "#6b829e", fontSize: 11 }}>Craft</div>
+                                <div style={{ color: "#6b829e", fontSize: 12 }}>Craft</div>
                                 <div style={{ ...S.mono, color: "#c084fc" }}>{fmtDec(a.craftPer, 0)}</div>
                               </div>
                               <div style={{ textAlign: "center" }}>
-                                <div style={{ color: "#6b829e", fontSize: 11 }}>Profit</div>
+                                <div style={{ color: "#6b829e", fontSize: 12 }}>Profit</div>
                                 <div style={{ ...S.mono, fontWeight: 700, color: a.profitPct > 0 ? "#4ade80" : "#f87171" }}>{a.profitPct > 0 ? "+" : ""}{fmtDec(a.avgBuyFor - a.craftPer, 0)}</div>
                               </div>
                             </div>
@@ -1410,16 +1410,16 @@ function L2MarketTracker() {
                                 <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr auto auto", gap: 6, alignItems: "center", padding: "3px 6px", background: "#080c14", borderRadius: 4, fontSize: 12 }}>
                                   <div>
                                     <span style={{ color: "#d1dce8" }}>{ing.qty}× {ing.name}</span>
-                                    {ing.resolved.path === "craft" && <span style={{ fontSize: 11, color: "#ebd48d", marginLeft: 4 }}>⚒</span>}
-                                    {ing.resolved.path === "buy" && <span style={{ fontSize: 11, color: "#c084fc", marginLeft: 4 }}>🛒</span>}
-                                    {ing.resolved.path === "override" && <span style={{ fontSize: 11, color: "#fbbf24", marginLeft: 4 }}>⚡</span>}
-                                    {ingDays != null && ingDays > 7 && <span title={`Data is ${ingDays} days old`} style={{ fontSize: 11, marginLeft: 4, cursor: "help" }}>🔴</span>}
+                                    {ing.resolved.path === "craft" && <span style={{ fontSize: 12, color: "#ebd48d", marginLeft: 4 }}>⚒</span>}
+                                    {ing.resolved.path === "buy" && <span style={{ fontSize: 12, color: "#c084fc", marginLeft: 4 }}></span>}
+                                    {ing.resolved.path === "override" && <span style={{ fontSize: 12, color: "#fbbf24", marginLeft: 4 }}>⚡</span>}
+                                    {ingDays != null && ingDays > 7 && <span title={`Data is ${ingDays} days old`} style={{ fontSize: 12, marginLeft: 4, cursor: "help" }}>🔴</span>}
                                   </div>
                                   <span style={{ ...S.mono, fontSize: 12, color: ing.resolved.cost != null ? "#ebd48d" : "#4f637a" }}>
                                     {ing.resolved.cost != null ? `${fmtDec(ing.resolved.cost, 0)}` : "—"}
                                   </span>
                                   <AdenaInput
-                                    style={{ ...S.inputSm, width: 58, padding: "3px 5px", fontSize: 11, textAlign: "right" }}
+                                    style={{ ...S.inputSm, width: 58, padding: "3px 5px", fontSize: 12, textAlign: "right" }}
                                     placeholder="⚡"
                                     value={craftOverrides[norm(ing.name)] || ""}
                                     onChange={v => setCraftOverrides(p => ({ ...p, [norm(ing.name)]: v }))}
@@ -1441,7 +1441,7 @@ function L2MarketTracker() {
                                   <span style={{ color: ing.resolved.cost != null ? "#6b829e" : "#4f637a" }}>{ing.qty}× {ing.name}</span>
                                   <span style={{ fontSize: 12, color: ing.resolved.cost != null ? "#4f637a" : "#f87171" }}>{ing.resolved.cost != null ? "✓" : "✕"}</span>
                                   <AdenaInput
-                                    style={{ ...S.inputSm, width: 58, padding: "3px 5px", fontSize: 11, textAlign: "right" }}
+                                    style={{ ...S.inputSm, width: 58, padding: "3px 5px", fontSize: 12, textAlign: "right" }}
                                     placeholder="⚡"
                                     value={craftOverrides[norm(ing.name)] || ""}
                                     onChange={v => setCraftOverrides(p => ({ ...p, [norm(ing.name)]: v }))}
@@ -1473,7 +1473,7 @@ function L2MarketTracker() {
         maxWidth: 960, margin: "40px auto 0", padding: "20px 16px 32px",
         borderTop: "1px solid #283a54",
       }}>
-        <div style={{ textAlign: "center", fontSize: 13, color: "#4f637a", lineHeight: 1.9 }}>
+        <div style={{ textAlign: "center", fontSize: 16, color: "#4f637a", lineHeight: 1.9 }}>
           <div style={{ fontFamily: "'Cinzel',serif", fontSize: 14, color: "#6b829e", letterSpacing: 1, marginBottom: 10 }}>✠ Giran Insider Trading ✠</div>
 
           <div style={{ marginBottom: 10 }}>
@@ -1496,7 +1496,7 @@ function L2MarketTracker() {
             </div>
           </div>
 
-          <div style={{ marginTop: 10, fontSize: 12, color: "#2e3f59" }}>
+          <div style={{ marginTop: 10, fontSize: 10, color: "#2e3f59" }}>
             Made by Vaxil with Claude Opus 4.6 · L2 Reborn Franz · 2026
           </div>
         </div>
