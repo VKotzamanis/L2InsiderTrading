@@ -1,0 +1,3932 @@
+{
+  "version": 1,
+  "exportDate": "2026-02-25T18:00:00Z",
+  "_comment": "Demo dataset for Giran Insider Trading. Contains ~250 fake entries across all base materials, crafted intermediates, crystals, shots, and scrolls. One deliberate outlier (Crystal D @ 75k) included to demonstrate IQR filtering. Import via History tab > Import JSON.",
+  "entries": [
+    {
+      "id": "bf32839915",
+      "item": "Varnish",
+      "type": "sell",
+      "price": 251,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-25T15:51:07.058095Z"
+    },
+    {
+      "id": "b90ea1fab0",
+      "item": "Mold Glue",
+      "type": "sell",
+      "price": 2899,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-25T12:54:22.250708Z"
+    },
+    {
+      "id": "aae4494005",
+      "item": "Iron Ore",
+      "type": "sell",
+      "price": 375,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-25T10:50:42.085966Z"
+    },
+    {
+      "id": "fe752e42cd",
+      "item": "Coarse Bone Powder",
+      "type": "sell",
+      "price": 1347,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-25T10:03:28.175671Z"
+    },
+    {
+      "id": "dc20e4048a",
+      "item": "Maestro Holder",
+      "type": "buy",
+      "price": 140285,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-25T09:23:58.578418Z"
+    },
+    {
+      "id": "b5715555c8",
+      "item": "Scroll: Enchant Armor D",
+      "type": "buy",
+      "price": 19574,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-25T09:09:58.330166Z"
+    },
+    {
+      "id": "e786b42aca",
+      "item": "Stone of Purity",
+      "type": "sell",
+      "price": 3856,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-25T09:07:08.097297Z"
+    },
+    {
+      "id": "4408445e28",
+      "item": "Crafted Leather",
+      "type": "sell",
+      "price": 4932,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-25T08:55:00.100226Z"
+    },
+    {
+      "id": "f87fb38283",
+      "item": "Iron Ore",
+      "type": "sell",
+      "price": 361,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-25T08:00:48.848985Z"
+    },
+    {
+      "id": "0d36aed507",
+      "item": "Silver Nugget",
+      "type": "sell",
+      "price": 654,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-25T05:07:55.499785Z"
+    },
+    {
+      "id": "6ab1a407d8",
+      "item": "Spiritshot D",
+      "type": "buy",
+      "price": 50,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-25T04:13:37.505983Z"
+    },
+    {
+      "id": "e3d0a7dbb7",
+      "item": "Spiritshot D",
+      "type": "buy",
+      "price": 53,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-25T03:44:58.531025Z"
+    },
+    {
+      "id": "8f916a8776",
+      "item": "Thons",
+      "type": "sell",
+      "price": 6177,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-25T02:57:19.376518Z"
+    },
+    {
+      "id": "83939b3a58",
+      "item": "Blacksmith's Frame",
+      "type": "buy",
+      "price": 50060,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-25T01:20:07.431419Z"
+    },
+    {
+      "id": "bdc77ae783",
+      "item": "Leather",
+      "type": "sell",
+      "price": 788,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-25T01:08:47.426239Z"
+    },
+    {
+      "id": "b6237fdb25",
+      "item": "Enria",
+      "type": "sell",
+      "price": 13316,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-25T00:35:23.756831Z"
+    },
+    {
+      "id": "4182a0e850",
+      "item": "Gemstone D",
+      "type": "sell",
+      "price": 810,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-25T00:19:20.031111Z"
+    },
+    {
+      "id": "465944c0f0",
+      "item": "Artisan's Frame",
+      "type": "sell",
+      "price": 76533,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T23:36:24.363556Z"
+    },
+    {
+      "id": "291f1ea2d4",
+      "item": "Soulshot D",
+      "type": "sell",
+      "price": 33,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-24T22:12:47.601356Z"
+    },
+    {
+      "id": "ff499cf9c7",
+      "item": "Warsmith's Mold",
+      "type": "buy",
+      "price": 630486,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T22:10:44.344929Z"
+    },
+    {
+      "id": "54f2270d15",
+      "item": "Blacksmith's Frame",
+      "type": "buy",
+      "price": 49683,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-24T22:10:37.443555Z"
+    },
+    {
+      "id": "97b4428655",
+      "item": "Shining Arrow",
+      "type": "buy",
+      "price": 12,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-24T21:30:52.636335Z"
+    },
+    {
+      "id": "046c56648d",
+      "item": "Crystal D",
+      "type": "buy",
+      "price": 692,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T21:13:42.367746Z"
+    },
+    {
+      "id": "87a37bfea4",
+      "item": "Cokes",
+      "type": "sell",
+      "price": 1675,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T19:56:47.801284Z"
+    },
+    {
+      "id": "3bd43210b9",
+      "item": "Soulshot C",
+      "type": "buy",
+      "price": 59,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-24T19:46:57.220429Z"
+    },
+    {
+      "id": "c255cc01a1",
+      "item": "Stem",
+      "type": "sell",
+      "price": 192,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T19:43:17.165583Z"
+    },
+    {
+      "id": "d25b1d7c0d",
+      "item": "Coal",
+      "type": "sell",
+      "price": 298,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T19:36:23.535981Z"
+    },
+    {
+      "id": "4216ef2f35",
+      "item": "Iron Ore",
+      "type": "sell",
+      "price": 400,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T19:36:20.058017Z"
+    },
+    {
+      "id": "b5d7f9ed21",
+      "item": "Stem",
+      "type": "sell",
+      "price": 216,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T18:50:57.082253Z"
+    },
+    {
+      "id": "9608e02c48",
+      "item": "Spiritshot C",
+      "type": "sell",
+      "price": 115,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T18:42:34.408254Z"
+    },
+    {
+      "id": "70ac212ad0",
+      "item": "Warsmith's Holder",
+      "type": "buy",
+      "price": 1063681,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-24T18:01:20.469278Z"
+    },
+    {
+      "id": "d97edc1929",
+      "item": "Stem",
+      "type": "sell",
+      "price": 223,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T17:55:03.284364Z"
+    },
+    {
+      "id": "13c6d0278b",
+      "item": "Gemstone C",
+      "type": "sell",
+      "price": 5537,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T17:48:42.337703Z"
+    },
+    {
+      "id": "e4ff1a3a1a",
+      "item": "Braided Hemp",
+      "type": "sell",
+      "price": 1092,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T17:45:29.321221Z"
+    },
+    {
+      "id": "5edb0ba10e",
+      "item": "BSPS C",
+      "type": "buy",
+      "price": 167,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-24T17:39:39.774656Z"
+    },
+    {
+      "id": "964f85e227",
+      "item": "Animal Skin",
+      "type": "sell",
+      "price": 133,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T15:02:55.313078Z"
+    },
+    {
+      "id": "a88234d3db",
+      "item": "Thread",
+      "type": "sell",
+      "price": 42,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T14:42:47.165876Z"
+    },
+    {
+      "id": "d728fab95b",
+      "item": "Iron Ore",
+      "type": "sell",
+      "price": 363,
+      "location": "Giran",
+      "notes": "price going up",
+      "timestamp": "2026-02-24T13:29:50.639834Z"
+    },
+    {
+      "id": "4a53370400",
+      "item": "Maestro Mold",
+      "type": "sell",
+      "price": 130048,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T12:23:11.505009Z"
+    },
+    {
+      "id": "ee564ac6c6",
+      "item": "Silver Arrow",
+      "type": "sell",
+      "price": 9,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-24T12:18:23.658268Z"
+    },
+    {
+      "id": "fb3540f6bd",
+      "item": "Animal Bone",
+      "type": "sell",
+      "price": 111,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T12:07:00.961377Z"
+    },
+    {
+      "id": "3e7ac90be6",
+      "item": "Scroll: Enchant Weapon D",
+      "type": "sell",
+      "price": 103423,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-24T09:19:40.076401Z"
+    },
+    {
+      "id": "394ef6152b",
+      "item": "Charcoal",
+      "type": "sell",
+      "price": 150,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T07:49:41.049103Z"
+    },
+    {
+      "id": "9677abf6d9",
+      "item": "Animal Skin",
+      "type": "sell",
+      "price": 108,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-24T07:36:02.131808Z"
+    },
+    {
+      "id": "7cd5bd852e",
+      "item": "Metallic Fiber",
+      "type": "sell",
+      "price": 702,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-24T06:47:37.335357Z"
+    },
+    {
+      "id": "249b7d8762",
+      "item": "Varnish",
+      "type": "sell",
+      "price": 254,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-24T06:45:04.692332Z"
+    },
+    {
+      "id": "41c8b2d8f0",
+      "item": "Asofe",
+      "type": "sell",
+      "price": 6817,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-24T06:36:37.149769Z"
+    },
+    {
+      "id": "a192c65deb",
+      "item": "Mithril Arrow",
+      "type": "buy",
+      "price": 6,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-24T06:36:07.369846Z"
+    },
+    {
+      "id": "0ef82b3cd6",
+      "item": "Crystal D",
+      "type": "sell",
+      "price": 717,
+      "location": "Giran",
+      "notes": "crystallized",
+      "timestamp": "2026-02-24T05:56:11.059171Z"
+    },
+    {
+      "id": "bf7d8673f2",
+      "item": "Warsmith's Holder",
+      "type": "buy",
+      "price": 1091907,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T05:40:04.648350Z"
+    },
+    {
+      "id": "5858e89df3",
+      "item": "Metal Hardener",
+      "type": "sell",
+      "price": 5983,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-24T05:35:55.489704Z"
+    },
+    {
+      "id": "25434a0346",
+      "item": "Warsmith's Holder",
+      "type": "buy",
+      "price": 1295341,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T05:12:03.266140Z"
+    },
+    {
+      "id": "a0395853e4",
+      "item": "Artisan's Frame",
+      "type": "sell",
+      "price": 94624,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-24T04:41:09.906577Z"
+    },
+    {
+      "id": "e213ed3d8b",
+      "item": "Crafted Leather",
+      "type": "sell",
+      "price": 4822,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T04:30:28.362508Z"
+    },
+    {
+      "id": "a20952e205",
+      "item": "Coal",
+      "type": "sell",
+      "price": 249,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T03:47:15.781652Z"
+    },
+    {
+      "id": "f8e16dd4e0",
+      "item": "Arcsmith's Anvil",
+      "type": "buy",
+      "price": 905998,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T03:35:28.373752Z"
+    },
+    {
+      "id": "da44b7254d",
+      "item": "Animal Skin",
+      "type": "sell",
+      "price": 130,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T03:23:49.867369Z"
+    },
+    {
+      "id": "0a5bb6b454",
+      "item": "Varnish",
+      "type": "sell",
+      "price": 265,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-24T02:45:23.729607Z"
+    },
+    {
+      "id": "724f248039",
+      "item": "BSPS D",
+      "type": "buy",
+      "price": 81,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T02:11:30.287866Z"
+    },
+    {
+      "id": "b8cf71c76b",
+      "item": "Cokes",
+      "type": "sell",
+      "price": 1685,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T01:39:10.127204Z"
+    },
+    {
+      "id": "6b5ba9f363",
+      "item": "Varnish of Purity",
+      "type": "sell",
+      "price": 10071,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-24T00:35:00.666515Z"
+    },
+    {
+      "id": "c75254866f",
+      "item": "Soulshot C",
+      "type": "buy",
+      "price": 60,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-23T23:58:34.178942Z"
+    },
+    {
+      "id": "b17f10c2e0",
+      "item": "Mithril Alloy",
+      "type": "sell",
+      "price": 18450,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T22:15:00.646076Z"
+    },
+    {
+      "id": "3b6b380d41",
+      "item": "Suede",
+      "type": "sell",
+      "price": 386,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T22:11:12.477164Z"
+    },
+    {
+      "id": "171719aa77",
+      "item": "Maestro Anvil Lock",
+      "type": "buy",
+      "price": 72723,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T22:10:42.920704Z"
+    },
+    {
+      "id": "84b77934bf",
+      "item": "Braided Hemp",
+      "type": "sell",
+      "price": 1253,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-23T21:03:09.439193Z"
+    },
+    {
+      "id": "2caf3230ad",
+      "item": "Crystal C",
+      "type": "sell",
+      "price": 3283,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T20:25:57.498772Z"
+    },
+    {
+      "id": "0d87b540fa",
+      "item": "Spiritshot D",
+      "type": "sell",
+      "price": 55,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T19:22:49.084440Z"
+    },
+    {
+      "id": "ee197521bd",
+      "item": "Soulshot C",
+      "type": "sell",
+      "price": 61,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-23T18:11:01.081706Z"
+    },
+    {
+      "id": "cc20472fbb",
+      "item": "Spiritshot D",
+      "type": "sell",
+      "price": 50,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T17:53:02.477870Z"
+    },
+    {
+      "id": "fba7d4931f",
+      "item": "High Grade Suede",
+      "type": "sell",
+      "price": 2295,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T16:08:10.850365Z"
+    },
+    {
+      "id": "0bbffa653e",
+      "item": "BSPS C",
+      "type": "buy",
+      "price": 190,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-23T15:59:36.106466Z"
+    },
+    {
+      "id": "42c765321c",
+      "item": "Soulshot D",
+      "type": "buy",
+      "price": 25,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T15:43:56.078738Z"
+    },
+    {
+      "id": "4a9b920f17",
+      "item": "Spiritshot C",
+      "type": "buy",
+      "price": 96,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T15:43:33.050983Z"
+    },
+    {
+      "id": "2f322504d8",
+      "item": "Crystal C",
+      "type": "buy",
+      "price": 2717,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T15:00:36.250069Z"
+    },
+    {
+      "id": "bd5ea3e131",
+      "item": "Maestro Anvil Lock",
+      "type": "buy",
+      "price": 71390,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T14:32:07.055010Z"
+    },
+    {
+      "id": "924cfa29db",
+      "item": "Steel",
+      "type": "sell",
+      "price": 3281,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-23T14:18:13.519767Z"
+    },
+    {
+      "id": "e81edc25d3",
+      "item": "Maestro Anvil Lock",
+      "type": "sell",
+      "price": 78335,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-23T14:00:36.975152Z"
+    },
+    {
+      "id": "3e810dfb0e",
+      "item": "Iron Ore",
+      "type": "sell",
+      "price": 353,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T13:59:53.627699Z"
+    },
+    {
+      "id": "f3fcc7f19d",
+      "item": "Leather",
+      "type": "sell",
+      "price": 783,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T13:18:48.684235Z"
+    },
+    {
+      "id": "de992dbfd0",
+      "item": "Enria",
+      "type": "sell",
+      "price": 10618,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T13:11:58.314539Z"
+    },
+    {
+      "id": "27689090ea",
+      "item": "Braided Hemp",
+      "type": "buy",
+      "price": 929,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T12:46:14.231256Z"
+    },
+    {
+      "id": "ca24f9150a",
+      "item": "Warsmith's Mold",
+      "type": "buy",
+      "price": 695455,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T12:01:59.538687Z"
+    },
+    {
+      "id": "f3d0de97e5",
+      "item": "Silver Nugget",
+      "type": "sell",
+      "price": 657,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T11:36:34.289131Z"
+    },
+    {
+      "id": "b3bf09f47b",
+      "item": "Scroll: Enchant Armor D",
+      "type": "sell",
+      "price": 23891,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-23T10:17:26.163829Z"
+    },
+    {
+      "id": "d8a64fc8d8",
+      "item": "Coarse Bone Powder",
+      "type": "sell",
+      "price": 1361,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T09:58:44.634970Z"
+    },
+    {
+      "id": "b6812aadb1",
+      "item": "BSPS C",
+      "type": "buy",
+      "price": 166,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-23T09:43:34.274835Z"
+    },
+    {
+      "id": "7baf054957",
+      "item": "Spiritshot D",
+      "type": "buy",
+      "price": 50,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-23T07:07:26.873332Z"
+    },
+    {
+      "id": "88ee35a661",
+      "item": "Cokes",
+      "type": "sell",
+      "price": 2024,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-23T06:38:52.052159Z"
+    },
+    {
+      "id": "cdb69b7680",
+      "item": "Oriharukon",
+      "type": "sell",
+      "price": 20317,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-23T06:12:02.997282Z"
+    },
+    {
+      "id": "63284fafc2",
+      "item": "Crystal D",
+      "type": "sell",
+      "price": 693,
+      "location": "Giran",
+      "notes": "crystallized",
+      "timestamp": "2026-02-23T05:38:12.491346Z"
+    },
+    {
+      "id": "c914376ba8",
+      "item": "Compound Braid",
+      "type": "sell",
+      "price": 12437,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T05:32:33.404674Z"
+    },
+    {
+      "id": "b08182e470",
+      "item": "Metallic Thread",
+      "type": "sell",
+      "price": 2174,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T04:43:41.551749Z"
+    },
+    {
+      "id": "46e47f9ade",
+      "item": "Crystal D",
+      "type": "sell",
+      "price": 770,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-23T03:58:37.390027Z"
+    },
+    {
+      "id": "5ee9226c11",
+      "item": "Suede",
+      "type": "sell",
+      "price": 361,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-23T02:33:37.908991Z"
+    },
+    {
+      "id": "8a60bbf2e0",
+      "item": "Silver Nugget",
+      "type": "sell",
+      "price": 767,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T01:35:00.714362Z"
+    },
+    {
+      "id": "5eddd6677b",
+      "item": "Iron Ore",
+      "type": "sell",
+      "price": 387,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T01:32:50.906935Z"
+    },
+    {
+      "id": "2924d4788a",
+      "item": "BSPS C",
+      "type": "buy",
+      "price": 184,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T01:30:28.658011Z"
+    },
+    {
+      "id": "e82d446df7",
+      "item": "Crafted Leather",
+      "type": "sell",
+      "price": 4183,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T00:58:21.638331Z"
+    },
+    {
+      "id": "e64166f82c",
+      "item": "Spiritshot D",
+      "type": "sell",
+      "price": 60,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-23T00:06:05.979361Z"
+    },
+    {
+      "id": "ef1b603f2f",
+      "item": "Animal Skin",
+      "type": "sell",
+      "price": 124,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-22T22:31:53.158545Z"
+    },
+    {
+      "id": "8d2833f2fb",
+      "item": "High Grade Suede",
+      "type": "sell",
+      "price": 2070,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-22T20:46:17.724150Z"
+    },
+    {
+      "id": "87bcd205c7",
+      "item": "Maestro Holder",
+      "type": "sell",
+      "price": 182377,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-22T20:17:02.200773Z"
+    },
+    {
+      "id": "c3567b1664",
+      "item": "Crystal D",
+      "type": "buy",
+      "price": 619,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-22T19:16:13.871925Z"
+    },
+    {
+      "id": "6b43e362f5",
+      "item": "Soulshot D",
+      "type": "buy",
+      "price": 29,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-22T19:02:50.606446Z"
+    },
+    {
+      "id": "d5d3fea0d1",
+      "item": "Iron Ore",
+      "type": "sell",
+      "price": 310,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-22T18:49:56.147724Z"
+    },
+    {
+      "id": "073896489b",
+      "item": "Suede",
+      "type": "sell",
+      "price": 321,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-22T18:39:42.581460Z"
+    },
+    {
+      "id": "d3543189a7",
+      "item": "Scroll: Enchant Weapon D",
+      "type": "buy",
+      "price": 101500,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-22T17:17:23.014866Z"
+    },
+    {
+      "id": "a4642167f4",
+      "item": "BSPS D",
+      "type": "buy",
+      "price": 95,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-22T15:56:59.632017Z"
+    },
+    {
+      "id": "5dfea7e1ff",
+      "item": "Oriharukon Ore",
+      "type": "sell",
+      "price": 2603,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-22T14:16:14.650410Z"
+    },
+    {
+      "id": "f79f3fc6a8",
+      "item": "Coarse Bone Powder",
+      "type": "sell",
+      "price": 1331,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-22T13:47:17.375391Z"
+    },
+    {
+      "id": "0d8aa9d86e",
+      "item": "Thons",
+      "type": "sell",
+      "price": 7927,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-22T13:06:40.301630Z"
+    },
+    {
+      "id": "f5f353bc88",
+      "item": "Crystal D",
+      "type": "sell",
+      "price": 693,
+      "location": "Giran",
+      "notes": "crystallized",
+      "timestamp": "2026-02-22T13:05:14.143023Z"
+    },
+    {
+      "id": "2f46d9795b",
+      "item": "Cord",
+      "type": "sell",
+      "price": 163,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-22T12:59:30.241566Z"
+    },
+    {
+      "id": "be6f770b74",
+      "item": "Braided Hemp",
+      "type": "sell",
+      "price": 1111,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-22T12:55:05.456101Z"
+    },
+    {
+      "id": "97cb79a676",
+      "item": "Mithril Ore",
+      "type": "sell",
+      "price": 853,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-22T10:36:45.776977Z"
+    },
+    {
+      "id": "33ed942e7e",
+      "item": "Silver Nugget",
+      "type": "sell",
+      "price": 695,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-22T10:01:36.704801Z"
+    },
+    {
+      "id": "7ed5207735",
+      "item": "Metallic Thread",
+      "type": "sell",
+      "price": 2321,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-22T09:50:18.225602Z"
+    },
+    {
+      "id": "ba49eb765c",
+      "item": "Soulshot C",
+      "type": "buy",
+      "price": 62,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-22T09:48:49.593832Z"
+    },
+    {
+      "id": "27666433b6",
+      "item": "Silver Arrow",
+      "type": "sell",
+      "price": 9,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-22T09:11:45.813982Z"
+    },
+    {
+      "id": "f86dc66283",
+      "item": "Asofe",
+      "type": "sell",
+      "price": 6701,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-22T08:52:56.395346Z"
+    },
+    {
+      "id": "4a03457223",
+      "item": "Animal Skin",
+      "type": "sell",
+      "price": 117,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-22T08:18:44.394009Z"
+    },
+    {
+      "id": "d5891c83ad",
+      "item": "Thread",
+      "type": "sell",
+      "price": 52,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-22T07:58:24.783908Z"
+    },
+    {
+      "id": "230b918679",
+      "item": "Varnish of Purity",
+      "type": "sell",
+      "price": 9896,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-22T07:39:14.234791Z"
+    },
+    {
+      "id": "283606ee76",
+      "item": "Cokes",
+      "type": "sell",
+      "price": 1704,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-22T07:00:38.558779Z"
+    },
+    {
+      "id": "f1525086cf",
+      "item": "Gemstone C",
+      "type": "sell",
+      "price": 5588,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-22T06:58:28.649352Z"
+    },
+    {
+      "id": "0dd2826927",
+      "item": "Gemstone D",
+      "type": "sell",
+      "price": 860,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-22T06:31:37.713014Z"
+    },
+    {
+      "id": "a161ceb848",
+      "item": "Synthetic Cokes",
+      "type": "sell",
+      "price": 7501,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-22T03:06:09.027085Z"
+    },
+    {
+      "id": "8a9640eb8e",
+      "item": "Maestro Anvil Lock",
+      "type": "buy",
+      "price": 72996,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-22T03:04:56.417483Z"
+    },
+    {
+      "id": "a8f5963eb7",
+      "item": "Reorin's Mold",
+      "type": "buy",
+      "price": 247700,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-22T02:40:59.067533Z"
+    },
+    {
+      "id": "03526c1216",
+      "item": "Steel Mold",
+      "type": "sell",
+      "price": 4958,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-22T02:10:29.483751Z"
+    },
+    {
+      "id": "1eb890e34d",
+      "item": "BSPS C",
+      "type": "sell",
+      "price": 215,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-22T02:10:00.879534Z"
+    },
+    {
+      "id": "2e1f554d9f",
+      "item": "Leather",
+      "type": "sell",
+      "price": 791,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-22T02:05:57.176205Z"
+    },
+    {
+      "id": "5f3675e421",
+      "item": "Mold Glue",
+      "type": "sell",
+      "price": 3092,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-22T02:04:07.191237Z"
+    },
+    {
+      "id": "e73fa5c6a3",
+      "item": "Mold Hardener",
+      "type": "sell",
+      "price": 4238,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-22T00:58:21.185245Z"
+    },
+    {
+      "id": "401ee6dbc0",
+      "item": "Shining Arrow",
+      "type": "sell",
+      "price": 15,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-22T00:22:01.896682Z"
+    },
+    {
+      "id": "5934f7660a",
+      "item": "Artisan's Frame",
+      "type": "buy",
+      "price": 77733,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-21T20:56:01.052246Z"
+    },
+    {
+      "id": "2b5b180e21",
+      "item": "Blacksmith's Frame",
+      "type": "sell",
+      "price": 50211,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-21T20:21:43.607936Z"
+    },
+    {
+      "id": "b86a9dfa0c",
+      "item": "Soulshot D",
+      "type": "buy",
+      "price": 25,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-21T20:13:23.633163Z"
+    },
+    {
+      "id": "992529124b",
+      "item": "Silver Arrow",
+      "type": "sell",
+      "price": 9,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-21T19:19:31.433392Z"
+    },
+    {
+      "id": "f48bd15c9a",
+      "item": "Enria",
+      "type": "sell",
+      "price": 13093,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-21T19:00:20.797723Z"
+    },
+    {
+      "id": "0d35424efc",
+      "item": "Shining Arrow",
+      "type": "sell",
+      "price": 15,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-21T17:27:18.584297Z"
+    },
+    {
+      "id": "298de3b28f",
+      "item": "Animal Bone",
+      "type": "sell",
+      "price": 118,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-21T17:21:01.187237Z"
+    },
+    {
+      "id": "97cefe1808",
+      "item": "Oriharukon",
+      "type": "sell",
+      "price": 19512,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-21T17:10:52.137813Z"
+    },
+    {
+      "id": "d22f236b85",
+      "item": "Spiritshot D",
+      "type": "buy",
+      "price": 53,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-21T16:39:22.553408Z"
+    },
+    {
+      "id": "9a616788f6",
+      "item": "Arcsmith's Anvil",
+      "type": "buy",
+      "price": 809112,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-21T16:22:34.416163Z"
+    },
+    {
+      "id": "c9c4b35b38",
+      "item": "Shining Arrow",
+      "type": "sell",
+      "price": 14,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-21T15:50:06.665477Z"
+    },
+    {
+      "id": "286d786ad6",
+      "item": "Mithril Alloy",
+      "type": "sell",
+      "price": 15207,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-21T14:13:13.809134Z"
+    },
+    {
+      "id": "235775e442",
+      "item": "Steel",
+      "type": "buy",
+      "price": 3208,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-21T14:06:49.746052Z"
+    },
+    {
+      "id": "57aa518a35",
+      "item": "Leather",
+      "type": "sell",
+      "price": 794,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-21T13:38:47.247276Z"
+    },
+    {
+      "id": "8a0f73518f",
+      "item": "Scroll: Enchant Weapon D",
+      "type": "sell",
+      "price": 113578,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-21T13:34:31.594680Z"
+    },
+    {
+      "id": "a3cb8dd65d",
+      "item": "Charcoal",
+      "type": "sell",
+      "price": 130,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-21T13:29:40.936458Z"
+    },
+    {
+      "id": "3bc605833b",
+      "item": "Stem",
+      "type": "sell",
+      "price": 190,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-21T13:20:27.482905Z"
+    },
+    {
+      "id": "287e699f66",
+      "item": "Braided Hemp",
+      "type": "buy",
+      "price": 1066,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-21T13:15:33.385409Z"
+    },
+    {
+      "id": "70d23ea143",
+      "item": "Stem",
+      "type": "sell",
+      "price": 208,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-21T12:49:54.171054Z"
+    },
+    {
+      "id": "cce5994dcd",
+      "item": "Mithril Alloy",
+      "type": "sell",
+      "price": 18791,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-21T12:45:26.326552Z"
+    },
+    {
+      "id": "264d28d682",
+      "item": "Charcoal",
+      "type": "sell",
+      "price": 136,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-21T11:16:38.431361Z"
+    },
+    {
+      "id": "ce4f136ad4",
+      "item": "BSPS C",
+      "type": "sell",
+      "price": 195,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-21T09:34:53.817753Z"
+    },
+    {
+      "id": "2238883ba9",
+      "item": "Silver Nugget",
+      "type": "sell",
+      "price": 738,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-21T07:12:15.920750Z"
+    },
+    {
+      "id": "614a2437a4",
+      "item": "Reorin's Mold",
+      "type": "sell",
+      "price": 275145,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-21T06:43:08.401656Z"
+    },
+    {
+      "id": "98421daebe",
+      "item": "Thread",
+      "type": "sell",
+      "price": 53,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-21T06:28:50.106833Z"
+    },
+    {
+      "id": "a9cad2446e",
+      "item": "Thread",
+      "type": "sell",
+      "price": 43,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-21T05:08:03.388003Z"
+    },
+    {
+      "id": "d3fcf143c6",
+      "item": "Soulshot D",
+      "type": "sell",
+      "price": 33,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-21T04:53:26.139278Z"
+    },
+    {
+      "id": "ce37145f47",
+      "item": "BSPS D",
+      "type": "sell",
+      "price": 99,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-21T04:51:15.080944Z"
+    },
+    {
+      "id": "4b380da3fc",
+      "item": "Spiritshot D",
+      "type": "sell",
+      "price": 61,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-21T04:24:15.547517Z"
+    },
+    {
+      "id": "944ca12d60",
+      "item": "Iron Ore",
+      "type": "sell",
+      "price": 338,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-21T03:27:26.706934Z"
+    },
+    {
+      "id": "bada8e41f8",
+      "item": "Soulshot C",
+      "type": "sell",
+      "price": 61,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-21T02:29:15.414624Z"
+    },
+    {
+      "id": "0c3c52187d",
+      "item": "Mold Lubricant",
+      "type": "sell",
+      "price": 3190,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-21T02:04:37.475069Z"
+    },
+    {
+      "id": "88dc57bb4e",
+      "item": "Soulshot C",
+      "type": "sell",
+      "price": 65,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-21T00:13:44.856567Z"
+    },
+    {
+      "id": "49bc3629c8",
+      "item": "Mold Lubricant",
+      "type": "sell",
+      "price": 3284,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-20T23:40:03.889480Z"
+    },
+    {
+      "id": "3ab5fd23b6",
+      "item": "Metallic Thread",
+      "type": "sell",
+      "price": 2298,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-20T22:43:32.546851Z"
+    },
+    {
+      "id": "bc105b7435",
+      "item": "Reorin's Mold",
+      "type": "buy",
+      "price": 248835,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-20T22:11:27.287873Z"
+    },
+    {
+      "id": "aa25a7155f",
+      "item": "Crystal C",
+      "type": "buy",
+      "price": 2847,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-20T21:51:53.538261Z"
+    },
+    {
+      "id": "8f49bd762b",
+      "item": "Coal",
+      "type": "sell",
+      "price": 290,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-20T21:48:28.844980Z"
+    },
+    {
+      "id": "ffb27befc1",
+      "item": "Metallic Fiber",
+      "type": "sell",
+      "price": 607,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-20T21:31:39.628897Z"
+    },
+    {
+      "id": "aea763c68f",
+      "item": "Soulshot D",
+      "type": "sell",
+      "price": 32,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-20T21:09:12.510699Z"
+    },
+    {
+      "id": "046f95795f",
+      "item": "Blacksmith's Frame",
+      "type": "buy",
+      "price": 49264,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-20T20:50:50.595398Z"
+    },
+    {
+      "id": "8c8da71e0d",
+      "item": "Crystal C",
+      "type": "sell",
+      "price": 3909,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-20T20:37:19.769776Z"
+    },
+    {
+      "id": "4fe68dd07a",
+      "item": "Thons",
+      "type": "sell",
+      "price": 7593,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-20T19:48:22.325483Z"
+    },
+    {
+      "id": "5669de53f2",
+      "item": "Shining Arrow",
+      "type": "buy",
+      "price": 14,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-20T18:38:43.031300Z"
+    },
+    {
+      "id": "1f164c509e",
+      "item": "Maestro Mold",
+      "type": "sell",
+      "price": 129944,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-20T17:45:49.760596Z"
+    },
+    {
+      "id": "ecd37d98f6",
+      "item": "Adamantite Nugget",
+      "type": "sell",
+      "price": 1531,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-20T17:36:01.265032Z"
+    },
+    {
+      "id": "6ea612b088",
+      "item": "Crystal C",
+      "type": "buy",
+      "price": 2903,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-20T17:02:56.975332Z"
+    },
+    {
+      "id": "0691091279",
+      "item": "Shining Arrow",
+      "type": "sell",
+      "price": 15,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-20T16:57:46.018338Z"
+    },
+    {
+      "id": "67d7739781",
+      "item": "Adamantite Nugget",
+      "type": "sell",
+      "price": 1414,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-20T12:14:58.232344Z"
+    },
+    {
+      "id": "541862a31b",
+      "item": "Spiritshot C",
+      "type": "sell",
+      "price": 121,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-20T12:00:18.894808Z"
+    },
+    {
+      "id": "a04d8a5710",
+      "item": "Leather",
+      "type": "sell",
+      "price": 783,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-20T11:03:14.765887Z"
+    },
+    {
+      "id": "459e15948e",
+      "item": "High Grade Suede",
+      "type": "sell",
+      "price": 2296,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-20T10:53:35.493954Z"
+    },
+    {
+      "id": "7da36bf5c6",
+      "item": "Craftsman Mold",
+      "type": "buy",
+      "price": 305362,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-20T10:22:21.791600Z"
+    },
+    {
+      "id": "e679d2026f",
+      "item": "Mold Glue",
+      "type": "sell",
+      "price": 2788,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-20T08:40:16.365654Z"
+    },
+    {
+      "id": "222567f3a1",
+      "item": "Metal Hardener",
+      "type": "sell",
+      "price": 5850,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-20T08:11:14.576916Z"
+    },
+    {
+      "id": "8dc59e93b7",
+      "item": "Crystal D",
+      "type": "sell",
+      "price": 75000,
+      "location": "Giran",
+      "notes": "oops wrong price",
+      "timestamp": "2026-02-20T08:07:00Z"
+    },
+    {
+      "id": "0ad55c6e71",
+      "item": "Durable Metal Plate",
+      "type": "sell",
+      "price": 17333,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-20T08:04:42.112590Z"
+    },
+    {
+      "id": "8ff2fead24",
+      "item": "Stone of Purity",
+      "type": "sell",
+      "price": 3580,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-20T07:52:00.510275Z"
+    },
+    {
+      "id": "96a15811c9",
+      "item": "Silver Arrow",
+      "type": "sell",
+      "price": 11,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-20T06:21:40.412272Z"
+    },
+    {
+      "id": "fb247bc740",
+      "item": "Braided Hemp",
+      "type": "sell",
+      "price": 1191,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-20T06:13:41.950093Z"
+    },
+    {
+      "id": "ab394b1fb3",
+      "item": "Cokes",
+      "type": "sell",
+      "price": 1821,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-20T05:08:31.610249Z"
+    },
+    {
+      "id": "98ba1943c9",
+      "item": "Asofe",
+      "type": "sell",
+      "price": 5623,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-20T04:49:15.965878Z"
+    },
+    {
+      "id": "f20da677a2",
+      "item": "Artisan's Frame",
+      "type": "sell",
+      "price": 81754,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-20T04:01:43.779340Z"
+    },
+    {
+      "id": "c4a1b2fdeb",
+      "item": "Mithril Ore",
+      "type": "sell",
+      "price": 978,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-20T03:33:47.675686Z"
+    },
+    {
+      "id": "fef1c6e77f",
+      "item": "Maestro Mold",
+      "type": "sell",
+      "price": 120862,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-20T01:40:20.603479Z"
+    },
+    {
+      "id": "c615f5c333",
+      "item": "Thread",
+      "type": "sell",
+      "price": 50,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-20T01:18:17.136085Z"
+    },
+    {
+      "id": "4ed6d8faff",
+      "item": "High Grade Suede",
+      "type": "sell",
+      "price": 2087,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-20T01:11:59.209112Z"
+    },
+    {
+      "id": "59250b82ac",
+      "item": "Animal Bone",
+      "type": "sell",
+      "price": 149,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-20T00:23:56.168578Z"
+    },
+    {
+      "id": "0b7d156579",
+      "item": "Mithril Arrow",
+      "type": "sell",
+      "price": 7,
+      "location": "Gludin",
+      "notes": "per arrow",
+      "timestamp": "2026-02-19T23:29:26.549357Z"
+    },
+    {
+      "id": "9fc18081f1",
+      "item": "Metallic Fiber",
+      "type": "sell",
+      "price": 750,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T23:21:22.105019Z"
+    },
+    {
+      "id": "852cd09cae",
+      "item": "Spiritshot C",
+      "type": "buy",
+      "price": 102,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-19T22:21:41.391174Z"
+    },
+    {
+      "id": "ad8b27a402",
+      "item": "Mithril Ore",
+      "type": "sell",
+      "price": 975,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-19T21:54:20.379353Z"
+    },
+    {
+      "id": "2707f0e50d",
+      "item": "BSPS D",
+      "type": "buy",
+      "price": 98,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-19T21:47:17.555241Z"
+    },
+    {
+      "id": "62266bd0db",
+      "item": "Mithril Arrow",
+      "type": "buy",
+      "price": 7,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T21:28:21.477227Z"
+    },
+    {
+      "id": "8ad838dd4d",
+      "item": "Scroll: Enchant Armor D",
+      "type": "sell",
+      "price": 26982,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T21:26:10.367766Z"
+    },
+    {
+      "id": "26aa911bed",
+      "item": "Mithril Ore",
+      "type": "sell",
+      "price": 959,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T20:41:09.812702Z"
+    },
+    {
+      "id": "e237528cd4",
+      "item": "Steel",
+      "type": "buy",
+      "price": 2746,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T20:10:26.380864Z"
+    },
+    {
+      "id": "8d5da99add",
+      "item": "Maestro Holder",
+      "type": "buy",
+      "price": 155041,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T19:53:14.309239Z"
+    },
+    {
+      "id": "2b6f857301",
+      "item": "Scroll: Enchant Armor D",
+      "type": "buy",
+      "price": 18649,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T19:41:09.185578Z"
+    },
+    {
+      "id": "d81ac257e7",
+      "item": "Crystal C",
+      "type": "buy",
+      "price": 2676,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-19T18:34:13.689785Z"
+    },
+    {
+      "id": "e2acf19e9b",
+      "item": "Crystal D",
+      "type": "sell",
+      "price": 746,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-19T18:17:22.222043Z"
+    },
+    {
+      "id": "efff47835a",
+      "item": "Mithril Arrow",
+      "type": "sell",
+      "price": 8,
+      "location": "Giran",
+      "notes": "per arrow",
+      "timestamp": "2026-02-19T18:07:57.467004Z"
+    },
+    {
+      "id": "10d6b49294",
+      "item": "Animal Bone",
+      "type": "sell",
+      "price": 148,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-19T17:56:48.228735Z"
+    },
+    {
+      "id": "5f57031843",
+      "item": "BSPS D",
+      "type": "buy",
+      "price": 82,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T17:32:23.711201Z"
+    },
+    {
+      "id": "e5b08c783a",
+      "item": "Stem",
+      "type": "sell",
+      "price": 178,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-19T16:36:05.665461Z"
+    },
+    {
+      "id": "09d8a49404",
+      "item": "Scroll: Enchant Armor D",
+      "type": "buy",
+      "price": 20559,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-19T14:15:13.933525Z"
+    },
+    {
+      "id": "46a1150e5b",
+      "item": "Steel",
+      "type": "sell",
+      "price": 3779,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T14:02:04.276720Z"
+    },
+    {
+      "id": "bccd76dd48",
+      "item": "Varnish of Purity",
+      "type": "sell",
+      "price": 8253,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T13:09:55.675612Z"
+    },
+    {
+      "id": "ecf1b849f6",
+      "item": "Steel",
+      "type": "sell",
+      "price": 3819,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T12:33:10.808922Z"
+    },
+    {
+      "id": "f1e74fa54f",
+      "item": "Compound Braid",
+      "type": "sell",
+      "price": 12640,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T11:58:49.861555Z"
+    },
+    {
+      "id": "a98b6e5f15",
+      "item": "Crystal C",
+      "type": "sell",
+      "price": 3805,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T11:44:24.214462Z"
+    },
+    {
+      "id": "c2b068dd6c",
+      "item": "Varnish",
+      "type": "sell",
+      "price": 246,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T11:35:17.368014Z"
+    },
+    {
+      "id": "d0a463f3a3",
+      "item": "Braided Hemp",
+      "type": "buy",
+      "price": 953,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-19T11:09:12.394594Z"
+    },
+    {
+      "id": "a57645b4ab",
+      "item": "Cord",
+      "type": "sell",
+      "price": 170,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-19T10:55:05.509337Z"
+    },
+    {
+      "id": "240d9ae4af",
+      "item": "Mold Lubricant",
+      "type": "sell",
+      "price": 3369,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T10:32:22.488387Z"
+    },
+    {
+      "id": "32078fb689",
+      "item": "Silver Arrow",
+      "type": "buy",
+      "price": 8,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-19T10:00:14.913641Z"
+    },
+    {
+      "id": "07137cd83a",
+      "item": "Maestro Holder",
+      "type": "sell",
+      "price": 153368,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T05:50:53.431434Z"
+    },
+    {
+      "id": "2d3b8ee2ef",
+      "item": "Charcoal",
+      "type": "sell",
+      "price": 139,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T05:41:09.006027Z"
+    },
+    {
+      "id": "d9e03f5284",
+      "item": "Artisan's Frame",
+      "type": "sell",
+      "price": 76464,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-19T05:40:50.546250Z"
+    },
+    {
+      "id": "c91fe0a472",
+      "item": "Mithril Arrow",
+      "type": "sell",
+      "price": 8,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T05:39:05.984421Z"
+    },
+    {
+      "id": "198d1d4707",
+      "item": "Adamantite Nugget",
+      "type": "sell",
+      "price": 1691,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T05:13:32.969414Z"
+    },
+    {
+      "id": "cddc26ae7e",
+      "item": "Cord",
+      "type": "sell",
+      "price": 130,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T04:25:16.881438Z"
+    },
+    {
+      "id": "5a4012796e",
+      "item": "Enria",
+      "type": "sell",
+      "price": 13289,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T03:06:54.893637Z"
+    },
+    {
+      "id": "3cda31d802",
+      "item": "Metal Hardener",
+      "type": "sell",
+      "price": 6316,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-19T03:05:58.670951Z"
+    },
+    {
+      "id": "b7ccdbf764",
+      "item": "Reorin's Mold",
+      "type": "sell",
+      "price": 244232,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T02:47:16.288394Z"
+    },
+    {
+      "id": "49fe63f21c",
+      "item": "Gemstone D",
+      "type": "sell",
+      "price": 880,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-19T02:42:37.216009Z"
+    },
+    {
+      "id": "62e8f8cf2a",
+      "item": "Scroll: Enchant Weapon D",
+      "type": "buy",
+      "price": 94277,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-19T01:32:31.811303Z"
+    },
+    {
+      "id": "3a5f292712",
+      "item": "Varnish",
+      "type": "sell",
+      "price": 221,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-19T00:43:14.165550Z"
+    },
+    {
+      "id": "14805fb6ec",
+      "item": "Mold Lubricant",
+      "type": "sell",
+      "price": 3491,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-19T00:40:55.862253Z"
+    },
+    {
+      "id": "4ab40ab484",
+      "item": "Mithril Arrow",
+      "type": "buy",
+      "price": 6,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-19T00:03:44.587601Z"
+    },
+    {
+      "id": "4fca2bf36a",
+      "item": "Oriharukon Ore",
+      "type": "sell",
+      "price": 2328,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T22:28:33.989524Z"
+    },
+    {
+      "id": "d99d6518ea",
+      "item": "Maestro Anvil Lock",
+      "type": "sell",
+      "price": 78469,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T22:04:21.258769Z"
+    },
+    {
+      "id": "c39d46ac7a",
+      "item": "Coal",
+      "type": "sell",
+      "price": 296,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-18T21:21:28.346073Z"
+    },
+    {
+      "id": "d3c65f90a4",
+      "item": "BSPS C",
+      "type": "buy",
+      "price": 194,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T21:17:05.089099Z"
+    },
+    {
+      "id": "7d8a35e3e9",
+      "item": "Crystal C",
+      "type": "sell",
+      "price": 3449,
+      "location": "Giran",
+      "notes": "from SoR dual",
+      "timestamp": "2026-02-18T17:31:29.833022Z"
+    },
+    {
+      "id": "b16c8f5f84",
+      "item": "Crystal D",
+      "type": "sell",
+      "price": 686,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T16:53:48.161738Z"
+    },
+    {
+      "id": "2fbf089d43",
+      "item": "Cord",
+      "type": "sell",
+      "price": 161,
+      "location": "Giran",
+      "notes": "per unit, sells in batches of 20",
+      "timestamp": "2026-02-18T16:43:58.323460Z"
+    },
+    {
+      "id": "8afa278dd9",
+      "item": "Crafted Leather",
+      "type": "sell",
+      "price": 4811,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T16:16:37.290418Z"
+    },
+    {
+      "id": "d94a824497",
+      "item": "Suede",
+      "type": "sell",
+      "price": 352,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-18T15:36:46.191992Z"
+    },
+    {
+      "id": "fc7652a7db",
+      "item": "Spiritshot C",
+      "type": "buy",
+      "price": 85,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T15:19:09.868747Z"
+    },
+    {
+      "id": "25bb0c39c0",
+      "item": "Soulshot D",
+      "type": "sell",
+      "price": 30,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-18T14:48:05.404374Z"
+    },
+    {
+      "id": "61e42c3852",
+      "item": "Charcoal",
+      "type": "sell",
+      "price": 169,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T13:55:55.133538Z"
+    },
+    {
+      "id": "4f4d531e89",
+      "item": "Artisan's Frame",
+      "type": "buy",
+      "price": 74328,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T13:45:24.786196Z"
+    },
+    {
+      "id": "9c4c057324",
+      "item": "Gemstone C",
+      "type": "sell",
+      "price": 6109,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-18T12:46:00.967285Z"
+    },
+    {
+      "id": "35f07a1dfd",
+      "item": "Shining Arrow",
+      "type": "buy",
+      "price": 13,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T12:17:51.331117Z"
+    },
+    {
+      "id": "3fb03e72f5",
+      "item": "Cord",
+      "type": "sell",
+      "price": 142,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T11:21:03.226821Z"
+    },
+    {
+      "id": "4f9ad6d5e7",
+      "item": "Soulshot D",
+      "type": "buy",
+      "price": 30,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T09:53:57.812349Z"
+    },
+    {
+      "id": "63e50193c3",
+      "item": "Shining Arrow",
+      "type": "buy",
+      "price": 11,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T09:05:28.411270Z"
+    },
+    {
+      "id": "18f7910de1",
+      "item": "Soulshot C",
+      "type": "sell",
+      "price": 67,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-18T08:55:41.875023Z"
+    },
+    {
+      "id": "8059324401",
+      "item": "Soulshot C",
+      "type": "buy",
+      "price": 59,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T08:45:34.139082Z"
+    },
+    {
+      "id": "978fb22182",
+      "item": "Steel",
+      "type": "sell",
+      "price": 3240,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T08:33:45.305694Z"
+    },
+    {
+      "id": "dc5b636063",
+      "item": "Animal Skin",
+      "type": "sell",
+      "price": 133,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T07:37:03.761569Z"
+    },
+    {
+      "id": "7e630f7085",
+      "item": "Cokes",
+      "type": "sell",
+      "price": 1994,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T06:02:30.944403Z"
+    },
+    {
+      "id": "6a878cde02",
+      "item": "Silver Arrow",
+      "type": "buy",
+      "price": 8,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T05:16:52.362106Z"
+    },
+    {
+      "id": "af78002e59",
+      "item": "Suede",
+      "type": "sell",
+      "price": 378,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-18T04:28:01.504725Z"
+    },
+    {
+      "id": "387387d819",
+      "item": "Spiritshot D",
+      "type": "sell",
+      "price": 55,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T03:45:19.805869Z"
+    },
+    {
+      "id": "7c0a827b91",
+      "item": "Adamantite Nugget",
+      "type": "sell",
+      "price": 1628,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T03:33:53.283727Z"
+    },
+    {
+      "id": "c43736fb8e",
+      "item": "Enria",
+      "type": "sell",
+      "price": 10615,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T02:56:18.719633Z"
+    },
+    {
+      "id": "c36b970160",
+      "item": "BSPS D",
+      "type": "sell",
+      "price": 104,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T02:11:08.625465Z"
+    },
+    {
+      "id": "3f5c50191f",
+      "item": "Adamantite Nugget",
+      "type": "sell",
+      "price": 1689,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T01:59:52.470968Z"
+    },
+    {
+      "id": "39e1816cd0",
+      "item": "Silver Nugget",
+      "type": "sell",
+      "price": 780,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T01:38:53.449994Z"
+    },
+    {
+      "id": "c682cef2da",
+      "item": "Crystal D",
+      "type": "buy",
+      "price": 649,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T00:52:36.354123Z"
+    },
+    {
+      "id": "374ec65500",
+      "item": "Metal Hardener",
+      "type": "sell",
+      "price": 4883,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-18T00:47:47.621929Z"
+    },
+    {
+      "id": "292127d8f7",
+      "item": "Charcoal",
+      "type": "sell",
+      "price": 127,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-18T00:30:52.459028Z"
+    },
+    {
+      "id": "fdcc31c382",
+      "item": "Scroll: Enchant Armor D",
+      "type": "sell",
+      "price": 28429,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-17T23:54:16.835127Z"
+    },
+    {
+      "id": "11cfc64e15",
+      "item": "Crystal D",
+      "type": "buy",
+      "price": 597,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-17T23:13:44.235376Z"
+    },
+    {
+      "id": "fb8cc4729e",
+      "item": "Metallic Thread",
+      "type": "sell",
+      "price": 1986,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-17T23:06:20.257306Z"
+    },
+    {
+      "id": "3678c2cc31",
+      "item": "Soulshot D",
+      "type": "buy",
+      "price": 26,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-17T22:41:26.629980Z"
+    },
+    {
+      "id": "9ee63c9020",
+      "item": "Varnish",
+      "type": "sell",
+      "price": 251,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-17T22:32:03.426354Z"
+    },
+    {
+      "id": "047530c750",
+      "item": "Gemstone C",
+      "type": "sell",
+      "price": 5955,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-17T22:19:00.171553Z"
+    },
+    {
+      "id": "f1ebd2240c",
+      "item": "Soulshot D",
+      "type": "buy",
+      "price": 28,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-17T22:07:39.547504Z"
+    },
+    {
+      "id": "6b3f74b418",
+      "item": "Stone of Purity",
+      "type": "sell",
+      "price": 3889,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-17T21:16:57.564446Z"
+    },
+    {
+      "id": "d9bb7fb42e",
+      "item": "Mold Glue",
+      "type": "sell",
+      "price": 3109,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-17T20:46:05.361994Z"
+    },
+    {
+      "id": "e14e4f2046",
+      "item": "Steel Mold",
+      "type": "sell",
+      "price": 5680,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-17T20:30:00.042067Z"
+    },
+    {
+      "id": "e411f3e234",
+      "item": "Coal",
+      "type": "sell",
+      "price": 312,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-17T19:47:48.248983Z"
+    },
+    {
+      "id": "a353aaec90",
+      "item": "Shining Arrow",
+      "type": "sell",
+      "price": 15,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-17T18:40:06.458142Z"
+    },
+    {
+      "id": "9ecc0530e9",
+      "item": "Braided Hemp",
+      "type": "buy",
+      "price": 908,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-17T17:18:00.863238Z"
+    },
+    {
+      "id": "215647d231",
+      "item": "Stem",
+      "type": "sell",
+      "price": 179,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-17T16:27:35.503075Z"
+    },
+    {
+      "id": "69e1c69a20",
+      "item": "Gemstone D",
+      "type": "sell",
+      "price": 894,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-17T16:25:49.432380Z"
+    },
+    {
+      "id": "1193b05dbb",
+      "item": "Adamantite Nugget",
+      "type": "sell",
+      "price": 1361,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-17T15:51:01.162608Z"
+    },
+    {
+      "id": "0e5f4d9443",
+      "item": "Soulshot D",
+      "type": "sell",
+      "price": 31,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-17T15:30:26.814324Z"
+    },
+    {
+      "id": "088024434f",
+      "item": "Gemstone C",
+      "type": "sell",
+      "price": 5556,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-17T15:26:52.339471Z"
+    },
+    {
+      "id": "e23c3d20a7",
+      "item": "Silver Arrow",
+      "type": "buy",
+      "price": 8,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-17T14:50:13.077114Z"
+    },
+    {
+      "id": "a5569f315d",
+      "item": "Mithril Arrow",
+      "type": "sell",
+      "price": 8,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-17T14:13:39.741830Z"
+    },
+    {
+      "id": "095bc37766",
+      "item": "Maestro Mold",
+      "type": "buy",
+      "price": 105668,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-17T13:12:51.766693Z"
+    },
+    {
+      "id": "d6dc93da3a",
+      "item": "Crystal C",
+      "type": "buy",
+      "price": 3352,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-17T12:37:42.689925Z"
+    },
+    {
+      "id": "c897ed91c7",
+      "item": "Oriharukon",
+      "type": "sell",
+      "price": 22923,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-17T11:39:07.592146Z"
+    },
+    {
+      "id": "0aebe7f970",
+      "item": "Blacksmith's Frame",
+      "type": "sell",
+      "price": 57352,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-17T10:28:24.810726Z"
+    },
+    {
+      "id": "1a8cf8c6c8",
+      "item": "Animal Bone",
+      "type": "sell",
+      "price": 120,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-17T10:03:22.999916Z"
+    },
+    {
+      "id": "af40576c20",
+      "item": "Spiritshot C",
+      "type": "buy",
+      "price": 96,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-17T09:58:34.435963Z"
+    },
+    {
+      "id": "afe2ae9197",
+      "item": "Spiritshot D",
+      "type": "buy",
+      "price": 43,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-17T09:55:15.531185Z"
+    },
+    {
+      "id": "b8293062c5",
+      "item": "Coarse Bone Powder",
+      "type": "sell",
+      "price": 1341,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-17T09:48:08.918775Z"
+    },
+    {
+      "id": "865f030052",
+      "item": "Silver Arrow",
+      "type": "buy",
+      "price": 9,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-17T09:37:43.155891Z"
+    },
+    {
+      "id": "35e4be21ae",
+      "item": "Durable Metal Plate",
+      "type": "sell",
+      "price": 15430,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-17T08:35:09.760156Z"
+    },
+    {
+      "id": "458ca6f6f0",
+      "item": "Silver Mold",
+      "type": "sell",
+      "price": 17025,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-17T08:19:52.261090Z"
+    },
+    {
+      "id": "47a28b6060",
+      "item": "Scroll: Enchant Armor D",
+      "type": "buy",
+      "price": 20010,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-17T06:54:59.709778Z"
+    },
+    {
+      "id": "9495eb6a94",
+      "item": "Mithril Ore",
+      "type": "sell",
+      "price": 965,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-17T05:36:38.670220Z"
+    },
+    {
+      "id": "258ba72515",
+      "item": "Animal Skin",
+      "type": "sell",
+      "price": 110,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-17T05:21:03.839462Z"
+    },
+    {
+      "id": "d7275bc63e",
+      "item": "Blacksmith's Frame",
+      "type": "sell",
+      "price": 53617,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-17T04:48:36.532080Z"
+    },
+    {
+      "id": "74b7183533",
+      "item": "Leather",
+      "type": "sell",
+      "price": 870,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-17T03:32:02.896376Z"
+    },
+    {
+      "id": "32596fdd5c",
+      "item": "Stone of Purity",
+      "type": "sell",
+      "price": 4485,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-17T01:08:57.540579Z"
+    },
+    {
+      "id": "054069463c",
+      "item": "Steel",
+      "type": "buy",
+      "price": 3162,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-17T01:05:20.802868Z"
+    },
+    {
+      "id": "ee7c990fed",
+      "item": "Suede",
+      "type": "sell",
+      "price": 361,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-16T22:49:23.250782Z"
+    },
+    {
+      "id": "f118d83564",
+      "item": "Iron Ore",
+      "type": "sell",
+      "price": 368,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-16T22:44:06.267382Z"
+    },
+    {
+      "id": "06be008394",
+      "item": "Craftsman Mold",
+      "type": "sell",
+      "price": 364206,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-16T22:39:38.455587Z"
+    },
+    {
+      "id": "415da2949d",
+      "item": "Silver Arrow",
+      "type": "sell",
+      "price": 9,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-16T21:48:12.309675Z"
+    },
+    {
+      "id": "43f52764f8",
+      "item": "Scroll: Enchant Weapon D",
+      "type": "buy",
+      "price": 102016,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-16T21:24:11.622942Z"
+    },
+    {
+      "id": "a9e175790d",
+      "item": "Animal Bone",
+      "type": "sell",
+      "price": 142,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-16T19:41:04.604907Z"
+    },
+    {
+      "id": "4128ac4c4b",
+      "item": "Spiritshot C",
+      "type": "buy",
+      "price": 99,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-16T19:03:39.452664Z"
+    },
+    {
+      "id": "14682654d1",
+      "item": "Craftsman Mold",
+      "type": "sell",
+      "price": 318213,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-16T18:55:38.187414Z"
+    },
+    {
+      "id": "a4c74ca23a",
+      "item": "Varnish",
+      "type": "sell",
+      "price": 261,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-16T18:17:14.504981Z"
+    },
+    {
+      "id": "acf1def2f1",
+      "item": "Oriharukon Ore",
+      "type": "sell",
+      "price": 2790,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-16T18:00:43.002186Z"
+    },
+    {
+      "id": "28bd466be3",
+      "item": "Mithril Alloy",
+      "type": "sell",
+      "price": 17664,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-16T17:33:14.276435Z"
+    },
+    {
+      "id": "edb77b960e",
+      "item": "Arcsmith's Anvil",
+      "type": "buy",
+      "price": 843502,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-16T17:25:43.984764Z"
+    },
+    {
+      "id": "05791956ab",
+      "item": "Crystal D",
+      "type": "buy",
+      "price": 670,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-16T17:25:27.945684Z"
+    },
+    {
+      "id": "96095df207",
+      "item": "Varnish of Purity",
+      "type": "sell",
+      "price": 9434,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-16T15:32:19.965774Z"
+    },
+    {
+      "id": "8d66ae7602",
+      "item": "Asofe",
+      "type": "sell",
+      "price": 5773,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-16T15:19:17.980006Z"
+    },
+    {
+      "id": "c9cde73da1",
+      "item": "Iron Ore",
+      "type": "sell",
+      "price": 316,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-16T14:39:15.682329Z"
+    },
+    {
+      "id": "1944f0b2a1",
+      "item": "Oriharukon Ore",
+      "type": "sell",
+      "price": 2598,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-16T13:40:42.129834Z"
+    },
+    {
+      "id": "86ecdb51cf",
+      "item": "Mithril Arrow",
+      "type": "buy",
+      "price": 7,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-16T12:59:37.106826Z"
+    },
+    {
+      "id": "bb3cb6d1ff",
+      "item": "BSPS D",
+      "type": "sell",
+      "price": 111,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-16T10:31:02.562430Z"
+    },
+    {
+      "id": "75f9d3bb44",
+      "item": "Coarse Bone Powder",
+      "type": "sell",
+      "price": 1567,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-16T08:48:40.857567Z"
+    },
+    {
+      "id": "64faecb447",
+      "item": "Braided Hemp",
+      "type": "sell",
+      "price": 1239,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-16T07:53:45.072140Z"
+    },
+    {
+      "id": "48e680e137",
+      "item": "Steel",
+      "type": "buy",
+      "price": 2911,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-16T06:30:55.651062Z"
+    },
+    {
+      "id": "7aa1fdb1c0",
+      "item": "BSPS D",
+      "type": "sell",
+      "price": 100,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-16T05:59:45.154553Z"
+    },
+    {
+      "id": "3d55ecfdc5",
+      "item": "Metallic Fiber",
+      "type": "sell",
+      "price": 747,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-16T05:52:58.541649Z"
+    },
+    {
+      "id": "4ba59ccf76",
+      "item": "Mithril Ore",
+      "type": "sell",
+      "price": 860,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-16T04:32:16.785945Z"
+    },
+    {
+      "id": "9101e477d4",
+      "item": "Soulshot C",
+      "type": "sell",
+      "price": 65,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-16T03:39:29.369797Z"
+    },
+    {
+      "id": "0376c882d0",
+      "item": "Thread",
+      "type": "sell",
+      "price": 44,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-16T03:26:57.127393Z"
+    },
+    {
+      "id": "6c1948c958",
+      "item": "Craftsman Mold",
+      "type": "buy",
+      "price": 328777,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-16T03:24:55.787338Z"
+    },
+    {
+      "id": "fdc2f8a63a",
+      "item": "Reorin's Mold",
+      "type": "buy",
+      "price": 269013,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-16T02:33:14.436400Z"
+    },
+    {
+      "id": "93a94c3274",
+      "item": "Mold Hardener",
+      "type": "sell",
+      "price": 4153,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-16T02:32:33.957876Z"
+    },
+    {
+      "id": "94c8202a09",
+      "item": "Asofe",
+      "type": "sell",
+      "price": 6283,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-16T01:17:30.468495Z"
+    },
+    {
+      "id": "221b4eab3a",
+      "item": "BSPS D",
+      "type": "buy",
+      "price": 79,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-16T00:37:13.019307Z"
+    },
+    {
+      "id": "cbdf1fb525",
+      "item": "BSPS C",
+      "type": "sell",
+      "price": 184,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-16T00:15:23.850873Z"
+    },
+    {
+      "id": "5d12925598",
+      "item": "High Grade Suede",
+      "type": "sell",
+      "price": 2093,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-15T22:54:46.881081Z"
+    },
+    {
+      "id": "41e32997dc",
+      "item": "Mold Lubricant",
+      "type": "sell",
+      "price": 3192,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-15T22:54:07.202320Z"
+    },
+    {
+      "id": "0c8db1cdca",
+      "item": "Durable Metal Plate",
+      "type": "sell",
+      "price": 16236,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-15T22:04:31.954980Z"
+    },
+    {
+      "id": "3eb715ea3f",
+      "item": "Oriharukon Ore",
+      "type": "sell",
+      "price": 2316,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-15T21:20:29.898607Z"
+    },
+    {
+      "id": "bf6813c489",
+      "item": "Varnish of Purity",
+      "type": "sell",
+      "price": 8899,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-15T20:56:59.869679Z"
+    },
+    {
+      "id": "e87fc55a75",
+      "item": "Scroll: Enchant Weapon D",
+      "type": "sell",
+      "price": 134919,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-15T20:41:10.444811Z"
+    },
+    {
+      "id": "e902689ee6",
+      "item": "Steel Mold",
+      "type": "sell",
+      "price": 4892,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-15T19:44:48.650178Z"
+    },
+    {
+      "id": "c1fe359a5a",
+      "item": "Maestro Mold",
+      "type": "buy",
+      "price": 99853,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-15T19:05:17.003937Z"
+    },
+    {
+      "id": "9a0be292be",
+      "item": "Mold Hardener",
+      "type": "sell",
+      "price": 5108,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-15T18:49:18.164912Z"
+    },
+    {
+      "id": "1bfe96f97a",
+      "item": "Mithril Arrow",
+      "type": "sell",
+      "price": 8,
+      "location": "Giran",
+      "notes": "per arrow",
+      "timestamp": "2026-02-15T17:18:01.938915Z"
+    },
+    {
+      "id": "547d374229",
+      "item": "Mithril Ore",
+      "type": "sell",
+      "price": 901,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-15T16:00:45.884833Z"
+    },
+    {
+      "id": "c947aaafda",
+      "item": "Maestro Mold",
+      "type": "buy",
+      "price": 96488,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-15T15:48:21.445225Z"
+    },
+    {
+      "id": "d9f246681e",
+      "item": "Steel",
+      "type": "sell",
+      "price": 3268,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-15T13:59:30.589299Z"
+    },
+    {
+      "id": "67422a44e4",
+      "item": "Maestro Holder",
+      "type": "sell",
+      "price": 163523,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-15T13:35:30.056086Z"
+    },
+    {
+      "id": "c6fca22c38",
+      "item": "Maestro Holder",
+      "type": "buy",
+      "price": 149799,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-15T13:21:10.016141Z"
+    },
+    {
+      "id": "2d8cb94937",
+      "item": "Braided Hemp",
+      "type": "sell",
+      "price": 1193,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-15T11:33:50.498954Z"
+    },
+    {
+      "id": "6e3a4367d0",
+      "item": "Crystal D",
+      "type": "sell",
+      "price": 698,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-15T11:21:11.638152Z"
+    },
+    {
+      "id": "9d93659cd9",
+      "item": "Scroll: Enchant Weapon D",
+      "type": "buy",
+      "price": 99267,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-15T10:07:26.710955Z"
+    },
+    {
+      "id": "416701034d",
+      "item": "Thons",
+      "type": "sell",
+      "price": 7225,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-15T04:22:49.131395Z"
+    },
+    {
+      "id": "b7e560fef2",
+      "item": "Blacksmith's Frame",
+      "type": "sell",
+      "price": 52005,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-15T03:02:20.773419Z"
+    },
+    {
+      "id": "15f0e8da46",
+      "item": "Thread",
+      "type": "sell",
+      "price": 50,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-15T02:09:57.848233Z"
+    },
+    {
+      "id": "ab84b0ce6a",
+      "item": "Warsmith's Mold",
+      "type": "buy",
+      "price": 701653,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-15T02:04:45.739196Z"
+    },
+    {
+      "id": "6f2adb4611",
+      "item": "BSPS D",
+      "type": "sell",
+      "price": 100,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-15T01:25:22.792760Z"
+    },
+    {
+      "id": "bdafcc6793",
+      "item": "BSPS D",
+      "type": "sell",
+      "price": 107,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-15T01:02:34.897567Z"
+    },
+    {
+      "id": "a7eb3ce6d0",
+      "item": "Stem",
+      "type": "sell",
+      "price": 181,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-15T00:56:50.112711Z"
+    },
+    {
+      "id": "b8aca45908",
+      "item": "Soulshot C",
+      "type": "buy",
+      "price": 60,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-15T00:34:24.716344Z"
+    },
+    {
+      "id": "4e36a99eb5",
+      "item": "Mold Hardener",
+      "type": "sell",
+      "price": 4399,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-15T00:04:56.495751Z"
+    },
+    {
+      "id": "781f616386",
+      "item": "BSPS C",
+      "type": "sell",
+      "price": 215,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-14T23:29:36.452423Z"
+    },
+    {
+      "id": "7cb879dcd0",
+      "item": "Artisan's Frame",
+      "type": "buy",
+      "price": 67863,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-14T21:31:05.298555Z"
+    },
+    {
+      "id": "3820629ca6",
+      "item": "Crystal C",
+      "type": "sell",
+      "price": 3342,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-14T21:04:28.384632Z"
+    },
+    {
+      "id": "0952d4bc99",
+      "item": "Synthetic Cokes",
+      "type": "sell",
+      "price": 8164,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-14T19:56:55.564362Z"
+    },
+    {
+      "id": "ca511dedc4",
+      "item": "Spiritshot C",
+      "type": "sell",
+      "price": 100,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-14T19:10:39.940982Z"
+    },
+    {
+      "id": "f320ab9a8f",
+      "item": "Craftsman Mold",
+      "type": "sell",
+      "price": 349382,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-14T18:49:22.329781Z"
+    },
+    {
+      "id": "b3c058b585",
+      "item": "Soulshot C",
+      "type": "sell",
+      "price": 62,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-14T17:30:01.387926Z"
+    },
+    {
+      "id": "47612c1fe9",
+      "item": "Spiritshot C",
+      "type": "sell",
+      "price": 120,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-14T16:43:48.807011Z"
+    },
+    {
+      "id": "7ab66fe6cf",
+      "item": "Silver Nugget",
+      "type": "sell",
+      "price": 627,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-14T15:26:44.099352Z"
+    },
+    {
+      "id": "45f13f46d2",
+      "item": "Synthetic Cokes",
+      "type": "sell",
+      "price": 8157,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-14T14:50:51.090795Z"
+    },
+    {
+      "id": "fd5b56b9d1",
+      "item": "Steel Mold",
+      "type": "sell",
+      "price": 5057,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-14T13:58:14.044971Z"
+    },
+    {
+      "id": "6f732f61fd",
+      "item": "Coal",
+      "type": "sell",
+      "price": 250,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-14T13:48:00.466444Z"
+    },
+    {
+      "id": "64f52e9795",
+      "item": "Craftsman Mold",
+      "type": "buy",
+      "price": 331157,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-14T12:11:19.406219Z"
+    },
+    {
+      "id": "cc5c3ef7e5",
+      "item": "BSPS C",
+      "type": "sell",
+      "price": 208,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-14T11:49:10.760702Z"
+    },
+    {
+      "id": "85660e945b",
+      "item": "Crystal C",
+      "type": "sell",
+      "price": 3285,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-14T10:33:50.269267Z"
+    },
+    {
+      "id": "812bf45ce7",
+      "item": "Thons",
+      "type": "sell",
+      "price": 6163,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-14T09:50:47.121563Z"
+    },
+    {
+      "id": "5bb0a20cf0",
+      "item": "Synthetic Cokes",
+      "type": "sell",
+      "price": 9444,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-14T08:58:40.321304Z"
+    },
+    {
+      "id": "bd5234fc79",
+      "item": "Spiritshot C",
+      "type": "sell",
+      "price": 112,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-14T06:03:36.413590Z"
+    },
+    {
+      "id": "a5a41fab16",
+      "item": "Soulshot D",
+      "type": "sell",
+      "price": 33,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-14T01:55:02.901557Z"
+    },
+    {
+      "id": "8bb7c8f210",
+      "item": "Oriharukon",
+      "type": "sell",
+      "price": 22391,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-14T01:07:25.029454Z"
+    },
+    {
+      "id": "b3f97ea595",
+      "item": "Iron Ore",
+      "type": "sell",
+      "price": 321,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-14T00:13:21.486736Z"
+    },
+    {
+      "id": "89c07a2bcc",
+      "item": "Maestro Anvil Lock",
+      "type": "sell",
+      "price": 88000,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-14T00:05:00.254329Z"
+    },
+    {
+      "id": "2828cc4d5f",
+      "item": "Steel Mold",
+      "type": "sell",
+      "price": 5552,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-13T21:19:39.602200Z"
+    },
+    {
+      "id": "33af181f54",
+      "item": "Steel",
+      "type": "sell",
+      "price": 3781,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-13T21:17:22.364917Z"
+    },
+    {
+      "id": "979def7f2f",
+      "item": "Iron Ore",
+      "type": "sell",
+      "price": 353,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-13T20:51:33.575906Z"
+    },
+    {
+      "id": "daaaf9e55a",
+      "item": "Compound Braid",
+      "type": "sell",
+      "price": 12591,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-13T20:29:59.791458Z"
+    },
+    {
+      "id": "b938bff93f",
+      "item": "Gemstone D",
+      "type": "sell",
+      "price": 812,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-13T19:07:46.392796Z"
+    },
+    {
+      "id": "54d01ccbb2",
+      "item": "Mold Glue",
+      "type": "sell",
+      "price": 2957,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-13T19:07:36.835452Z"
+    },
+    {
+      "id": "fb4b765f23",
+      "item": "Varnish",
+      "type": "sell",
+      "price": 241,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-13T18:17:38.794311Z"
+    },
+    {
+      "id": "f2cea8a86b",
+      "item": "Scroll: Enchant Armor D",
+      "type": "sell",
+      "price": 23179,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-13T18:06:42.389748Z"
+    },
+    {
+      "id": "71f7bd717b",
+      "item": "Coal",
+      "type": "sell",
+      "price": 270,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-13T16:58:12.633381Z"
+    },
+    {
+      "id": "2f68408b2d",
+      "item": "Stone of Purity",
+      "type": "sell",
+      "price": 4469,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-13T16:20:42.599802Z"
+    },
+    {
+      "id": "adf66b573d",
+      "item": "Scroll: Enchant Armor D",
+      "type": "sell",
+      "price": 24098,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-13T15:38:24.459589Z"
+    },
+    {
+      "id": "16a4f227b2",
+      "item": "Scroll: Enchant Weapon D",
+      "type": "sell",
+      "price": 119258,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-13T13:38:24.429196Z"
+    },
+    {
+      "id": "3eaf789689",
+      "item": "BSPS C",
+      "type": "sell",
+      "price": 186,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-13T11:33:11.898466Z"
+    },
+    {
+      "id": "003b0ba75a",
+      "item": "Silver Mold",
+      "type": "sell",
+      "price": 20157,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-13T09:54:45.429205Z"
+    },
+    {
+      "id": "a0ff37ae09",
+      "item": "Crafted Leather",
+      "type": "sell",
+      "price": 4320,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-13T08:38:10.486794Z"
+    },
+    {
+      "id": "3773dedd44",
+      "item": "Compound Braid",
+      "type": "sell",
+      "price": 11662,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-13T06:52:46.704246Z"
+    },
+    {
+      "id": "f2b3ed5378",
+      "item": "Compound Braid",
+      "type": "sell",
+      "price": 13064,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-13T05:16:19.323544Z"
+    },
+    {
+      "id": "9342ef784c",
+      "item": "Synthetic Cokes",
+      "type": "sell",
+      "price": 9689,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-13T04:24:33.933991Z"
+    },
+    {
+      "id": "a2a67b8412",
+      "item": "Oriharukon Ore",
+      "type": "sell",
+      "price": 2612,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-13T02:52:58.674215Z"
+    },
+    {
+      "id": "865370e18c",
+      "item": "Spiritshot D",
+      "type": "sell",
+      "price": 55,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-12T23:55:31.147824Z"
+    },
+    {
+      "id": "a6d539b9c8",
+      "item": "Silver Mold",
+      "type": "sell",
+      "price": 19437,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-12T21:22:49.922643Z"
+    },
+    {
+      "id": "5eb8c7d095",
+      "item": "Soulshot C",
+      "type": "sell",
+      "price": 58,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-12T16:19:57.949266Z"
+    },
+    {
+      "id": "afef739306",
+      "item": "Spiritshot D",
+      "type": "sell",
+      "price": 54,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-12T14:58:58.062317Z"
+    },
+    {
+      "id": "0acc13bead",
+      "item": "BSPS D",
+      "type": "sell",
+      "price": 108,
+      "location": "Dion",
+      "notes": "",
+      "timestamp": "2026-02-12T14:24:34.259980Z"
+    },
+    {
+      "id": "f6e2221aac",
+      "item": "Durable Metal Plate",
+      "type": "sell",
+      "price": 15704,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-12T12:57:35.495592Z"
+    },
+    {
+      "id": "007e4eee9f",
+      "item": "Spiritshot C",
+      "type": "sell",
+      "price": 114,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-12T08:52:10.965530Z"
+    },
+    {
+      "id": "2b12185065",
+      "item": "Crystal C",
+      "type": "sell",
+      "price": 3099,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-12T07:21:06.400198Z"
+    },
+    {
+      "id": "02f9890899",
+      "item": "Mold Hardener",
+      "type": "sell",
+      "price": 4803,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-11T23:58:36.145121Z"
+    },
+    {
+      "id": "86fd71d58a",
+      "item": "Scroll: Enchant Weapon D",
+      "type": "sell",
+      "price": 135737,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-11T18:14:30.988124Z"
+    },
+    {
+      "id": "61e3cf32fa",
+      "item": "Reorin's Mold",
+      "type": "sell",
+      "price": 292151,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-11T17:12:15.023048Z"
+    },
+    {
+      "id": "e07b5b447c",
+      "item": "Silver Nugget",
+      "type": "sell",
+      "price": 713,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-11T17:09:37.227041Z"
+    },
+    {
+      "id": "2bd2b21ef7",
+      "item": "Soulshot D",
+      "type": "sell",
+      "price": 33,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-11T12:50:15.341486Z"
+    },
+    {
+      "id": "18bbd11f94",
+      "item": "Crystal D",
+      "type": "sell",
+      "price": 745,
+      "location": "Giran",
+      "notes": "from Winged Spear",
+      "timestamp": "2026-02-11T11:56:28.736035Z"
+    },
+    {
+      "id": "82b1c63728",
+      "item": "Soulshot D",
+      "type": "sell",
+      "price": 31,
+      "location": "Gludin",
+      "notes": "",
+      "timestamp": "2026-02-11T10:17:21.641098Z"
+    },
+    {
+      "id": "c93440601e",
+      "item": "Silver Mold",
+      "type": "sell",
+      "price": 18323,
+      "location": "Giran",
+      "notes": "",
+      "timestamp": "2026-02-11T10:02:19.704029Z"
+    }
+  ],
+  "analyticsWatchlist": [
+    "Crystal D",
+    "Crystal C",
+    "Soulshot D",
+    "Soulshot C",
+    "Iron Ore",
+    "Steel",
+    "Enria",
+    "BSPS C"
+  ]
+}
